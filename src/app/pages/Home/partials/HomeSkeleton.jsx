@@ -1,8 +1,6 @@
 import React from "react";
-import "./Home.css";
-import SideBar from "./partials/SideBar";
 
-const Home = () => {
+export default function HomeSkeleton() {
   return (
     <>
       <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-primary rounded-lg p-4 w-20 h-25">
@@ -34,6 +32,4 @@ const Home = () => {
       </div>
     </>
   );
-};
-
-export default Home;
+}
