@@ -7,7 +7,9 @@ export default function Loading() {
       <img src="public/Loading icon.png" alt="Loading" />
       <h1 className="loading-text">
         <span className="p1">Loading</span>
-        <span className="p2">...</span>
+        <span className="p2 dot">.</span>
+        <span className="p2 dot">.</span>
+        <span className="p2 dot">.</span>
       </h1>
     </div>
   );
