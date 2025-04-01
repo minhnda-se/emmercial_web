@@ -36,3 +36,25 @@
 .card {
   flex-shrink: 0;
 }
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical; /* Specify vertical layout for the box */
+  overflow: hidden; /* Hide overflowed content */
+  text-overflow: ellipsis; /* Add ellipsis when the text overflows */
+}
+.rating-stars {
+  display: flex;
+}
+
+.rating-stars svg {
+  color: gold; /* Set the color of the stars */
+  font-size: 10px; /* Adjust size of the stars */
+}
+.home-card {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.home-card:hover {
+  transform: scale(0.95);
+}
