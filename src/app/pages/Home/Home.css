@@ -5,7 +5,7 @@
   justify-content: space-between;
 }
 .home_sidebar {
-  width: 20%;
+  width: 18%;
 }
 /* Custom scrollbar hidden */
 .custom-scrollbar::-webkit-scrollbar {
@@ -23,5 +23,16 @@
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 .home_body {
-  width: 78%;
+  width: 80%;
+}
+.btn-hotdeals {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-hotdeals:hover {
+  transform: scale(0.95);
+}
+.card {
+  flex-shrink: 0;
 }

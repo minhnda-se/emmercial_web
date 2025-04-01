@@ -7,3 +7,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  @apply w-8 h-8 bg-white rounded-full;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 14px !important; /* Thu nhỏ icon */
+}
