@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: autumn --default, all;
+}
 * {
   margin: 0;
   padding: 0;
