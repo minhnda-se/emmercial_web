@@ -10,6 +10,8 @@ import { fetchHotDeals } from "./services/fetchHotDeals";
 import { fetchTopDeals } from "./services/fetchTopDeals";
 import Link from "daisyui/components/link";
 import { Banner } from "./usecases/Banner";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 const content = [
   { title: "Content 1", description: "Some description here" },
   { title: "Content 2", description: "Another description" },
@@ -54,7 +56,6 @@ const Home = () => {
         console.error("Error fetching hot deals:", error);
       }
     };
-
     const bannerData = async () => {
       try {
         const data = await fetchBanner();
@@ -70,7 +71,6 @@ const Home = () => {
     categoryData();
     hotDealsData();
     topDealsData();
-
     bannerData();
 
     // Set a 1-second delay before setting loading state to false
@@ -135,49 +135,55 @@ const Home = () => {
                 {/* Header */}
                 <div className="flex justify-between">
                   <img
-                    src={topDeals.header.badge?.icon}
+                    src={topDeals?.header?.badge?.icon}
                     alt="top-deals-icon"
                     style={{
-                      width: `${topDeals.header.badge.icon_width}px`,
-                      height: `${topDeals.header.badge.icon_height}px`,
+                      width: `${topDeals.header?.badge.icon_width}px`,
+                      height: `${topDeals.header?.badge.icon_height}px`,
                     }}
                   />
                   <a className="link link-secondary">
-                    {topDeals.header.more_link_text}
+                    {topDeals.header?.more_link_text}
                   </a>
                 </div>
 
                 {/* Content    */}
-                <div className="overflow-hidden">
-                  <div className="flex flex-nowrap">
-                    {topDeals.items.slice(0, 36).map((item, index) => (
-                      <div
-                        key={item.id}
-                        className="card shadow-sm  border-1 border-zinc-100"
-                        style={{ width: "19%", marginRight: "12px" }}
-                      >
-                        <figure>
-                          <img
-                            src={item.thumbnail_url}
-                            alt="Shoes"
-                            style={{
-                              width: `${item.thumbnail_width}px`,
-                            }}
-                          />
-                        </figure>
-                        <div className="card-body">
-                          <h2 className="card-title">Card Title</h2>
-                          <p>
-                            A card component has a figure, a body part, and
-                            inside body there are title and actions parts
-                          </p>
-                          <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+                <div>
+                  <Swiper
+                    modules={[Navigation]} // Enable navigation and pagination features
+                    slidesPerView={5} // Number of slides visible at a time
+                    slidesPerGroup={5}
+                    navigation
+                    spaceBetween={10}
+                  >
+                    {topDeals?.items?.slice(0, 34).map((item, index) => (
+                      <SwiperSlide key={item.id}>
+                        <div className="card shadow-sm  border-1 border-zinc-100">
+                          <figure>
+                            <img
+                              src={item.thumbnail_url}
+                              alt="Shoes"
+                              style={{
+                                width: `${item.thumbnail_width}px`,
+                              }}
+                            />
+                          </figure>
+                          <div className="card-body">
+                            <h2 className="card-title">Card Title</h2>
+                            <p>
+                              A card component has a figure, a body part, and
+                              inside body there are title and actions parts
+                            </p>
+                            <div className="card-actions justify-end">
+                              <button className="btn btn-primary">
+                                Buy Now
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </SwiperSlide>
                     ))}
-                  </div>
+                  </Swiper>
                 </div>
               </div>
               {content.map((item, index) => (

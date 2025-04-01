@@ -1,29 +1,33 @@
 import React from "react";
-import { Carousel } from "antd";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 export const Banner = (props) => {
-  const banner = props.banner.data[0].banners;
+  const banner =
+    Array.isArray(props?.banner?.data) && props.banner.data.length > 0
+      ? props.banner.data[0].banners
+      : [];
   return (
     <>
-      <Carousel
-        arrows
-        infinite={true}
-        autoplay={{ dotDuration: true }}
-        autoplaySpeed={5000}
-        style={{ width: "100%", height: "100%" }}
-        className="rounded-lg"
+      <Swiper
+        modules={[Navigation, Autoplay, Pagination]} // Enable navigation and pagination features
+        slidesPerView={2} // Number of slides visible at a time
+        navigation
+        loop={true} // Enable loop for infinite scrolling
+        pagination={{ clickable: true }}
+        spaceBetween={10}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+        }}
       >
-        {banner.map((item) => (
-          <div key={item.id}>
-            <img
-              src={item.image_url}
-              alt={item.title}
-              style={{ width: "100%", height: "280px" }}
-              className="rounded-lg"
-            />
-          </div>
+        {banner.map((item, index) => (
+          <SwiperSlide key={index} style={{ height: "100%" }}>
+            <img src={item.image_url} alt={item.title} className="rounded-lg" />
+          </SwiperSlide>
         ))}
-      </Carousel>
-      <br />
+      </Swiper>
     </>
   );
 };
