@@ -1,0 +1,80 @@
+.checkout-wrapper{
+    h1{
+        margin-left: 5vw;
+    }
+}
+.left-container{
+    width: 55%;
+    margin: 10px 0 0 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.checkout-container{
+    display: flex;
+    gap: 20px;
+
+}
+.cart-item{
+    padding: 12px;
+}
+.cart-item:last-child{
+    border-bottom: none;
+}
+.payment-container{
+    padding: 12px;
+}
+.radio-container{
+    display: flex;
+    gap: 30px;
+    margin-top: 9px;
+    flex-direction: column;
+}
+.radio-item{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.bill-content{
+    padding: 10px;
+}
+
+.right-container{
+    width: 34%;
+    margin-top: 10px;
+}
+
+.bill-item{
+    padding: none;
+}
+.bill-item-info{
+    display: flex;
+    padding: 0;
+    gap: 5px;
+    align-items: center;
+}
+.bill-item-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+}
+.bill-price-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bill-price-row{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.bill-total-row{
+    display: flex;
+    justify-content: space-between;
+}
+.bill-button{
+    padding: 10px;
+    margin-top: 20px;
+}
