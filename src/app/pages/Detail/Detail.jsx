@@ -8,6 +8,7 @@ import "./Detail.css";
 
 export default function Detail() {
   const [isLoading, setIsLoading] = useState(true);
+  const [productData, setProductData] = useState(null);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
