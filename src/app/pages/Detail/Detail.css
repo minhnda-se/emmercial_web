@@ -1,11 +1,12 @@
-.home_container {
+.detail_container {
     display: flex;
     margin: auto;
     width: 90vw;
     justify-content: space-between;
   }
-  .home_sidebar {
+  .detail_sidebar {
     width: 400px;
+    height: auto;
   }
   /* Custom scrollbar hidden */
   .custom-scrollbar::-webkit-scrollbar {
@@ -19,11 +20,11 @@
   }
   
   /* Optional: If you want to make sure scrollbars are hidden for all browsers */
-  .home_sidebar {
+  .detail_sidebar {
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
   }
 
-  .home_body {
+  .detail_body {
     width: 550px;
     /* margin: 0 20px; */
   }

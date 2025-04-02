@@ -31,13 +31,19 @@ export default function HomeSkeleton() {
           </div>
         </div>
         <div className="home_body flex flex-col gap-6 p-4">
-          <div className="h-80 bg-white rounded-lg shadow-md skeleton"></div>
-          <div className="h-20 bg-white rounded-lg shadow-md"></div>
+          <div className="h-80 bg-white rounded-lg shadow-md skeleton">
+            <Loading />
+          </div>
+          <div className="h-20 bg-white rounded-lg shadow-md">
+            {/* <Loading /> */}
+          </div>
           {content.map((item, index) => (
             <div
               key={index}
               className="h-80 bg-white rounded-lg shadow-md skeleton"
-            ></div>
+            >
+              <Loading />
+            </div>
           ))}
         </div>
       </div>

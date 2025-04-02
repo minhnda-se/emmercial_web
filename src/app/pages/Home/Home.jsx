@@ -90,17 +90,17 @@ const Home = () => {
         <HomeSkeleton />
       ) : (
         <>
-          <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-30 z-10">
+          <div className="flex flex-col justify-between fixed bottom-2 right-2  rounded-lg p-4 w-20 h-30 z-10 !gap-0.5">
             <button
-              className="btn flex flex-col btn-ghost text-white h-1/2"
+              className="btn flex flex-col btn-secondary text-white h-1/2"
               aria-label="Message"
             >
               <MessageOutlined style={{ fontSize: "24px" }} />
               Message
             </button>
-            <div className="border-t border-white"></div>
+            {/* <div className="border-t border-white"></div> */}
             <button
-              className="btn flex flex-col btn-ghost text-white h-1/2"
+              className="btn flex flex-col btn-secondary text-white h-1/2"
               aria-label="Support"
             >
               <CustomerServiceOutlined style={{ fontSize: "24px" }} />

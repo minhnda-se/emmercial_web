@@ -1,11 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import DetailPng from "../../components/DetailPng";
-
 import { sProductData } from "./Detail.store";
-
-export default function Detail() {
-  const proData = sProductData.use();
-
 import HomeSkeleton from "../Home/partials/HomeSkeleton";
 import Loading from "../../components/Loading";
 import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
@@ -51,15 +46,15 @@ export default function Detail() {
             <DetailPng />
           </div> */}
 
-          <div className="home_container">
-            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+          <div className="detail_container">
+            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
                 <DetailPng />
               </div>
               {/* <SideBar categories={categories} /> */}
             </div>
 
-            <div className="home_body flex flex-col gap-6 p-4">
+            <div className="detail_body flex flex-col gap-6 p-4">
               <div className="h-70 bg-white rounded-lg shadow-md ">
                 {/* <Banner banner={banner} /> */}
               </div>
@@ -84,6 +79,7 @@ export default function Detail() {
                     </p>
                   </button>
                 ))} */}
+                <Loading />
               </div>
 
               <div className=" bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
@@ -149,10 +145,9 @@ export default function Detail() {
               ))} */}
             </div>
 
-            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
-                <h3>Categories</h3>
-                {/* <DetailPng /> */}
+                <Loading />
               </div>
               {/* <SideBar categories={categories} /> */}
             </div>
