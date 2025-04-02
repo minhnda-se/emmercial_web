@@ -11,7 +11,6 @@ import { fetchTopDeals } from "./services/fetchTopDeals";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Banner } from "./partials/Banner";
-
 import { ProductSlide } from "./partials/ProductSlide";
 import { fetchFlashSale } from "./services/fetchFlashSale";
 import { FlashSale } from "./partials/FlashSale";
@@ -20,6 +19,7 @@ import { fetchOverseaProduct } from "./services/fetchOverseaProduct";
 import { fetchEvent } from "./services/fetchEvent";
 import { fetchMayLikeProduct } from "./services/fetchMayLikeProduct";
 import { RecommendProduct } from "./partials/RecommendProduct";
+
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState({});
@@ -31,117 +31,50 @@ const Home = () => {
   const [overseaProduct, setOverseaProduct] = useState({});
   const [event, setEvent] = useState({});
   const [mayLike, setMayLike] = useState({});
+
   useEffect(() => {
-    const categoryData = async () => {
+    const fetchData = async () => {
       try {
-        const data = await fetchCategory();
-        if (data) {
-          setCategories(data);
-        }
+        const [
+          categoryData,
+          hotDealsData,
+          topDealsData,
+          bannerData,
+          flashSaleData,
+          prominentBrandData,
+          overseaProductData,
+          eventData,
+          mayLikeData,
+        ] = await Promise.all([
+          fetchCategory(),
+          fetchHotDeals(),
+          fetchTopDeals(),
+          fetchBanner(),
+          fetchFlashSale(),
+          fetchProminentBrand(),
+          fetchOverseaProduct(),
+          fetchEvent(),
+          fetchMayLikeProduct(),
+        ]);
+
+        setCategories(categoryData);
+        setHotDeals(hotDealsData);
+        setTopDeals(topDealsData);
+        setBanner(bannerData);
+        setFlashSale(flashSaleData);
+        setProminentBrand(prominentBrandData);
+        setOverseaProduct(overseaProductData);
+        setEvent(eventData);
+        setMayLike(mayLikeData);
+
+        setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching data:", error);
+        setIsLoading(false); // Set loading to false even if there's an error
       }
     };
 
-    const hotDealsData = async () => {
-      try {
-        const data = await fetchHotDeals();
-        if (data) {
-          setHotDeals(data);
-        }
-      } catch (error) {
-        console.error("Error fetching hot deals:", error);
-      }
-    };
-    const topDealsData = async () => {
-      try {
-        const data = await fetchTopDeals();
-        if (data) {
-          setTopDeals(data);
-        }
-      } catch (error) {
-        console.error("Error fetching hot deals:", error);
-      }
-    };
-    const bannerData = async () => {
-      try {
-        const data = await fetchBanner();
-        if (data) {
-          setBanner(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-    const flashSaleData = async () => {
-      try {
-        const data = await fetchFlashSale();
-        if (data) {
-          setFlashSale(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-    const prominentBrandData = async () => {
-      try {
-        const data = await fetchProminentBrand();
-        if (data) {
-          setProminentBrand(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-    const overseaProduct = async () => {
-      try {
-        const data = await fetchOverseaProduct();
-        if (data) {
-          setOverseaProduct(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-    const eventData = async () => {
-      try {
-        const data = await fetchEvent();
-        if (data) {
-          setEvent(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-    const mayLikeData = async () => {
-      try {
-        const data = await fetchMayLikeProduct();
-        if (data) {
-          setMayLike(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-
-    categoryData();
-    hotDealsData();
-    topDealsData();
-    bannerData();
-    flashSaleData();
-    prominentBrandData();
-    overseaProduct();
-    eventData();
-    mayLikeData();
-    // Set a 1-second delay before setting loading state to false
-    const timeoutId = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-
-    // Cleanup function to clear the timeout if the component unmounts
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    fetchData();
   }, []);
 
   return (
@@ -150,32 +83,24 @@ const Home = () => {
         <HomeSkeleton />
       ) : (
         <>
-
-          <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10 !gap-0.5">
-
-          {/* <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-25 z-10">
-
-            <button
-              className="btn flex flex-col btn-secondary text-white h-1/2"
-              aria-label="Message"
-            >
-              <MessageOutlined style={{ fontSize: "24px" }} />
-              Message
-            </button>
-
-            <button
-              className="btn flex flex-col btn-secondary text-white h-1/2"
-              aria-label="Support"
-
-            >
-              <CustomerServiceOutlined style={{ fontSize: "24px" }} />
-              Support
-            </button>
+          <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10">
+            <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-25 z-10">
+              <button
+                className="btn flex flex-col btn-secondary text-white h-1/2"
+                aria-label="Message"
+              >
+                <MessageOutlined style={{ fontSize: "24px" }} />
+                Message
+              </button>
+              <button
+                className="btn flex flex-col btn-secondary text-white h-1/2"
+                aria-label="Support"
+              >
+                <CustomerServiceOutlined style={{ fontSize: "24px" }} />
+                Support
+              </button>
+            </div>
           </div>
-
-            ></button>
-          </div> */}
-
 
           <div className="home_container flex">
             <div className="home_sidebar rounded-lg !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
@@ -186,38 +111,42 @@ const Home = () => {
                 <Banner banner={banner} />
               </div>
               <div className="min-h-32 bg-white rounded-lg shadow-md flex justify-around items-center !px-2">
-                {hotDeals?.items?.map((item, index) => (
-                  <button
-                    key={index}
-                    style={{ width: "8%", height: "70%", padding: "auto" }}
-                    className="btn-hotdeals flex flex-col items-center"
-                  >
-                    <div className="avatar ">
-                      <div className="w-12 rounded-lg">
-                        <img src={item.thumbnail_url} />
-                      </div>
-                    </div>
-                    <p
-                      className="text-[12px] text-center text-wrap !mt-2 font-bold"
-                      style={{ color: index === 0 && `${item.name_color}` }}
+                {hotDeals?.items?.length ? (
+                  hotDeals.items.map((item, index) => (
+                    <button
+                      key={index}
+                      style={{ width: "8%", height: "70%", padding: "auto" }}
+                      className="btn-hotdeals flex flex-col items-center"
                     >
-                      {item.name}
-                    </p>
-                  </button>
-                ))}
+                      <div className="avatar">
+                        <div className="w-12 rounded-lg">
+                          <img src={item.thumbnail_url} alt={item.name} />
+                        </div>
+                      </div>
+                      <p
+                        className="text-[12px] text-center text-wrap !mt-2 font-bold"
+                        style={{ color: index === 0 && `${item.name_color}` }}
+                      >
+                        {item.name}
+                      </p>
+                    </button>
+                  ))
+                ) : (
+                  <p>No hot deals available.</p>
+                )}
               </div>
 
-              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
-                {/* Top Deals   */}
+              <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+                {/* Top Deals */}
                 <ProductSlide data={topDeals} />
               </div>
 
               {/* Flash Sales */}
               <FlashSale flashSale={flashSale} />
 
-              {/* Thuong Hieu Noi Bat */}
+              {/* Prominent Brands */}
               <div className="bg-gradient-to-b from-neutral-content to-white rounded-lg shadow-md flex flex-col !px-4 !py-4 font-bold text-primary text-lg gap-4">
-                <h3>{prominentBrand.data[0].title.text}</h3>
+                <h3>{prominentBrand.data[0]?.title?.text}</h3>
                 <div>
                   <Swiper
                     modules={[Navigation]} // Enable navigation and pagination features
@@ -226,11 +155,11 @@ const Home = () => {
                     navigation
                     spaceBetween={10}
                   >
-                    {prominentBrand.data[0].banners.map((item, index) => (
+                    {prominentBrand.data[0]?.banners?.map((item, index) => (
                       <SwiperSlide key={index}>
                         <img
                           src={item.image_url}
-                          alt=""
+                          alt={item.title}
                           className="card shadow-sm  border-1 border-zinc-100 home-card"
                         />
                       </SwiperSlide>
@@ -239,14 +168,14 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Oversea products   */}
-              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+              {/* Oversea products */}
+              <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
                 <ProductSlide data={overseaProduct} />
               </div>
 
               {/* Event */}
               <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-wrap justify-between !gap-y-3">
-                {event.data[0].banners.map((item, index) => (
+                {event?.data?.[0]?.banners?.map((item, index) => (
                   <div className="w-1/6 home-card" key={item.id}>
                     <img
                       src={item.image_url}
@@ -261,8 +190,8 @@ const Home = () => {
                 ))}
               </div>
 
-              {/* May-Like products   */}
-              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+              {/* May-Like products */}
+              <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
                 <ProductSlide data={mayLike} />
               </div>
 
