@@ -98,7 +98,7 @@ const Home = () => {
               <MessageOutlined style={{ fontSize: "24px" }} />
               Message
             </button>
-            {/* <div className="border-t border-white"></div> */}
+
             <button
               className="btn flex flex-col btn-secondary text-white h-1/2"
               aria-label="Support"
