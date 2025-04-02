@@ -129,3 +129,43 @@ $transition-duration: 0.3s;
     object-fit: contain;
   }
 }
+
+// Đặc điểm nổi bật styling - increased text boldness only
+.product-highlights {
+  margin-top: 30px;
+  padding: 20px;
+  
+  &__title {
+    font-size: 18px;
+    font-weight: 700; // Increased from 600 to 700
+    margin-bottom: 16px;
+    color: #212121;
+  }
+  
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  &__check-icon {
+    color: $highlight-color;
+    font-size: 18px;
+    font-weight: bold; // Made the checkmark bold
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  
+  &__text {
+    color: #212121;
+    font-weight: 500; // Increased from normal (400) to medium (500)
+  }
+}

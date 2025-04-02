@@ -1,8 +1,8 @@
 import React from "react";
 import DetailPng from "../../components/DetailPng";
-import { saveData } from "../../components/DetailPng/DetailPng";
+import { sProductData } from "./Detail.store";
 
 export default function Detail() {
-  console.log(saveData);
+  const proData = sProductData.use();
   return <DetailPng />;
 }
