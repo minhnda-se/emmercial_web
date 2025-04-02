@@ -7,12 +7,10 @@ import Home from "../pages/Home";
 
 import Loading from "../components/Loading";
 
-
 import DetailPng from "../components/DetailPng/DetailPng";
 import Detail from "../pages/Detail/Detail";
 
 import Login from "../pages/Login";
-
 
 const MainRoutes = () => {
   return (
@@ -20,13 +18,15 @@ const MainRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login/>}></Route>
+
+        <Route path="/login" element={<Login />} />
+
         <Route path="*" element={<PageNotFound />} />
 
         <Route path="/loading" element={<Loading />} />
 
+        {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
-
       </Routes>
       <Footer />
     </BrowserRouter>

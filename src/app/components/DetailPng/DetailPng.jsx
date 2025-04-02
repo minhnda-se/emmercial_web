@@ -1,39 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./DetailPng.scss";
+import Loading from "../Loading";
 
-export default function ImageGallery({
-  productId = "10198980",
-  spid = "190252114",
-}) {
+import { sProductData } from "../../pages/Detail/Detail.store";
+
+export default function ImageGallery({ data }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [saveData, setSaveData] = useState([]);
+  const [highlightItems, setHighlightItems] = useState([]);
+  const [highlightTitle, setHighlightTitle] = useState("");
+  // Add states to track scroll position
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
   const thumbnailsRef = useRef(null);
   const thumbWidth = 80; // Width of each thumbnail including padding
   const visibleThumbs = 6; // Limit the number of visible thumbnails to 6
   const containerWidth = thumbWidth * visibleThumbs;
 
-  
-
   // Fetch product images from API
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(
-          `https://tiki.vn/api/v2/products/${productId}?platform=web&spid=${spid}&version=3#`
-        );
+        console.log(data);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch product data");
+        // Extract highlights based on the provided data structure
+        if (data.highlight) {
+          if (data.highlight.items && Array.isArray(data.highlight.items)) {
+            setHighlightItems(data.highlight.items);
+          }
+          if (data.highlight.title) {
+            setHighlightTitle(data.highlight.title);
+          }
+        } else if (data.hightlight == null) {
+          setHighlightItems([]);
+          setHighlightTitle("");
         }
-
-        const data = await response.json();
-
-        setSaveData(data);
 
         // Extract images from configurable_products.images
         let productImages = [];
@@ -70,6 +76,8 @@ export default function ImageGallery({
         // Set the first image as selected if available
         if (productImages.length > 0) {
           setSelectedImage(productImages[0].large_url);
+          // Show/hide arrows based on image count
+          setShowRightArrow(productImages.length > visibleThumbs);
         }
 
         setLoading(false);
@@ -80,7 +88,7 @@ export default function ImageGallery({
     };
 
     fetchProductImages();
-  }, [productId, spid]);
+  }, []);
 
   // Handle selecting an image
   const handleSelectImage = (url, index) => {
@@ -88,6 +96,35 @@ export default function ImageGallery({
     setSelectedIndex(index);
     ensureVisible(index);
   };
+
+  // Add scroll event listener to update arrow visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!thumbnailsRef.current) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = thumbnailsRef.current;
+
+      // Show left arrow if not at the start
+      setShowLeftArrow(scrollLeft > 0);
+
+      // Show right arrow if not at the end
+      const isAtEnd = Math.ceil(scrollLeft + clientWidth) >= scrollWidth;
+      setShowRightArrow(!isAtEnd);
+    };
+
+    const thumbnailsElement = thumbnailsRef.current;
+    if (thumbnailsElement) {
+      thumbnailsElement.addEventListener("scroll", handleScroll);
+      // Initial check
+      handleScroll();
+    }
+
+    return () => {
+      if (thumbnailsElement) {
+        thumbnailsElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [images]);
 
   // Ensure the selected thumbnail is visible in the viewport
   const ensureVisible = (index) => {
@@ -136,10 +173,12 @@ export default function ImageGallery({
       behavior: "smooth",
     });
   };
+
   // If loading, show a loading indicator
   if (loading) {
     return (
-      <div className="image-gallery__loading">Loading product images...</div>
+      // <div className="image-gallery__loading">Loading product images...</div>
+      <Loading />
     );
   }
 
@@ -173,13 +212,13 @@ export default function ImageGallery({
         className="image-gallery__carousel"
         style={{ maxWidth: containerWidth }}
       >
-        {/* Previous button - only show if we have more than visibleThumbs images */}
-        {images.length > visibleThumbs && (
+        {/* Previous button - only show if we can scroll left */}
+        {images.length > visibleThumbs && showLeftArrow && (
           <button
             className="image-gallery__nav-button image-gallery__nav-button--prev"
             onClick={handlePrev}
           >
-            {"<"}
+            <LeftOutlined />
           </button>
         )}
 
@@ -206,16 +245,31 @@ export default function ImageGallery({
           </div>
         </div>
 
-        {/* Next button - only show if we have more than visibleThumbs images */}
-        {images.length > visibleThumbs && (
+        {/* Next button - only show if we can scroll right */}
+        {images.length > visibleThumbs && showRightArrow && (
           <button
             className="image-gallery__nav-button image-gallery__nav-button--next"
             onClick={handleNext}
           >
-            {">"}
+            <RightOutlined />
           </button>
         )}
       </div>
+
+      {/* Product Highlights Section */}
+      {highlightItems.length > 0 && (
+        <div className="product-highlights">
+          <h3 className="product-highlights__title">{highlightTitle}</h3>
+          <ul className="product-highlights__list">
+            {highlightItems.map((item, index) => (
+              <li key={index} className="product-highlights__item">
+                <span className="product-highlights__check-icon">✓</span>
+                <span className="product-highlights__text">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

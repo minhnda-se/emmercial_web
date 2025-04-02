@@ -150,16 +150,32 @@ const Home = () => {
         <HomeSkeleton />
       ) : (
         <>
+
+          <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10 !gap-0.5">
+
           {/* <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-25 z-10">
+
             <button
-              className="btn btn-ghost text-white h-1/2"
+              className="btn flex flex-col btn-secondary text-white h-1/2"
               aria-label="Message"
-            ></button>
+            >
+              <MessageOutlined style={{ fontSize: "24px" }} />
+              Message
+            </button>
+
             <button
-              className="btn btn-ghost text-white h-1/2"
+              className="btn flex flex-col btn-secondary text-white h-1/2"
               aria-label="Support"
+
+            >
+              <CustomerServiceOutlined style={{ fontSize: "24px" }} />
+              Support
+            </button>
+          </div>
+
             ></button>
           </div> */}
+
 
           <div className="home_container flex">
             <div className="home_sidebar rounded-lg !sticky top-0 h-screen overflow-y-auto custom-scrollbar">

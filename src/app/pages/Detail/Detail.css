@@ -1,0 +1,30 @@
+.detail_container {
+    display: flex;
+    margin: auto;
+    width: 90vw;
+    justify-content: space-between;
+  }
+  .detail_sidebar {
+    width: 400px;
+    height: auto;
+  }
+  /* Custom scrollbar hidden */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0px; /* Hide scrollbar */
+    background: transparent; /* Optional: Make the background transparent */
+  }
+  
+  .custom-scrollbar {
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: transparent transparent; /* For Firefox */
+  }
+  
+  /* Optional: If you want to make sure scrollbars are hidden for all browsers */
+  .detail_sidebar {
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  }
+
+  .detail_body {
+    width: 550px;
+    /* margin: 0 20px; */
+  }
