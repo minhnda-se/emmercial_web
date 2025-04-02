@@ -1,93 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
+import DetailPng from "../../components/DetailPng";
+import HomeSkeleton from "../Home/partials/HomeSkeleton";
+import Loading from "../../components/Loading";
 import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
-import "./Home.css";
-import { Carousel } from "antd";
-import { SideBar } from "./partials/SideBar";
-import HomeSkeleton from "./partials/HomeSkeleton";
-import { fetchCategory } from "./services/fetchCategory";
-import { fetchBanner } from "./services/fetchBanner";
-import { fetchHotDeals } from "./services/fetchHotDeals";
-import { fetchTopDeals } from "./services/fetchTopDeals";
-import Link from "daisyui/components/link";
-import { Banner } from "./usecases/Banner";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-const content = [
-  { title: "Content 1", description: "Some description here" },
-  { title: "Content 2", description: "Another description" },
-  { title: "Content 3", description: "More content to display" },
-];
-const Home = () => {
+import "./Detail.css";
+
+export default function Detail() {
   const [isLoading, setIsLoading] = useState(true);
-  const [categories, setCategories] = useState({});
-  const [banner, setBanner] = useState({});
-  const [hotDeals, setHotDeals] = useState({});
-  const [topDeals, setTopDeals] = useState({});
+
   useEffect(() => {
-    const categoryData = async () => {
-      try {
-        const data = await fetchCategory();
-        if (data) {
-          setCategories(data);
-        }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    const hotDealsData = async () => {
-      try {
-        const data = await fetchHotDeals();
-        if (data) {
-          setHotDeals(data);
-        }
-      } catch (error) {
-        console.error("Error fetching hot deals:", error);
-      }
-    };
-    const topDealsData = async () => {
-      try {
-        const data = await fetchTopDeals();
-        if (data) {
-          setTopDeals(data);
-          console.log(data);
-        }
-      } catch (error) {
-        console.error("Error fetching hot deals:", error);
-      }
-    };
-    const bannerData = async () => {
-      try {
-        const data = await fetchBanner();
-        if (data) {
-          setBanner(data);
-          console.log(data);
-        }
-      } catch (error) {
-        console.error("Error fetching banner:", error);
-      }
-    };
-
-    categoryData();
-    hotDealsData();
-    topDealsData();
-    bannerData();
-
-    // Set a 1-second delay before setting loading state to false
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
-    // Cleanup function to clear the timeout if the component unmounts
     return () => {
       clearTimeout(timeoutId);
     };
   }, []);
-
   return (
     <>
       {isLoading ? (
-        <HomeSkeleton />
+        <Loading />
       ) : (
         <>
           <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-30 z-10">
@@ -108,16 +41,25 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="home_container flex">
+          {/* <div>
+            <DetailPng />
+          </div> */}
+
+          <div className="home_container">
             <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
-              <SideBar categories={categories} />
+              <div className="flex flex-col gap-y-2 !p-4">
+                <DetailPng />
+              </div>
+              {/* <SideBar categories={categories} /> */}
             </div>
+
             <div className="home_body flex flex-col gap-6 p-4">
               <div className="h-70 bg-white rounded-lg shadow-md ">
-                <Banner banner={banner} />
+                {/* <Banner banner={banner} /> */}
               </div>
+
               <div className="h-32 bg-white rounded-lg shadow-md flex justify-around items-center">
-                {hotDeals?.items?.map((item, index) => (
+                {/* {hotDeals?.items?.map((item, index) => (
                   <button
                     key={index}
                     style={{ width: "8%", height: "70%", padding: "auto" }}
@@ -135,13 +77,13 @@ const Home = () => {
                       {item.name}
                     </p>
                   </button>
-                ))}
+                ))} */}
               </div>
 
               <div className=" bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                 {/* Header */}
                 <div className="flex justify-between">
-                  <img
+                  {/* <img
                     src={topDeals?.header?.badge?.icon}
                     alt="top-deals-icon"
                     style={{
@@ -151,12 +93,12 @@ const Home = () => {
                   />
                   <a className="link link-secondary">
                     {topDeals.header?.more_link_text}
-                  </a>
+                  </a> */}
                 </div>
 
                 {/* Content    */}
                 <div>
-                  <Swiper
+                  {/* <Swiper
                     modules={[Navigation]} // Enable navigation and pagination features
                     slidesPerView={5} // Number of slides visible at a time
                     slidesPerGroup={5}
@@ -190,21 +132,27 @@ const Home = () => {
                         </div>
                       </SwiperSlide>
                     ))}
-                  </Swiper>
+                  </Swiper> */}
                 </div>
               </div>
-              {content.map((item, index) => (
+              {/* {content.map((item, index) => (
                 <div key={index} className="h-80 bg-white rounded-lg shadow-md">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
-              ))}
+              ))} */}
+            </div>
+
+            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+              <div className="flex flex-col gap-y-2 !p-4">
+                <h3>Categories</h3>
+                {/* <DetailPng /> */}
+              </div>
+              {/* <SideBar categories={categories} /> */}
             </div>
           </div>
         </>
       )}
     </>
   );
-};
-
-export default Home;
+}
