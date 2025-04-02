@@ -8,22 +8,29 @@ import { fetchCategory } from "./services/fetchCategory";
 import { fetchBanner } from "./services/fetchBanner";
 import { fetchHotDeals } from "./services/fetchHotDeals";
 import { fetchTopDeals } from "./services/fetchTopDeals";
-import Link from "daisyui/components/link";
-import { Banner } from "./usecases/Banner";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { RatingStar } from "./usecases/RatingStar";
-const content = [
-  { title: "Content 1", description: "Some description here" },
-  { title: "Content 2", description: "Another description" },
-  { title: "Content 3", description: "More content to display" },
-];
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Banner } from "./partials/Banner";
+
+import { ProductSlide } from "./partials/ProductSlide";
+import { fetchFlashSale } from "./services/fetchFlashSale";
+import { FlashSale } from "./partials/FlashSale";
+import { fetchProminentBrand } from "./services/fetchProminentBrand";
+import { fetchOverseaProduct } from "./services/fetchOverseaProduct";
+import { fetchEvent } from "./services/fetchEvent";
+import { fetchMayLikeProduct } from "./services/fetchMayLikeProduct";
+import { RecommendProduct } from "./partials/RecommendProduct";
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState({});
   const [banner, setBanner] = useState({});
   const [hotDeals, setHotDeals] = useState({});
   const [topDeals, setTopDeals] = useState({});
+  const [flashSale, setFlashSale] = useState({});
+  const [prominentBrand, setProminentBrand] = useState({});
+  const [overseaProduct, setOverseaProduct] = useState({});
+  const [event, setEvent] = useState({});
+  const [mayLike, setMayLike] = useState({});
   useEffect(() => {
     const categoryData = async () => {
       try {
@@ -51,7 +58,6 @@ const Home = () => {
         const data = await fetchTopDeals();
         if (data) {
           setTopDeals(data);
-          console.log(data);
         }
       } catch (error) {
         console.error("Error fetching hot deals:", error);
@@ -62,7 +68,56 @@ const Home = () => {
         const data = await fetchBanner();
         if (data) {
           setBanner(data);
-          console.log(data);
+        }
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      }
+    };
+    const flashSaleData = async () => {
+      try {
+        const data = await fetchFlashSale();
+        if (data) {
+          setFlashSale(data);
+        }
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      }
+    };
+    const prominentBrandData = async () => {
+      try {
+        const data = await fetchProminentBrand();
+        if (data) {
+          setProminentBrand(data);
+        }
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      }
+    };
+    const overseaProduct = async () => {
+      try {
+        const data = await fetchOverseaProduct();
+        if (data) {
+          setOverseaProduct(data);
+        }
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      }
+    };
+    const eventData = async () => {
+      try {
+        const data = await fetchEvent();
+        if (data) {
+          setEvent(data);
+        }
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      }
+    };
+    const mayLikeData = async () => {
+      try {
+        const data = await fetchMayLikeProduct();
+        if (data) {
+          setMayLike(data);
         }
       } catch (error) {
         console.error("Error fetching banner:", error);
@@ -73,11 +128,15 @@ const Home = () => {
     hotDealsData();
     topDealsData();
     bannerData();
-
+    flashSaleData();
+    prominentBrandData();
+    overseaProduct();
+    eventData();
+    mayLikeData();
     // Set a 1-second delay before setting loading state to false
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
 
     // Cleanup function to clear the timeout if the component unmounts
     return () => {
@@ -103,14 +162,14 @@ const Home = () => {
           </div> */}
 
           <div className="home_container flex">
-            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+            <div className="home_sidebar rounded-lg !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
               <SideBar categories={categories} />
             </div>
             <div className="home_body flex flex-col gap-6 p-4">
               <div className="h-70 bg-white rounded-lg shadow-md ">
                 <Banner banner={banner} />
               </div>
-              <div className="min-h-32 bg-white rounded-lg shadow-md flex justify-around items-center">
+              <div className="min-h-32 bg-white rounded-lg shadow-md flex justify-around items-center !px-2">
                 {hotDeals?.items?.map((item, index) => (
                   <button
                     key={index}
@@ -132,23 +191,17 @@ const Home = () => {
                 ))}
               </div>
 
-              <div className=" bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                {/* Header */}
-                <div className="flex justify-between">
-                  <img
-                    src={topDeals?.header?.badge?.icon}
-                    alt="top-deals-icon"
-                    style={{
-                      width: `${topDeals.header?.badge.icon_width}px`,
-                      height: `${topDeals.header?.badge.icon_height}px`,
-                    }}
-                  />
-                  <a className="link link-secondary">
-                    {topDeals.header?.more_link_text}
-                  </a>
-                </div>
+              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+                {/* Top Deals   */}
+                <ProductSlide data={topDeals} />
+              </div>
 
-                {/* Content    */}
+              {/* Flash Sales */}
+              <FlashSale flashSale={flashSale} />
+
+              {/* Thuong Hieu Noi Bat */}
+              <div className="bg-gradient-to-b from-neutral-content to-white rounded-lg shadow-md flex flex-col !px-4 !py-4 font-bold text-primary text-lg gap-4">
+                <h3>{prominentBrand.data[0].title.text}</h3>
                 <div>
                   <Swiper
                     modules={[Navigation]} // Enable navigation and pagination features
@@ -157,100 +210,48 @@ const Home = () => {
                     navigation
                     spaceBetween={10}
                   >
-                    {topDeals?.items?.slice(0, 34).map((item, index) => (
-                      <SwiperSlide key={item.id}>
-                        <div className="card shadow-sm  border-1 border-zinc-100 home-card">
-                          <figure className="relative">
-                            <img
-                              src={item.thumbnail_url}
-                              alt="Shoes"
-                              className="w-full"
-                              style={{
-                                width: `${item.thumbnail_width}px`,
-                              }}
-                            />
-                            <img
-                              src={item.badges_v3[0].image}
-                              alt="Badge"
-                              className="absolute top-0 left-0 w-full"
-                              style={{
-                                width: `${item.thumbnail_width}px`,
-                              }}
-                            />
-                          </figure>
-
-                          <div className="card-body !mt-3 !p-3 ">
-                            <h2 className="card-title text-[12px] h-9 truncate-multiline">
-                              {item.name}
-                            </h2>
-                            <RatingStar rating={item.rating_average} />
-                            <div className="h-17 flex flex-col">
-                              <h3
-                                className={`text-${
-                                  item.discount_rate !== 0
-                                    ? "secondary"
-                                    : "black"
-                                } font-bold text-[16px]`}
-                              >
-                                {item.price?.toLocaleString()}
-                                <span className="align-super underline text-[14px]">
-                                  đ
-                                </span>
-                              </h3>
-                              {item.discount_rate !== 0 ? (
-                                <div className="flex gap-1 items-start">
-                                  <div className="badge badge-neutral w-10 h-5 text-[10px] flex justify-center items-center">
-                                    -{item.discount_rate}%
-                                  </div>
-
-                                  <h3 className="text-[11px] line-through text-gray-500">
-                                    {item.price?.toLocaleString()}
-
-                                    <span className="align-super text-[8px]">
-                                      đ
-                                    </span>
-                                  </h3>
-                                </div>
-                              ) : (
-                                <div className="h-5"></div>
-                              )}
-                              {item.origin && (
-                                <p className="text-[10px] !mt-1 truncate-multiline h-2">
-                                  Made in {item.origin}
-                                </p>
-                              )}
-                            </div>
-                            <hr className="border-base-200 border-1" />
-                            <div className="flex justify-center items-center gap-1">
-                              <div
-                                className="rounded"
-                                style={{
-                                  width: `${item.badges_new[0].icon_width}px`,
-                                  height: `${item.badges_new[0].icon_height}px`,
-                                }}
-                              >
-                                <img
-                                  src={item.badges_new[0].icon}
-                                  alt="Tailwind-CSS-Avatar-component"
-                                />
-                              </div>
-                              <p className="text-[10px]">
-                                {item.badges_new[0].text}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                    {prominentBrand.data[0].banners.map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <img
+                          src={item.image_url}
+                          alt=""
+                          className="card shadow-sm  border-1 border-zinc-100 home-card"
+                        />
                       </SwiperSlide>
                     ))}
                   </Swiper>
                 </div>
               </div>
-              {content.map((item, index) => (
-                <div key={index} className="h-80 bg-white rounded-lg shadow-md">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              ))}
+
+              {/* Oversea products   */}
+              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+                <ProductSlide data={overseaProduct} />
+              </div>
+
+              {/* Event */}
+              <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-wrap justify-between !gap-y-3">
+                {event.data[0].banners.map((item, index) => (
+                  <div className="w-1/6 home-card" key={item.id}>
+                    <img
+                      src={item.image_url}
+                      alt=""
+                      style={{
+                        width: "95%",
+                        margin: "auto",
+                      }}
+                      className="rounded-lg"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* May-Like products   */}
+              <div className=" bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4">
+                <ProductSlide data={mayLike} />
+              </div>
+
+              {/* Recommend Products */}
+              <RecommendProduct />
             </div>
           </div>
         </>
