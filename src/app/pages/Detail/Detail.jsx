@@ -1,5 +1,11 @@
 import React, { use, useEffect, useState } from "react";
 import DetailPng from "../../components/DetailPng";
+
+import { sProductData } from "./Detail.store";
+
+export default function Detail() {
+  const proData = sProductData.use();
+
 import HomeSkeleton from "../Home/partials/HomeSkeleton";
 import Loading from "../../components/Loading";
 import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";

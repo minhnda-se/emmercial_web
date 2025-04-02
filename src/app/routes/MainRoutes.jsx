@@ -18,7 +18,9 @@ const MainRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/login" element={<Login />} />
+
         <Route path="*" element={<PageNotFound />} />
 
         <Route path="/loading" element={<Loading />} />
