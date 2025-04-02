@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import DetailPng from "../../components/DetailPng";
 
+
 import { sProductData } from "./Detail.store";
 import HomeSkeleton from "../Home/partials/HomeSkeleton";
 import Loading from "../../components/Loading";
@@ -112,4 +113,11 @@ export default function Detail({ productId = "113568856", spid = "" }) {
       )}
     </>
   );
+
+// import { saveData } from "../../components/DetailPng/DetailPng";
+
+export default function Detail() {
+  // console.log(saveData);
+  return <DetailPng />;
+
 }
