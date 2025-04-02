@@ -76,15 +76,15 @@ export default function Detail({ productId = "113568856", spid = "" }) {
             <DetailPng />
           </div> */}
 
-          <div className="home_container">
-            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+          <div className="detail_container">
+            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
                 <DetailPng data={data} />
               </div>
               {/* <SideBar categories={categories} /> */}
             </div>
 
-            <div className="home_body flex flex-col gap-6 p-4">
+            <div className="detail_body flex flex-col gap-6 p-4">
               <div className="h-70 bg-white rounded-lg shadow-md ">
                 {/* <Banner banner={banner} /> */}
               </div>
@@ -100,7 +100,7 @@ export default function Detail({ productId = "113568856", spid = "" }) {
               </div>
             </div>
 
-            <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
+            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
                 <h3>Categories</h3>
                 {/* <DetailPng /> */}
