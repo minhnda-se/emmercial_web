@@ -25,6 +25,7 @@ const MainRoutes = () => {
 
         <Route path="/loading" element={<Loading />} />
 
+        {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
       </Routes>
       <Footer />

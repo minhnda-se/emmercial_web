@@ -5,7 +5,7 @@ import Loading from "../Loading";
 
 import { sProductData } from "../../pages/Detail/Detail.store";
 
-export default function ImageGallery({ productId = "113568856", spid = "" }) {
+export default function ImageGallery({ data }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,23 +22,11 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
   const visibleThumbs = 6; // Limit the number of visible thumbnails to 6
   const containerWidth = thumbWidth * visibleThumbs;
 
-  sProductData.use();
-
   // Fetch product images from API
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(
-          `https://tiki.vn/api/v2/products/${productId}?platform=web&spid=${spid}&version=3#`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch product data");
-        }
-
-        const data = await response.json();
-        sProductData.set(data); // Store the fetched data in the store
+        console.log(data);
 
         // Extract highlights based on the provided data structure
         if (data.highlight) {
@@ -100,7 +88,7 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
     };
 
     fetchProductImages();
-  }, [productId, spid]);
+  }, []);
 
   // Handle selecting an image
   const handleSelectImage = (url, index) => {
