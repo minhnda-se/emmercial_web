@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./DetailPng.scss";
+import Loading from "../Loading";
 
 import { sProductData } from "../../pages/Detail/Detail.store";
 
@@ -19,6 +21,7 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
   const thumbWidth = 80; // Width of each thumbnail including padding
   const visibleThumbs = 6; // Limit the number of visible thumbnails to 6
   const containerWidth = thumbWidth * visibleThumbs;
+
   sProductData.use();
 
   // Fetch product images from API
@@ -186,7 +189,8 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
   // If loading, show a loading indicator
   if (loading) {
     return (
-      <div className="image-gallery__loading">Loading product images...</div>
+      // <div className="image-gallery__loading">Loading product images...</div>
+      <Loading />
     );
   }
 
@@ -226,7 +230,7 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
             className="image-gallery__nav-button image-gallery__nav-button--prev"
             onClick={handlePrev}
           >
-            {"<"}
+            <LeftOutlined />
           </button>
         )}
 
@@ -259,7 +263,7 @@ export default function ImageGallery({ productId = "113568856", spid = "" }) {
             className="image-gallery__nav-button image-gallery__nav-button--next"
             onClick={handleNext}
           >
-            {">"}
+            <RightOutlined />
           </button>
         )}
       </div>

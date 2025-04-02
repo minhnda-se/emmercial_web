@@ -1,18 +1,22 @@
 import React from "react";
+import Loading from "../../../components/Loading";
 
 export default function HomeSkeleton() {
   const categories = Array(20).fill("Category");
   const content = Array(3).fill("Content");
   return (
     <>
-      <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-primary rounded-lg p-4 w-20 h-25">
+      <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-primary rounded-lg p-4 w-20 h-30">
         <button className="btn btn-ghost text-white h-1/2" aria-label="Message">
           Message
         </button>
+        <div className="border-t border-white"></div>
         <button className="btn btn-ghost text-white h-1/2" aria-label="Support">
           Support
         </button>
       </div>
+
+      {/* <Loading /> */}
 
       <div className="home_container flex  ">
         <div className="home_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
