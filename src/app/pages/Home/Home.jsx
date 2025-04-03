@@ -84,7 +84,7 @@ const Home = () => {
       ) : (
         <>
           <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10">
-            <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-secondary rounded-lg p-4 w-20 h-25 z-10">
+            <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10 !gap-0.5">
               <button
                 className="btn flex flex-col btn-secondary text-white h-1/2"
                 aria-label="Message"
@@ -92,6 +92,7 @@ const Home = () => {
                 <MessageOutlined style={{ fontSize: "24px" }} />
                 Message
               </button>
+
               <button
                 className="btn flex flex-col btn-secondary text-white h-1/2"
                 aria-label="Support"
