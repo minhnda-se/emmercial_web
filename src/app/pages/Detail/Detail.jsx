@@ -3,18 +3,21 @@ import DetailPng from "../../components/DetailPng";
 import Loading from "../../components/Loading";
 import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import "./Detail.css";
+import { BasicInfo } from "./partials/BasicInfo";
+import { DetailInfo } from "./partials/DetailInfo";
 
-export default function Detail({ productId = "113568856", spid = "" }) {
+export default function Detail({ productId = "275618846", spid = "" }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
+  const [selectedSpid, setSelectedSpid] = useState(spid);
 
   // Function to fetch product data
   const fetchProductImages = async () => {
     try {
       setIsLoading(true); // Start loading
       const response = await fetch(
-        `https://tiki.vn/api/v2/products/${productId}?platform=web&spid=${spid}&version=3#`
+        `https://tiki.vn/api/v2/products/${productId}?platform=web&spid=${selectedSpid}&version=3#`
       );
 
       if (!response.ok) {
@@ -30,10 +33,48 @@ export default function Detail({ productId = "113568856", spid = "" }) {
     }
   };
 
-  // Fetch product images when the component mounts
+  // Fetch product images when the component mounts or selectedSpid changes
   useEffect(() => {
     fetchProductImages();
-  }, [productId, spid]); // Refetch if productId or spid changes
+  }, [productId, selectedSpid]); // Refetch if productId or selectedSpid changes
+
+  // Handle color option selection
+  const handleColorSelect = (optionSpid) => {
+    setSelectedSpid(optionSpid);
+  };
+
+  // Render color options
+  const renderColorOptions = () => {
+    if (!productData || !productData.configurable_products) return null;
+
+    return (
+      <div className="mt-4">
+        <h3 className="text-lg font-medium mb-2">Màu</h3>
+        <div className="flex flex-wrap gap-2">
+          {productData.configurable_products.map((option) => (
+            <div
+              key={option.id}
+              onClick={() => handleColorSelect(option.id)}
+              className={`flex items-center border rounded-lg p-2 cursor-pointer transition-all ${
+                selectedSpid === option.id
+                  ? "border-blue-500 bg-blue-50"
+                  : "border-gray-300 hover:border-gray-400"
+              }`}
+            >
+              <div className="flex items-center">
+                <img
+                  src={option.thumbnail_url}
+                  alt={option.option1}
+                  className="w-10 h-10 object-cover mr-2"
+                />
+                <span>{option.option1}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -67,18 +108,21 @@ export default function Detail({ productId = "113568856", spid = "" }) {
             {/* Sidebar with Product Image */}
             <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
-                <DetailPng data={productData} />
+                {/* Fix: Pass selectedSpid as a prop directly */}
+                <DetailPng data={productData} spid={selectedSpid} />
               </div>
             </div>
 
             {/* Main content */}
             <div className="detail_body flex flex-col gap-6 p-4 flex-1">
-              <div className="h-70 bg-white rounded-lg shadow-md ">
-                {/* Insert Banner or other components here */}
+              <div className="bg-white rounded-lg shadow-md p-4">
+                <BasicInfo productData={productData} />
+                {renderColorOptions()}
               </div>
 
-              <div className="h-32 bg-white rounded-lg shadow-md flex justify-around items-center">
-                {/* Any other content you want */}
+              {/* Changed this div to properly contain the DetailInfo component */}
+              <div className="bg-white rounded-lg shadow-md">
+                <DetailInfo productData={productData} />
               </div>
 
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">

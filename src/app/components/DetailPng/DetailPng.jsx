@@ -3,9 +3,8 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./DetailPng.scss";
 import Loading from "../Loading";
 
-import { sProductData } from "../../pages/Detail/Detail.store";
-
-export default function ImageGallery({ data }) {
+// Fix props destructuring - change from {data}, spid to {data, spid}
+export default function ImageGallery({ data, spid }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,13 +12,12 @@ export default function ImageGallery({ data }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [highlightItems, setHighlightItems] = useState([]);
   const [highlightTitle, setHighlightTitle] = useState("");
-  // Add states to track scroll position
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const thumbnailsRef = useRef(null);
-  const thumbWidth = 80; // Width of each thumbnail including padding
-  const visibleThumbs = 6; // Limit the number of visible thumbnails to 6
+  const thumbWidth = 80;
+  const visibleThumbs = 6;
   const containerWidth = thumbWidth * visibleThumbs;
 
   // Fetch product images from API
@@ -49,7 +47,7 @@ export default function ImageGallery({ data }) {
         ) {
           // Find the specific configurable product that matches the spid
           const configurableProduct = data.configurable_products.find(
-            (product) => product.id.toString() === spid
+            (product) => product.id.toString() === spid.toString()
           );
 
           if (configurableProduct && configurableProduct.images) {
@@ -88,7 +86,10 @@ export default function ImageGallery({ data }) {
     };
 
     fetchProductImages();
-  }, []);
+  }, [data, spid]); // Add spid to dependency array to re-run when spid changes
+
+  // Remaining functions and return statement remain the same
+  // ...
 
   // Handle selecting an image
   const handleSelectImage = (url, index) => {
@@ -176,10 +177,7 @@ export default function ImageGallery({ data }) {
 
   // If loading, show a loading indicator
   if (loading) {
-    return (
-      // <div className="image-gallery__loading">Loading product images...</div>
-      <Loading />
-    );
+    return <Loading />;
   }
 
   // If error, show error message
