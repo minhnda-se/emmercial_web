@@ -1,39 +1,130 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import logo from "../../assets/logo.png";
+import { faHouse, faSearch } from "@fortawesome/free-solid-svg-icons";
+import logo from "../../assets/favicon.png";
 import { Link } from "react-router-dom";
+
 const Header = () => {
+  const [commitment, setCommitment] = useState({});
+  const [error, setError] = useState(null); // Error state
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
+  useEffect(() => {
+    const fetchCommitment = async () => {
+      const DOMAIN = import.meta.env.VITE_API_URL;
+      try {
+        const response = await fetch(
+          `${DOMAIN}/raiden/v3/widgets/reasons_to_believe?platform=desktop&page_name=Home`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json(); // Parse response into JSON
+        setCommitment(data); // Set the fetched data into state
+      } catch (error) {
+        setError(error.message); // Set the error message
+      }
+    };
+
+    // Check if the user is logged in by looking for a token or a flag in sessionStorage
+    const loggedIn = sessionStorage.getItem("token");
+    if (loggedIn) {
+      setIsLoggedIn(true); // Update the state if the token is found
+    }
+
+    fetchCommitment();
+  }, []); // Empty dependency array, so this runs only once on mount
+
   return (
-    <div className="header">
-      <div className="navbar bg-white l shadow-sm !mb-6 h-25">
-        <div className="flex-1">
-          <div className="avatar">
-            <div className="w-24 rounded-xl favicon">
-              <Link to="/">
-                <img src={logo} />
-              </Link>
+    <div className="header !mb-6 bg-white shadow-sm overflow-hidden">
+      <div className=" bg-emerald-100 ">
+        <div className="header-commitment flex justify-around !p-2 ">
+          {commitment.data?.map((item, index) => (
+            <div className="flex items-center gap-2" key={index}>
+              <img
+                src={item.icon}
+                alt=""
+                style={{ width: item.icon_width, height: item.icon_height }}
+              />
+              <p>{item.text}</p>
             </div>
+          ))}
+        </div>
+      </div>
+      <div className="navbar flex w-[93vw] !m-auto items-center justify-between !py-3">
+        <div className="avatar">
+          <div className="w-24 rounded-xl">
+            <Link to="/">
+              <img src={logo} alt="Logo" />
+            </Link>
           </div>
         </div>
-        <div className="flex gap-2 search-bar">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
-          <div className="w-10 rounded-full bg-accent-content icon-rounded">
-            <a href="/login">
+        <div className="flex items-center w-[60%] gap-2">
+          <label className="input w-[90%] !px-5 bg-transparent">
+            <svg
+              className="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input type="search" required placeholder="Search" />
+          </label>
+          <button className="btn btn-secondary w-[10%]">
+            <FontAwesomeIcon
+              icon={faSearch}
+              size="xl"
+              fixedWidth
+              color="white"
+              className="!p-2 rounded-full "
+            />
+          </button>
+        </div>
+
+        <div className="flex gap-4 font-bold">
+          <Link to="/" className="flex items-center text-secondary ">
+            <FontAwesomeIcon
+              icon={faHouse}
+              size="l"
+              fixedWidth
+              color="primary"
+              className="!p-2 rounded-full "
+            />
+            <p>Trang chủ</p>
+          </Link>
+          {isLoggedIn ? ( // Conditional rendering based on login status
+            <Link to={"/profile"} className="flex items-center">
               <FontAwesomeIcon
                 icon={faUser}
-                size="xl"
+                size="l"
                 fixedWidth
-                color="white"
-                className="user-icon"
+                color="black"
+                className="!p-2 rounded-full "
               />
-            </a>
-          </div>
+              <p>Profile</p>
+            </Link>
+          ) : (
+            <Link to={"/login"} className="flex items-center">
+              <FontAwesomeIcon
+                icon={faUser}
+                size="l"
+                fixedWidth
+                color="black"
+                className="!p-2 rounded-full "
+              />
+              <p>Tài khoản</p>
+            </Link>
+          )}
         </div>
       </div>
     </div>

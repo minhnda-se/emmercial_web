@@ -1,7 +1,7 @@
 .home_container {
   display: flex;
   margin: auto;
-  width: 90vw;
+  width: 93vw;
   justify-content: space-between;
 }
 .home_sidebar {

@@ -28,7 +28,7 @@ const MainRoutes = () => {
 
         {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
-        <Route path= "/checkout" element={<Checkout/>}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

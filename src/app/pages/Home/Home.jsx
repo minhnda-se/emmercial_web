@@ -33,6 +33,8 @@ const Home = () => {
   const [mayLike, setMayLike] = useState({});
 
   useEffect(() => {
+    const user = { email: "user1@gmail.com", password: "1234", name: "user1" };
+    localStorage.setItem("user", JSON.stringify(user)); // Storing user data
     const fetchData = async () => {
       try {
         const [
@@ -83,8 +85,8 @@ const Home = () => {
         <HomeSkeleton />
       ) : (
         <>
-          <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10">
-            <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-10 !gap-0.5">
+          <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 z-50">
+            <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30  !gap-0.5">
               <button
                 className="btn flex flex-col btn-secondary text-white h-1/2"
                 aria-label="Message"
