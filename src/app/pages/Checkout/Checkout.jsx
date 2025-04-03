@@ -6,29 +6,32 @@ export default function Checkout() {
       id: 1,
       image: "https://example.com/image1.jpg",
       name: "Book 1",
-      price: 10,
+      price: 100000,
       quantity: 2,
     },
     {
       id: 2,
       image: "https://example.com/image2.jpg",
       name: "Book 2",
-      price: 15,
+      price: 15000,
       quantity: 1,
     },
     {
       id: 3,
       image: "https://example.com/image3.jpg",
       name: "Book 3",
-      price: 20,
+      price: 20000,
       quantity: 3,
     },
   ];
-
+  const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   const totalPrice = booked.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
-  let shippingFee = 10;
+  console.log(formatNumber(totalPrice));
+  let shippingFee = 10000;
   return (
     <div className="checkout-wrapper">
       <h1 className="text-2xl font-bold">Your Cart</h1>
@@ -51,7 +54,7 @@ export default function Checkout() {
                     </div>
                   </div>
                   <div className="text-warning font-semibold">
-                    Price: ${item.price}
+                    {formatNumber(item.price)}đ
                   </div>
                 </li>
               </ul>
@@ -158,7 +161,7 @@ export default function Checkout() {
                     </div>
                     <div className="text-sm">{item.name}</div>
                   </div>
-                  <div className="text-warning">${item.price}</div>
+                  <div className="text-warning">{formatNumber(item.price)}đ</div>
                 </div>
               ))}
             </div>
@@ -167,11 +170,11 @@ export default function Checkout() {
               <div className="bill-price-row">
                 <div className="bill-price-item">
                   <div className="text-sm opacity-70 font-semibold">Tổng tiền hàng</div>
-                  <div className="text-warning">${totalPrice}</div>
+                  <div className="text-warning">{formatNumber(totalPrice)}đ</div>
                 </div>
                 <div className="bill-price-item">
                   <div className="text-sm opacity-70 font-semibold">Phí vận chuyển</div>
-                  <div className="text-warning">${shippingFee}</div>
+                  <div className="text-warning">{formatNumber(shippingFee)}đ</div>
                 </div>
               </div>
             </div>
@@ -179,7 +182,7 @@ export default function Checkout() {
             <div className="bill-total bill-content">
               <div className="bill-total-row">
                 <div className="font-bold">Tổng tiền thanh toán</div>
-                <div className="text-warning font-semibold">${totalPrice + shippingFee}</div>
+                <div className="text-warning font-bold">{formatNumber(totalPrice + shippingFee)}đ</div>
               </div>
             </div>
             <div className="bill-button btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
