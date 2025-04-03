@@ -11,6 +11,7 @@ import DetailPng from "../components/DetailPng/DetailPng";
 import Detail from "../pages/Detail/Detail";
 
 import Login from "../pages/Login";
+import Checkout from "../pages/Checkout";
 
 const MainRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const MainRoutes = () => {
 
         {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
+        <Route path= "/checkout" element={<Checkout/>}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
