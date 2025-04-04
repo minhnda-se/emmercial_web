@@ -289,41 +289,44 @@ export default function Detail({
           </div>
 
           {/* Main product detail container */}
-
-<div className="detail_container flex gap-4">
-  <div className="flex gap-4">
-    {/* Sidebar with Product Image */}
-    <div>
-      <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-        <div className="flex flex-col gap-y-2 !p-4">
-          {/* Fix: Pass selectedSpid as a prop directly */}
-          <DetailPng data={productData} spid={selectedSpid} />
-        </div>
-      </div>
-
-            {/* Main content */}
-            <div className="detail_body flex flex-col gap-6 p-4 flex-1">
-              <div className="bg-white rounded-lg shadow-md p-4">
-                <BasicInfo productData={productData} />
-                {renderConfigurableOptions()}
-
+          <div className="detail_container flex gap-4">
+            <div className="flex gap-4">
+              {/* Sidebar with Product Image */}
+              <div>
+                <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                  <div className="flex flex-col gap-y-2 !p-4">
+                    <DetailPng data={productData} spid={selectedSpid} />
+                  </div>
+                </div>
               </div>
 
               {/* Main content */}
               <div className="detail_body flex flex-col gap-6 p-4 flex-1">
                 <div className="bg-white rounded-lg shadow-md p-4">
                   <BasicInfo productData={productData} />
-                  {renderColorOptions()}
+                  {renderConfigurableOptions()}
                 </div>
 
+                {/* Changed this div to properly contain the DetailInfo component */}
+                <div className="bg-white rounded-lg shadow-md">
+                  <DetailInfo productData={productData} />
+                </div>
 
-                {/* Add product description or additional details */}
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(productData?.description || ""),
-                  }}
-                />
-
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  {/* Add product header and content */}
+                  <div className="flex justify-between">
+                    <h2>{productData?.name}</h2>
+                    {/* Add more header content here */}
+                  </div>
+                  {/* Add product description or additional details */}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(
+                        productData?.description || ""
+                      ),
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
