@@ -104,46 +104,59 @@ export default function Detail({ productId = "275618846", spid = "" }) {
           </div>
 
           {/* Main product detail container */}
-          <div className="detail_container flex">
-            {/* Sidebar with Product Image */}
-            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
-              <div className="flex flex-col gap-y-2 !p-4">
-                {/* Fix: Pass selectedSpid as a prop directly */}
-                <DetailPng data={productData} spid={selectedSpid} />
-              </div>
-            </div>
-
-            {/* Main content */}
-            <div className="detail_body flex flex-col gap-6 p-4 flex-1">
-              <div className="bg-white rounded-lg shadow-md p-4">
-                <BasicInfo productData={productData} />
-                {renderColorOptions()}
+          <div className="detail_container flex gap-4">
+            <div className="flex gap-4">
+              {/* Sidebar with Product Image */}
+              <div>
+                <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                  <div className="flex flex-col gap-y-2 !p-4">
+                    {/* Fix: Pass selectedSpid as a prop directly */}
+                    <DetailPng data={productData} spid={selectedSpid} />
+                  </div>
+                </div>
               </div>
 
-              {/* Changed this div to properly contain the DetailInfo component */}
-              <div className="bg-white rounded-lg shadow-md">
-                <DetailInfo productData={productData} />
-              </div>
-
-              <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                {/* Add product header and content */}
-                <div className="flex justify-between">
-                  <h2>{productData?.name}</h2>
-                  {/* Add more header content here */}
+              {/* Main content */}
+              <div className="detail_body flex flex-col gap-6 p-4 flex-1">
+                <div className="bg-white rounded-lg shadow-md p-4">
+                  <BasicInfo productData={productData} />
+                  {renderColorOptions()}
                 </div>
 
-                {/* Add product description or additional details */}
-                <div>
-                  <p>{productData?.description}</p>
+                {/* Changed this div to properly contain the DetailInfo component */}
+                <div className="bg-white rounded-lg shadow-md">
+                  <DetailInfo productData={productData} />
+                </div>
+
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  {/* Add product header and content */}
+                  <div className="flex justify-between">
+                    <h2>{productData?.name}</h2>
+                    {/* Add more header content here */}
+                  </div>
+
+                  {/* Add product description or additional details */}
+                  <div>
+                    <p
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        overflowWrap: "break-word",
+                      }}
+                    >
+                      {productData?.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Categories Sidebar */}
-            <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
-              <div className="flex flex-col gap-y-2 !p-4">
-                <h3>Categories</h3>
-                {/* Add categories or related content */}
+            <div>
+              <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                <div className="flex flex-col gap-y-2 !p-4">
+                  <h3>Categories</h3>
+                  {/* Add categories or related content */}
+                </div>
               </div>
             </div>
           </div>
