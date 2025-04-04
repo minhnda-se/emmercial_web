@@ -1,5 +1,6 @@
 // DetailInfo.jsx - Place this in the partials folder
 import React from "react";
+import DOMPurify from "dompurify";
 
 export const DetailInfo = ({ productData }) => {
   // Check if product data and specifications exist
@@ -33,9 +34,14 @@ export const DetailInfo = ({ productData }) => {
               }`}
             >
               <div className="w-1/2 text-gray-600">{attribute.name}</div>
-              <div className="w-1/2 font-medium">
-                {renderAttributeValue(attribute.value)}
-              </div>
+              <div
+                className="w-1/2 font-medium"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(attribute?.value || ""),
+                }}
+              />
+              {/* {renderAttributeValue(attribute.value)} */}
+              {/* {attribute.value} */}
             </div>
           ))}
         </div>

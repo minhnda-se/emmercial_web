@@ -5,8 +5,12 @@ import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import "./Detail.css";
 import { BasicInfo } from "./partials/BasicInfo";
 import { DetailInfo } from "./partials/DetailInfo";
+import DOMPurify from "dompurify";
 
-export default function Detail({ productId = "275618846", spid = "" }) {
+export default function Detail({
+  productId = "249947165",
+  spid = "273960211",
+}) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
@@ -16,9 +20,12 @@ export default function Detail({ productId = "275618846", spid = "" }) {
   const fetchProductImages = async () => {
     try {
       setIsLoading(true); // Start loading
-      const response = await fetch(
-        `https://tiki.vn/api/v2/products/${productId}?platform=web&spid=${selectedSpid}&version=3#`
-      );
+      // Modify URL to handle empty spid
+      const apiUrl = `https://tiki.vn/api/v2/products/${productId}?platform=web${
+        selectedSpid ? `&spid=${selectedSpid}` : ""
+      }&version=3#`;
+
+      const response = await fetch(apiUrl);
 
       if (!response.ok) {
         throw new Error("Failed to fetch product data");
@@ -38,42 +45,220 @@ export default function Detail({ productId = "275618846", spid = "" }) {
     fetchProductImages();
   }, [productId, selectedSpid]); // Refetch if productId or selectedSpid changes
 
-  // Handle color option selection
-  const handleColorSelect = (optionSpid) => {
+  // Set correct selectedSpid based on the provided spid once product data is loaded
+  useEffect(() => {
+    if (productData?.configurable_products) {
+      // If spid is provided, check if it exists in configurable_products
+      if (spid) {
+        const productExists = productData.configurable_products.some(
+          (product) => product.id === spid
+        );
+
+        if (productExists) {
+          setSelectedSpid(spid);
+        } else {
+          // If spid doesn't exist, find product with selected=true or use first product
+          const defaultProduct =
+            productData.configurable_products.find((p) => p.selected) ||
+            productData.configurable_products[0];
+          setSelectedSpid(defaultProduct?.id);
+        }
+      } else {
+        // If no spid is provided, find product with selected=true or use first product
+        const defaultProduct =
+          productData.configurable_products.find((p) => p.selected) ||
+          productData.configurable_products[0];
+        setSelectedSpid(defaultProduct?.id);
+      }
+    }
+  }, [productData, spid]);
+
+  // Handle variant selection
+  const handleVariantSelect = (optionSpid) => {
     setSelectedSpid(optionSpid);
+  };
+
+  // Get unique color options (option1) from configurable products
+  const getColorOptions = () => {
+    if (!productData?.configurable_products) return [];
+
+    const uniqueColors = new Set();
+    const colorOptions = [];
+
+    productData.configurable_products.forEach((option) => {
+      if (!uniqueColors.has(option.option1)) {
+        uniqueColors.add(option.option1);
+        colorOptions.push({
+          color: option.option1,
+          thumbnail: option.thumbnail_url,
+          spid: option.id,
+        });
+      }
+    });
+
+    return colorOptions;
+  };
+
+  // Get unique size options (option2) from configurable products
+  const getSizeOptions = () => {
+    if (!productData?.configurable_products) return [];
+
+    const uniqueSizes = new Set();
+    const sizeOptions = [];
+
+    productData.configurable_products.forEach((option) => {
+      if (!uniqueSizes.has(option.option2)) {
+        uniqueSizes.add(option.option2);
+        sizeOptions.push({
+          size: option.option2,
+          spid: option.id,
+        });
+      }
+    });
+
+    return sizeOptions;
+  };
+
+  // Get currently selected color and size
+  const getSelectedOptions = () => {
+    if (!productData?.configurable_products || !selectedSpid)
+      return { color: "", size: "" };
+
+    const selectedProduct = productData.configurable_products.find(
+      (option) => option.id === selectedSpid
+    );
+
+    return {
+      color: selectedProduct?.option1 || "",
+      size: selectedProduct?.option2 || "",
+    };
+  };
+
+  // Find product by color and size
+  const findProductByOptions = (color, size) => {
+    if (!productData?.configurable_products) return null;
+
+    return productData.configurable_products.find(
+      (product) => product.option1 === color && product.option2 === size
+    );
   };
 
   // Render color options
   const renderColorOptions = () => {
-    if (!productData || !productData.configurable_products) return null;
+    const colorOptions = getColorOptions();
+    const { color: selectedColor } = getSelectedOptions();
+
+    if (!colorOptions.length) return null;
 
     return (
       <div className="mt-4">
-        <h3 className="text-lg font-medium mb-2">Màu</h3>
         <div className="flex flex-wrap gap-2">
-          {productData.configurable_products.map((option) => (
+          {colorOptions.map((option) => (
             <div
-              key={option.id}
-              onClick={() => handleColorSelect(option.id)}
+              key={option.color}
+              onClick={() => {
+                // Find a product with this color and currently selected size
+                const { size } = getSelectedOptions();
+                const product =
+                  findProductByOptions(option.color, size) ||
+                  // Or just select the first product with this color
+                  productData.configurable_products.find(
+                    (p) => p.option1 === option.color
+                  );
+
+                if (product) {
+                  handleVariantSelect(product.id);
+                }
+              }}
               className={`flex items-center border rounded-lg p-2 cursor-pointer transition-all ${
-                selectedSpid === option.id
+                selectedColor === option.color
                   ? "border-blue-500 bg-blue-50"
                   : "border-gray-300 hover:border-gray-400"
               }`}
             >
               <div className="flex items-center">
                 <img
-                  src={option.thumbnail_url}
-                  alt={option.option1}
+                  src={option.thumbnail}
+                  alt={option.color}
                   className="w-10 h-10 object-cover mr-2"
                 />
-                <span>{option.option1}</span>
+                <span>{option.color}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
     );
+  };
+
+  // Render size options
+  const renderSizeOptions = () => {
+    const sizeOptions = getSizeOptions();
+    const { size: selectedSize, color: selectedColor } = getSelectedOptions();
+
+    if (!sizeOptions.length) return null;
+
+    return (
+      <div className="mt-4">
+        <div className="flex flex-wrap gap-2">
+          {sizeOptions.map((option) => {
+            // Find a product with currently selected color and this size
+            const product = findProductByOptions(selectedColor, option.size);
+            const isAvailable = !!product;
+
+            return (
+              <div
+                key={option.size}
+                onClick={() => {
+                  if (isAvailable) {
+                    handleVariantSelect(product.id);
+                  }
+                }}
+                className={`border rounded-lg px-4 py-2 text-center transition-all ${
+                  !isAvailable
+                    ? "border-gray-200 text-gray-400 cursor-not-allowed"
+                    : selectedSize === option.size
+                    ? "border-blue-500 bg-blue-50 cursor-pointer"
+                    : "border-gray-300 hover:border-gray-400 cursor-pointer"
+                }`}
+              >
+                <span>{option.size}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const renderConfigurableOptions = () => {
+    if (!productData?.configurable_options) return null;
+
+    // Sort options based on position field
+    const sortedOptions = [...productData.configurable_options].sort(
+      (a, b) => a.position - b.position
+    );
+
+    return sortedOptions.map((option) => {
+      switch (option.code) {
+        case "option1":
+          return (
+            <div key={option.code} className="mt-4">
+              <h3 className="text-lg font-medium mb-2">{option.name}</h3>
+              {renderColorOptions()}
+            </div>
+          );
+        case "option2":
+          return (
+            <div key={option.code} className="mt-4">
+              <h3 className="text-lg font-medium mb-2">{option.name}</h3>
+              {renderSizeOptions()}
+            </div>
+          );
+        default:
+          return null;
+      }
+    });
   };
 
   return (
@@ -108,7 +293,6 @@ export default function Detail({ productId = "275618846", spid = "" }) {
             {/* Sidebar with Product Image */}
             <div className="detail_sidebar rounded-lg bg-white !sticky top-2 h-screen overflow-y-auto custom-scrollbar">
               <div className="flex flex-col gap-y-2 !p-4">
-                {/* Fix: Pass selectedSpid as a prop directly */}
                 <DetailPng data={productData} spid={selectedSpid} />
               </div>
             </div>
@@ -117,7 +301,7 @@ export default function Detail({ productId = "275618846", spid = "" }) {
             <div className="detail_body flex flex-col gap-6 p-4 flex-1">
               <div className="bg-white rounded-lg shadow-md p-4">
                 <BasicInfo productData={productData} />
-                {renderColorOptions()}
+                {renderConfigurableOptions()}
               </div>
 
               {/* Changed this div to properly contain the DetailInfo component */}
@@ -133,9 +317,11 @@ export default function Detail({ productId = "275618846", spid = "" }) {
                 </div>
 
                 {/* Add product description or additional details */}
-                <div>
-                  <p>{productData?.description}</p>
-                </div>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(productData?.description || ""),
+                  }}
+                />
               </div>
             </div>
 
