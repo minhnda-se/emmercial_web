@@ -12,6 +12,7 @@ import Detail from "../pages/Detail/Detail";
 
 import Login from "../pages/Login";
 import Checkout from "../pages/Checkout";
+import Search from "../pages/Search/Search";
 
 const MainRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const MainRoutes = () => {
         {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
         <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/search" element={<Search />} />
       </Routes>
       <Footer />
     </BrowserRouter>

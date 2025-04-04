@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function ProductSkeleton() {
-  const arr = Array(10).fill(0);
+  const arr = Array(15).fill(0);
   return (
     <>
       {arr.map((item, index) => (

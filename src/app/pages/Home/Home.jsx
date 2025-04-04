@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import "./Home.css";
-import { Carousel } from "antd";
 import { SideBar } from "./partials/SideBar";
 import HomeSkeleton from "./partials/HomeSkeleton";
 import { fetchCategory } from "./services/fetchCategory";
@@ -72,7 +71,6 @@ const Home = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setIsLoading(false); // Set loading to false even if there's an error
       }
     };
 
