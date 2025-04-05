@@ -12,6 +12,7 @@ import Detail from "../pages/Detail/Detail";
 
 import Login from "../pages/Login";
 import Checkout from "../pages/Checkout";
+import Cart from "../pages/Cart";
 
 const MainRoutes = () => {
   return (
@@ -28,7 +29,8 @@ const MainRoutes = () => {
 
         {/* <Route path="/detail" element={<Detail />} /> */}
         <Route path="/detail" element={<Detail />} />
-        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/checkout" element={<Checkout />}/>
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

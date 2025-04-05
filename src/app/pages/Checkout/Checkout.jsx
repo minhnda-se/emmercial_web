@@ -38,12 +38,13 @@ export default function Checkout() {
       <div className="checkout-container">
         <div className="left-container">
           <div className="cart-container">
-            {booked.map((item) => (
-              <ul
-                key={item.id}
+          <ul
+                
                 className="list bg-white shadow-md border-b-1 border-solid border-neutral first:rounded-t-sm last:rounded-b-sm cart-item"
               >
-                <li className="list-row ">
+            {booked.map((item) => (
+              
+                <li key={item.id} className="list-row ">
                   <div>
                     <img className="size-10 rounded-box" src={item.image} />
                   </div>
@@ -54,11 +55,12 @@ export default function Checkout() {
                     </div>
                   </div>
                   <div className="text-warning font-semibold">
-                    {formatNumber(item.price)}đ
+                    {formatNumber(item.price * item.quantity)}đ
                   </div>
                 </li>
-              </ul>
+              
             ))}
+            </ul>
           </div>
           <div className="payment-container bg-white shadow-md rounded-sm">
             <h3 className="font-bold">Chọn hình thức thanh toán</h3>
@@ -161,7 +163,7 @@ export default function Checkout() {
                     </div>
                     <div className="text-sm">{item.name}</div>
                   </div>
-                  <div className="text-warning">{formatNumber(item.price)}đ</div>
+                  <div className="text-warning">{formatNumber(item.price*item.quantity)}đ</div>
                 </div>
               ))}
             </div>
