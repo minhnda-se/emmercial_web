@@ -8,13 +8,15 @@ import { DetailInfo } from "./partials/DetailInfo";
 import DOMPurify from "dompurify";
 
 export default function Detail({
-  productId = "249947165",
-  spid = "273960211",
+  productId = "274101255",
+  spid = "274101974",
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
   const [selectedSpid, setSelectedSpid] = useState(spid);
+  const [isFullDescriptionVisible, setIsFullDescriptionVisible] =
+    useState(false);
 
   // Function to fetch product data
   const fetchProductImages = async () => {
@@ -301,31 +303,47 @@ export default function Detail({
               </div>
 
               {/* Main content */}
-              <div className="detail_body flex flex-col gap-6 p-4 flex-1">
-                <div className="bg-white rounded-lg shadow-md p-4">
+              <div className="detail_body flex flex-col gap-6 flex-1">
+                <div className="bg-white rounded-lg shadow-md !p-4 flex flex-col !gap-4">
                   <BasicInfo productData={productData} />
                   {renderConfigurableOptions()}
                 </div>
 
                 {/* Changed this div to properly contain the DetailInfo component */}
-                <div className="bg-white rounded-lg shadow-md">
+                <div className="bg-white rounded-lg shadow-md !p-3">
                   <DetailInfo productData={productData} />
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col gap-2">
                   {/* Add product header and content */}
-                  <div className="flex justify-between">
-                    <h2>{productData?.name}</h2>
-                    {/* Add more header content here */}
-                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                    Mô tả sản phẩm
+                  </h2>
+                  {/* Add more header content here */}
+
                   {/* Add product description or additional details */}
                   <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.5rem",
+                      overflow: "hidden",
+                      height: isFullDescriptionVisible ? "auto" : "250px",
+                    }}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(
                         productData?.description || ""
                       ),
                     }}
                   />
+                  <a
+                    className="text-blue-500 cursor-pointer text-center"
+                    onClick={() =>
+                      setIsFullDescriptionVisible(!isFullDescriptionVisible)
+                    }
+                  >
+                    {isFullDescriptionVisible ? "Ẩn bớt" : "Xem thêm"}
+                  </a>
                 </div>
               </div>
             </div>
