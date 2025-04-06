@@ -1,7 +1,6 @@
 import React from "react";
 
 const ShoppingBenefits = ({ productData }) => {
-  console.log("Benefits: ", productData);
   const benefits = productData.benefits;
   if (!benefits || benefits.length === 0) return null;
 

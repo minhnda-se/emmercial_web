@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined, MinusOutlined, SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-const PaymentComponent = ({ mpid, spid }) => {
+const PaymentComponent = ({ mpid, spid, productData }) => {
   const [quantity, setQuantity] = useState(1);
   const [sellerData, setSellerData] = useState(null);
-  const [productData, setProductData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Fetch seller information
   useEffect(() => {
@@ -30,21 +31,10 @@ const PaymentComponent = ({ mpid, spid }) => {
     fetchSellerInfo();
   }, [mpid, spid]);
 
-  // Fetch product data
   useEffect(() => {
     const fetchProductData = async () => {
       try {
         setIsLoading(true);
-        const apiUrl = `https://tiki.vn/api/v2/products/${mpid}?platform=web&spid=${spid}&version=3`;
-
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch product data");
-        }
-
-        const data = await response.json();
-        setProductData(data);
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
@@ -53,9 +43,8 @@ const PaymentComponent = ({ mpid, spid }) => {
     };
 
     fetchProductData();
-  }, [mpid, spid]);
+  }, [mpid, spid, productData]);
 
-  // Handle increment quantity
   const handleIncrement = () => {
     setQuantity((prevQuantity) => {
       const newQuantity = prevQuantity + 1;
@@ -137,6 +126,68 @@ const PaymentComponent = ({ mpid, spid }) => {
     return options.join(", ");
   };
 
+  // Hàm lưu thông tin sản phẩm vào localStorage
+  const saveProductToLocalStorage = (isBuyNow = false) => {
+    const selectedVariant = getSelectedVariant();
+    const totalPrice = calculateTotalPrice();
+
+    const productInfo = {
+      id: spid || mpid,
+      mpid: mpid,
+      spid: spid,
+      name: productData?.name,
+      price: productData?.price,
+      thumbnail: selectedVariant?.thumbnail_url || productData?.thumbnail_url,
+      quantity: quantity,
+      totalPrice: totalPrice,
+      variant: getOptionsDisplay(),
+      seller: sellerData?.name || "Tiki Trading",
+      timestamp: new Date().getTime(),
+    };
+
+    // Lấy giỏ hàng hiện tại từ localStorage hoặc tạo mới nếu chưa có
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id === productInfo.id
+    );
+
+    if (existingItemIndex !== -1) {
+      // Nếu đã có, cập nhật số lượng
+      cartItems[existingItemIndex].quantity += quantity;
+      cartItems[existingItemIndex].totalPrice =
+        cartItems[existingItemIndex].price *
+        cartItems[existingItemIndex].quantity;
+    } else {
+      // Nếu chưa có, thêm mới vào giỏ hàng
+      cartItems.push(productInfo);
+    }
+
+    // Lưu lại vào localStorage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    // Nếu là "Mua ngay", lưu thêm thông tin cho quá trình thanh toán
+    if (isBuyNow) {
+      localStorage.setItem("checkoutItem", JSON.stringify(productInfo));
+      // Chuyển hướng đến trang thanh toán
+      navigate("/checkout");
+    } else {
+      console.log("Added to cart:", productInfo);
+      // Bạn có thể thêm code hiển thị thông báo "Đã thêm vào giỏ hàng" ở đây
+    }
+  };
+
+  // Xử lý sự kiện mua ngay
+  const handleBuyNow = () => {
+    saveProductToLocalStorage(true);
+  };
+
+  // Xử lý sự kiện thêm vào giỏ
+  const handleAddToCart = () => {
+    saveProductToLocalStorage(false);
+  };
+
   // Render loading state
   if (isLoading) {
     return (
@@ -160,24 +211,14 @@ const PaymentComponent = ({ mpid, spid }) => {
       {/* Header with seller info and search */}
       <div className="flex items-center justify-between mb-6 pb-2 border-b">
         <div className="flex items-center">
-          <img
-            src={
-              sellerData?.icon ||
-              "https://salt.tikicdn.com/ts/upload/e4/49/6c/270be9859abd5f5ec5071da65fab0a94.png"
-            }
-            alt="Tiki"
-            className="h-8 mr-2"
-          />
+          <img src={sellerData?.icon} alt="Tiki" className="h-8 mr-2" />
           <div className="flex flex-col">
             <span className="font-bold text-lg">Tiki Trading</span>
             <div className="flex items-center">
               {sellerData?.is_official && (
                 <div className="flex items-center mr-2">
                   <img
-                    src={
-                      sellerData?.badge_img?.url ||
-                      "https://salt.tikicdn.com/ts/upload/5d/4c/f7/0261315e75127c2ff73efd7a1f1ffdf2.png"
-                    }
+                    src={sellerData?.badge_img?.url}
                     alt="Official"
                     className="h-5"
                   />
@@ -253,10 +294,16 @@ const PaymentComponent = ({ mpid, spid }) => {
 
       {/* Action buttons */}
       <div className="flex flex-col gap-3">
-        <button className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium">
+        <button
+          className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium"
+          onClick={handleBuyNow}
+        >
           Mua ngay
         </button>
-        <button className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium">
+        <button
+          className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium"
+          onClick={handleAddToCart}
+        >
           Thêm vào giỏ
         </button>
         <button className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium">

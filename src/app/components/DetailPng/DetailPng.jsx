@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./DetailPng.scss";
 import Loading from "../Loading";
 
-// Fix props destructuring - change from {data}, spid to {data, spid}
-export default function ImageGallery({ data, spid }) {
+// Using memo to prevent unnecessary re-renders
+const ImageGallery = memo(({ data, spid }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,46 +20,38 @@ export default function ImageGallery({ data, spid }) {
   const visibleThumbs = 6;
   const containerWidth = thumbWidth * visibleThumbs;
 
-  // Fetch product images from API
+  // Process product images
   useEffect(() => {
-    const fetchProductImages = async () => {
+    const processProductImages = () => {
       try {
-        // Extract highlights based on the provided data structure
-        if (data.highlight) {
+        console.log("New Data", data);
+
+        // Extract highlights if available
+        if (data?.highlight) {
           if (data.highlight.items && Array.isArray(data.highlight.items)) {
             setHighlightItems(data.highlight.items);
           }
           if (data.highlight.title) {
             setHighlightTitle(data.highlight.title);
           }
-        } else if (data.hightlight == null) {
+        } else {
           setHighlightItems([]);
           setHighlightTitle("");
         }
 
-        // Extract images from configurable_products.images
+        // Process images from .images property or directly from data array
         let productImages = [];
-        if (
-          data.configurable_products &&
-          Array.isArray(data.configurable_products)
-        ) {
-          // Find the specific configurable product that matches the spid
-          const configurableProduct = data.configurable_products.find(
-            (product) => product.id.toString() === spid.toString()
-          );
 
-          if (configurableProduct && configurableProduct.images) {
-            productImages = configurableProduct.images.map((image) => ({
-              large_url: image.large_url || image.base_url,
-              medium_url: image.medium_url || image.base_url,
-              small_url:
-                image.small_url || image.thumbnail_url || image.base_url,
-            }));
-          }
+        // If data is an array (direct images array like in your JSON sample)
+        if (Array.isArray(data)) {
+          productImages = data.map((image) => ({
+            large_url: image.large_url || image.base_url,
+            medium_url: image.medium_url || image.base_url,
+            small_url: image.small_url || image.thumbnail_url || image.base_url,
+          }));
         }
-
-        // If no configurable product images found, try using main product images
-        if (productImages.length === 0 && data.images) {
+        // If data has an images property
+        else if (data?.images) {
           productImages = data.images.map((image) => ({
             large_url: image.large_url || image.base_url,
             medium_url: image.medium_url || image.base_url,
@@ -72,6 +64,7 @@ export default function ImageGallery({ data, spid }) {
         // Set the first image as selected if available
         if (productImages.length > 0) {
           setSelectedImage(productImages[0].large_url);
+          setSelectedIndex(0); // Reset selected index to first image
           // Show/hide arrows based on image count
           setShowRightArrow(productImages.length > visibleThumbs);
         }
@@ -83,11 +76,12 @@ export default function ImageGallery({ data, spid }) {
       }
     };
 
-    fetchProductImages();
-  }, [data, spid]); // Add spid to dependency array to re-run when spid changes
-
-  // Remaining functions and return statement remain the same
-  // ...
+    // Only process if there's data
+    if (data) {
+      setLoading(true); // Reset loading state when processing new data
+      processProductImages();
+    }
+  }, [data]); // Remove spid dependency since we're not using it for configurable products
 
   // Handle selecting an image
   const handleSelectImage = (url, index) => {
@@ -268,4 +262,6 @@ export default function ImageGallery({ data, spid }) {
       )}
     </div>
   );
-}
+});
+
+export default ImageGallery;
