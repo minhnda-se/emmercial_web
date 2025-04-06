@@ -6,10 +6,15 @@ import "./Detail.css";
 import { BasicInfo } from "./partials/BasicInfo";
 import { DetailInfo } from "./partials/DetailInfo";
 import DOMPurify from "dompurify";
+import ProductReviews from "./partials/ProductReviews";
+import PaymentComponent from "./partials/PaymentComponent";
+import InstallmentServices from "./partials/InstallmentServices";
+import WarrantyInfo from "./partials/WarrantyInfo";
+import ShoppingBenefits from "./partials/ShoppingBenefits";
 
 export default function Detail({
-  productId = "249947165",
-  spid = "273960211",
+  productId = "277068413",
+  spid = "277068435",
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
@@ -112,6 +117,7 @@ export default function Detail({
         sizeOptions.push({
           size: option.option2,
           spid: option.id,
+          thumbnail: option.thumbnail_url,
         });
       }
     });
@@ -147,6 +153,10 @@ export default function Detail({
   const renderColorOptions = () => {
     const colorOptions = getColorOptions();
     const { color: selectedColor } = getSelectedOptions();
+    const option1Config = productData?.configurable_options?.find(
+      (option) => option.code === "option1"
+    );
+    const showImages = option1Config?.show_preview_image;
 
     if (!colorOptions.length) return null;
 
@@ -177,11 +187,13 @@ export default function Detail({
               }`}
             >
               <div className="flex items-center">
-                <img
-                  src={option.thumbnail}
-                  alt={option.color}
-                  className="w-10 h-10 object-cover mr-2"
-                />
+                {showImages && (
+                  <img
+                    src={option.thumbnail}
+                    alt={option.color}
+                    className="w-10 h-10 object-cover mr-2"
+                  />
+                )}
                 <span>{option.color}</span>
               </div>
             </div>
@@ -195,6 +207,10 @@ export default function Detail({
   const renderSizeOptions = () => {
     const sizeOptions = getSizeOptions();
     const { size: selectedSize, color: selectedColor } = getSelectedOptions();
+    const option2Config = productData?.configurable_options?.find(
+      (option) => option.code === "option2"
+    );
+    const showImages = option2Config?.show_preview_image;
 
     if (!sizeOptions.length) return null;
 
@@ -214,7 +230,11 @@ export default function Detail({
                     handleVariantSelect(product.id);
                   }
                 }}
-                className={`border rounded-lg px-4 py-2 text-center transition-all ${
+                className={`${
+                  showImages ? "flex items-center" : ""
+                } border rounded-lg px-4 py-2 ${
+                  !showImages ? "text-center" : ""
+                } transition-all ${
                   !isAvailable
                     ? "border-gray-200 text-gray-400 cursor-not-allowed"
                     : selectedSize === option.size
@@ -222,6 +242,13 @@ export default function Detail({
                     : "border-gray-300 hover:border-gray-400 cursor-pointer"
                 }`}
               >
+                {showImages && product && (
+                  <img
+                    src={product.thumbnail_url}
+                    alt={option.size}
+                    className="w-10 h-10 object-cover mr-2"
+                  />
+                )}
                 <span>{option.size}</span>
               </div>
             );
@@ -308,8 +335,46 @@ export default function Detail({
                 </div>
 
                 {/* Changed this div to properly contain the DetailInfo component */}
-                <div className="bg-white rounded-lg shadow-md">
-                  <DetailInfo productData={productData} />
+                {productData?.specifications?.length > 0 ? (
+                  <div className="bg-white rounded-lg shadow-md">
+                    <DetailInfo productData={productData} />
+                  </div>
+                ) : (
+                  // If no specifications, show a message or alternative content
+                  <></>
+                )}
+
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  {/* Add product header and content */}
+                  <div className="flex justify-between">
+                    {/* Add more header content here */}
+                  </div>
+                  <InstallmentServices
+                    productData={productData}
+                    productId={productId}
+                    spid={selectedSpid}
+                  />
+                </div>
+
+                {!productData?.warranty_info ||
+                productData?.warranty_info == [] ? (
+                  <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                    {/* Add product header and content */}
+                    <div className="flex justify-between">
+                      {/* Add more header content here */}
+                    </div>
+                    <WarrantyInfo productData={productData} />
+                  </div>
+                ) : (
+                  <></>
+                )}
+
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  {/* Add product header and content */}
+                  <div className="flex justify-between">
+                    {/* Add more header content here */}
+                  </div>
+                  <ShoppingBenefits productData={productData} />
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
@@ -334,11 +399,13 @@ export default function Detail({
             <div>
               <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
                 <div className="flex flex-col gap-y-2 !p-4">
-                  <h3>Categories</h3>
-                  {/* Add categories or related content */}
+                  <PaymentComponent mpid={productId} spid={selectedSpid} />
                 </div>
               </div>
             </div>
+          </div>
+          <div className="bg-white rounded-lg shadow-md">
+            <ProductReviews productId={productId} spid={selectedSpid} />
           </div>
         </>
       )}

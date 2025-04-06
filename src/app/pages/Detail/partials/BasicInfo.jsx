@@ -89,14 +89,6 @@ export const BasicInfo = ({ productData }) => {
           Giá sau áp dụng mã khuyến mãi
         </div>
       </div>
-
-      {/* Coupon info */}
-      <div className="flex items-center text-blue-600 text-sm">
-        <span className="border border-blue-600 px-1 mr-2">
-          <span className="text-xs font-bold">₫</span>
-        </span>
-        <span>Giảm 20.000₫ từ mã khuyến mãi của Tiki</span>
-      </div>
     </div>
   );
 };

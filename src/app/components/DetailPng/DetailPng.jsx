@@ -24,8 +24,6 @@ export default function ImageGallery({ data, spid }) {
   useEffect(() => {
     const fetchProductImages = async () => {
       try {
-        console.log(data);
-
         // Extract highlights based on the provided data structure
         if (data.highlight) {
           if (data.highlight.items && Array.isArray(data.highlight.items)) {

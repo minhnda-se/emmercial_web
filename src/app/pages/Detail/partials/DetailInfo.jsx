@@ -49,24 +49,3 @@ export const DetailInfo = ({ productData }) => {
     </div>
   );
 };
-
-// Function to handle formatting of values with special styling
-const renderAttributeValue = (value) => {
-  if (!value) return "-";
-
-  // Handle HTML-encoded ampersands
-  const decodedValue = value.replace(/&amp;/g, "&");
-
-  // Check if the value contains specific keywords to apply special styling
-  if (
-    value.includes("Type-C") ||
-    value.toLowerCase().includes("bluetooth") ||
-    value.toLowerCase().includes("mp") ||
-    value.toLowerCase().includes("gb") ||
-    value.toLowerCase().includes("ghz")
-  ) {
-    return <span className="text-blue-600">{decodedValue}</span>;
-  }
-
-  return decodedValue;
-};
