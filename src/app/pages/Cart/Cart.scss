@@ -21,9 +21,29 @@
     justify-content: space-between;
 }
 .quantity-selector{
-    select{
-        margin-top: 10px;
+    margin-top: 10px;
+    height: 30%;
+    display: flex;
+    button{
+        width: 30px;
+        border-radius: none;
     }
+    button:hover{
+        background-color: rgb(4, 147, 57);
+        color: white;
+    }
+    button:active{
+        background-color: rgb(1, 105, 39);
+        color: white;
+    }
+    .item-quantity{
+        width: 30px;
+        text-align: center;
+    }
+    
+}
+.button-remove{
+    margin-right: 10px;
 }
 .button-remove:hover{
    color: red;
