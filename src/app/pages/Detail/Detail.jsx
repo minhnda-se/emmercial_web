@@ -338,7 +338,7 @@ export default function Detail({
 
                 {/* Changed this div to properly contain the DetailInfo component */}
                 {productData?.specifications?.length > 0 ? (
-                  <div className="bg-white rounded-lg shadow-md">
+                  <div className="bg-white rounded-lg shadow-md !p-3">
                     <DetailInfo productData={productData} />
                   </div>
                 ) : (
