@@ -337,12 +337,12 @@ export default function Detail({
                     }}
                   />
                   <a
-                    className="text-blue-500 cursor-pointer text-center"
+                    className="seemore text-blue-500 cursor-pointer text-center"
                     onClick={() =>
                       setIsFullDescriptionVisible(!isFullDescriptionVisible)
                     }
                   >
-                    {isFullDescriptionVisible ? "Ẩn bớt" : "Xem thêm"}
+                    {isFullDescriptionVisible ? "Thu gọn" : "Xem thêm"}
                   </a>
                 </div>
               </div>
