@@ -491,61 +491,68 @@ export default function Detail({
 
       {/* Main product detail container */}
       <div className="detail_container flex gap-4">
-        <div className="flex gap-4">
-          {/* Sidebar with Product Image */}
-          <div>
-            <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-              <div className="flex flex-col gap-y-2 !p-4">
-                <DetailPng data={currentVariantData} spid={selectedSpid} />
+        <div>
+          <div className="flex gap-4">
+            {/* Sidebar with Product Image */}
+            <div>
+              <div className="detail_sidebar rounded-lg shadow-md bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                <div className="flex flex-col gap-y-2 !p-4">
+                  <DetailPng data={currentVariantData} spid={selectedSpid} />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Main content */}
-          <div className="detail_body flex flex-col gap-6 flex-1">
-            <div className="bg-white rounded-lg shadow-md !p-4 flex flex-col !gap-4">
-              <BasicInfo productData={currentVariantData} />
+            {/* Main content */}
+            <div className="detail_body flex flex-col gap-6 flex-1">
+              <div className="bg-white rounded-lg shadow-md !p-4 flex flex-col !gap-4">
+                <BasicInfo productData={currentVariantData} />
 
-              {/* ConfigurableOptions component */}
-              <ConfigurableOptions
-                productData={productData} // Need original productData for all options
-                selectedSpid={selectedSpid}
-                onVariantSelect={handleVariantSelect}
-              />
-            </div>
-
-            {currentVariantData?.specifications?.length > 0 && (
-              <div className="bg-white rounded-lg shadow-md !p-3">
-                <DetailInfo productData={currentVariantData} />
+                {/* ConfigurableOptions component */}
+                <ConfigurableOptions
+                  productData={productData} // Need original productData for all options
+                  selectedSpid={selectedSpid}
+                  onVariantSelect={handleVariantSelect}
+                />
               </div>
-            )}
 
-            <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-              <div className="flex justify-between"></div>
-              <InstallmentServices
-                productData={currentVariantData}
-                productId={productId}
-                spid={selectedSpid}
-              />
-            </div>
+              {currentVariantData?.specifications?.length > 0 && (
+                <div className="bg-white rounded-lg shadow-md !p-3">
+                  <DetailInfo productData={currentVariantData} />
+                </div>
+              )}
 
-            {!currentVariantData?.warranty_info ||
-            currentVariantData?.warranty_info.length === 0 ? (
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                 <div className="flex justify-between"></div>
-                <WarrantyInfo productData={currentVariantData} />
+                <InstallmentServices
+                  productData={currentVariantData}
+                  productId={productId}
+                  spid={selectedSpid}
+                />
               </div>
-            ) : null}
 
-            <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-              <div className="flex justify-between"></div>
-              <ShoppingBenefits productData={currentVariantData} />
+              {!currentVariantData?.warranty_info ||
+              currentVariantData?.warranty_info.length === 0 ? (
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  <div className="flex justify-between"></div>
+                  <WarrantyInfo productData={currentVariantData} />
+                </div>
+              ) : null}
+
+              <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                <div className="flex justify-between"></div>
+                <ShoppingBenefits productData={currentVariantData} />
+              </div>
+
+              <ProductDescription
+                description={currentVariantData?.description}
+              />
             </div>
+          </div>
 
-            <ProductDescription description={currentVariantData?.description} />
+          <div className="bg-white rounded-lg shadow-md">
+            <ProductReviews productId={productId} spid={selectedSpid} />
           </div>
         </div>
-
         {/* Payment Sidebar */}
         <div>
           <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
@@ -558,10 +565,6 @@ export default function Detail({
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md">
-        <ProductReviews productId={productId} spid={selectedSpid} />
       </div>
     </>
   );

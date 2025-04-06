@@ -32,3 +32,12 @@
   .seemore:hover {
     text-decoration: none;
   }
+
+  .seperator {
+    /* content: " "; */
+    height: 1px;
+    background-color: rgb(235, 235, 240);
+    width: 1240px;
+    margin-right: auto;
+    margin-left: auto;
+}

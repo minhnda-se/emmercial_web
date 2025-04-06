@@ -6,6 +6,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
   const [quantity, setQuantity] = useState(1);
   const [sellerData, setSellerData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
   // Fetch seller information
