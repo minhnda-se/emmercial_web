@@ -28,3 +28,7 @@
     width: 550px;
     /* margin: 0 20px; */
   }
+
+  .seemore:hover {
+    text-decoration: none;
+  }

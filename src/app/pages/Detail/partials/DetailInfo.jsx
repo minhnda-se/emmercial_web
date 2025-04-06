@@ -22,20 +22,20 @@ export const DetailInfo = ({ productData }) => {
   return (
     <div className="w-full">
       <div className="p-4 bg-white">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        <h2 className="text-xl font-semibold text-gray-800 !mb-2">
           Thông tin chi tiết
         </h2>
         <div className="divide-y divide-gray-200">
           {attributes.map((attribute, index) => (
             <div
               key={attribute.code}
-              className={`flex flex-row py-3 ${
+              className={`flex justify-between items-center flex-row py-3 ${
                 index % 2 === 0 ? "bg-white" : "bg-gray-50"
               }`}
             >
-              <div className="w-1/2 text-gray-600">{attribute.name}</div>
+              <div className="text-gray-600">{attribute.name}</div>
               <div
-                className="w-1/2 font-medium"
+                className="w-3/7 font-medium"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(attribute?.value || ""),
                 }}
