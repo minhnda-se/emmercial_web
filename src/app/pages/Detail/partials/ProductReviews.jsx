@@ -4,9 +4,12 @@ import {
   StarOutlined,
   LikeOutlined,
   MessageOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Loading from "../../../components/Loading";
 
 // Initialize dayjs plugins
 dayjs.extend(relativeTime);
@@ -63,6 +66,22 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
     fetchReviews(page);
   };
 
+  const avatarUrl = (url) => {
+    if (
+      url ===
+      "https://salt.tikicdn.com/ts/ta/21/ce/5c/f3809056f0195db1a6295a50ac68ee0e.jpg"
+    ) {
+      return "src/app/assets/favicon.png";
+    } else if (
+      url ===
+      "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
+    ) {
+      return "src/app/assets/favicon.png";
+    } else {
+      return url;
+    }
+  };
+
   // Render stars for rating
   const renderStars = (rating) => {
     const stars = [];
@@ -102,7 +121,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             : "text-gray-700 hover:bg-gray-100"
         }`}
       >
-        &lt;
+        <LeftOutlined />
       </button>
     );
 
@@ -116,7 +135,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             onClick={() => handlePageChange(i)}
             className={`w-8 h-8 flex items-center justify-center rounded ${
               currentPage === i
-                ? "bg-blue-500 text-white"
+                ? "bg-red-400 text-white"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >
@@ -141,7 +160,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
               onClick={() => handlePageChange(i)}
               className={`w-8 h-8 flex items-center justify-center rounded ${
                 currentPage === i
-                  ? "bg-blue-500 text-white"
+                  ? "bg-red-400 text-white"
                   : "text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -200,7 +219,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
               onClick={() => handlePageChange(i)}
               className={`w-8 h-8 flex items-center justify-center rounded ${
                 currentPage === i
-                  ? "bg-blue-500 text-white"
+                  ? "bg-red-400 text-white"
                   : "text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -240,7 +259,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
               onClick={() => handlePageChange(i)}
               className={`w-8 h-8 flex items-center justify-center rounded ${
                 currentPage === i
-                  ? "bg-blue-500 text-white"
+                  ? "bg-red-400 text-white"
                   : "text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -282,7 +301,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             : "text-gray-700 hover:bg-gray-100"
         }`}
       >
-        &gt;
+        <RightOutlined />
       </button>
     );
 
@@ -290,20 +309,20 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 w-full">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">
+    <div className="!p-4 !mt-4 w-full">
+      <h2 className="text-xl font-bold !mb-4 text-gray-800">
         Khách hàng đánh giá
       </h2>
 
       {/* Rating summary - Completely restructured to fix overlap issues */}
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
+      <div className="flex justify-center !gap-6 border-b border-gray-200 !pb-4">
         {/* Average rating display */}
-        <div className="flex items-center">
-          <div className="text-3xl font-bold text-blue-600 mr-3">
+        <div className="flex justify-center items-center w-full max-w-xs border-r border-gray-200 !pr-8">
+          <div className="text-3xl font-bold text-red-400 !mr-3">
             {ratingStats.average?.toFixed(1) || "0.0"}
           </div>
           <div>
-            <div className="flex mb-1">
+            <div className="flex !mb-1">
               {renderStars(Math.round(ratingStats.average || 0))}
             </div>
             <div className="text-gray-600 text-sm">
@@ -313,17 +332,17 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
         </div>
 
         {/* Star distribution - Fixed height for each rating row */}
-        <div className="flex-1">
+        <div className="flex flex-col w-full max-w-xs !ml-6">
           {ratingStats.stars &&
             Object.keys(ratingStats.stars)
               .sort((a, b) => b - a)
               .map((stars) => (
                 <div key={stars} className="flex items-center h-8">
-                  <div className="w-12 flex justify-end mr-2">
+                  <div className="w-12 flex justify-end !mr-2">
                     {renderStars(parseInt(stars, 10)).slice(0, 1)}
-                    <span className="text-yellow-400 ml-1">{stars}</span>
+                    <span className="text-yellow-400 !ml-1">{stars}</span>
                   </div>
-                  <div className="w-full max-w-xs mx-2">
+                  <div className="w-full max-w-xs !mx-2">
                     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                       <div
                         className="h-2 bg-yellow-400 rounded-full"
@@ -343,27 +362,30 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
 
       {/* Show loading state */}
       {loading ? (
-        <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
+        // <div className="flex justify-center !py-8">
+        //   <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+        // </div>
+        <Loading />
       ) : (
         <>
           {/* Reviews list */}
           <div className="space-y-4">
             {reviews.length > 0 ? (
               reviews.map((review) => (
-                <div key={review.id} className="pb-4 border-b border-gray-100">
+                <div key={review.id} className="!pb-4 border-b border-gray-100">
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-3">
-                      <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 font-medium">
-                        {review.created_by?.name?.charAt(0).toUpperCase() ||
-                          "U"}
+                    <div className="flex-shrink-0 !mr-3 !mt-4">
+                      <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-red-400 font-medium">
+                        {review.created_by?.name
+                          ?.trim()
+                          .charAt(0)
+                          .toUpperCase() || "U"}
                       </div>
                     </div>
 
                     <div className="flex-1">
                       <div className="flex items-baseline justify-between">
-                        <h4 className="font-medium text-gray-800">
+                        <h4 className="font-medium text-gray-800 !mt-4">
                           {review.created_by?.name || "Người dùng ẩn danh"}
                         </h4>
                         <span className="text-xs text-gray-500">
@@ -371,20 +393,22 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                         </span>
                       </div>
 
-                      <div className="flex items-center mt-1 mb-2">
-                        <div className="flex text-yellow-400 mr-2">
+                      <div className="flex items-center !mt-1 !mb-2">
+                        <div className="flex text-yellow-400 !mr-2">
                           {renderStars(review.rating)}
                         </div>
-                        <div className="text-blue-600 font-medium">
+                        <div className="text-red-400 font-medium">
                           {review.title}
                         </div>
                       </div>
 
-                      <div className="text-gray-700 mb-2">{review.content}</div>
+                      <div className="text-gray-700 !mb-2">
+                        {review.content}
+                      </div>
 
                       {/* Display review images if any */}
                       {review.images?.length > 0 && (
-                        <div className="flex flex-wrap gap-2 my-2">
+                        <div className="flex flex-wrap !gap-2 !my-2">
                           {review.images.map((image) => (
                             <div
                               key={image.id}
@@ -401,40 +425,41 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                       )}
 
                       {/* Action buttons */}
-                      <div className="flex items-center mt-3 text-sm">
-                        <button className="flex items-center mr-4 text-gray-500 hover:text-blue-600">
-                          <LikeOutlined className="mr-1" />
+                      <div className="flex items-center !mt-3 text-sm justify-between">
+                        <button className="flex items-center !mr-4 text-gray-500 hover:text-red-400">
+                          <LikeOutlined className="!mr-1" />
                           <span>Hữu ích ({review.thank_count || 0})</span>
                         </button>
-                        <button className="flex items-center text-gray-500 hover:text-blue-600">
-                          <MessageOutlined className="mr-1" />
+                        <button className="flex items-center text-gray-500 hover:text-rose-400">
+                          <MessageOutlined className="!mr-1" />
                           <span>{review.comments?.length || 0}</span>
                         </button>
                       </div>
 
                       {/* Comments - Increased spacing between comments */}
                       {review.comments?.length > 0 && (
-                        <div className="mt-4 ml-3 border-l-2 border-gray-100 pl-3">
+                        <div className="!mt-4 !ml-3 border-l-2 border-gray-100 !pl-3">
                           {review.comments.map((comment) => (
                             <div
                               key={comment.id}
-                              className="mt-4 bg-gray-50 p-3 rounded"
+                              className="!mt-4 bg-gray-50 !p-3 rounded"
                             >
-                              <div className="flex items-center mb-1">
+                              <div className="flex items-center !mb-1">
                                 <img
                                   src={
-                                    comment.avatar_url ||
+                                    avatarUrl(comment.avatar_url) ||
                                     "//tiki.vn/assets/img/avatar.png"
                                   }
                                   alt={comment.fullname}
-                                  className="w-5 h-5 rounded-full mr-2"
+                                  className="w-5 h-5 !mr-2"
                                 />
+
                                 <span className="font-medium text-xs">
-                                  {comment.fullname}
+                                  {comment.fullname.split("Tiki").join("MAVT")}
                                 </span>
                               </div>
                               <p className="text-sm text-gray-700">
-                                {comment.content}
+                                {comment.content.split("Tiki").join("MAVT")}
                               </p>
                             </div>
                           ))}
@@ -445,7 +470,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                 </div>
               ))
             ) : (
-              <div className="py-8 text-center text-gray-500">
+              <div className="!py-8 text-center text-gray-500">
                 Không có đánh giá nào
               </div>
             )}
@@ -453,8 +478,8 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
 
           {/* FIXED Pagination to limit visible pages */}
           {pagination.total > pagination.per_page && (
-            <div className="flex justify-center mt-4">
-              <div className="flex items-center gap-1">
+            <div className="flex justify-center !mt-4">
+              <div className="flex items-center !gap-1">
                 {renderPaginationButtons()}
               </div>
             </div>

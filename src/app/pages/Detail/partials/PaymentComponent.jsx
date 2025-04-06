@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined, MinusOutlined, SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const PaymentComponent = ({ mpid, spid }) => {
   const [quantity, setQuantity] = useState(1);
   const [sellerData, setSellerData] = useState(null);
   const [productData, setProductData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const nav = useNavigate();
+
+  const handleBuyNow = () => {
+    nav("/checkout", { state: { mpid, spid } });
+  };
 
   // Fetch seller information
   useEffect(() => {
@@ -253,7 +259,10 @@ const PaymentComponent = ({ mpid, spid }) => {
 
       {/* Action buttons */}
       <div className="flex flex-col gap-3">
-        <button className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium">
+        <button
+          onClick={handleBuyNow}
+          className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium"
+        >
           Mua ngay
         </button>
         <button className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium">
