@@ -5,7 +5,7 @@ export default function Checkout() {
   const [booked, setBooked] = useState([]);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
+    const storedCart = localStorage.getItem("checkoutItem");
     if (storedCart) {
       setBooked(JSON.parse(storedCart));
     }
@@ -18,7 +18,6 @@ export default function Checkout() {
   const totalPrice = booked.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
-
 
   return (
     <div className="checkout-wrapper">
@@ -40,6 +39,11 @@ export default function Checkout() {
                     <div className="text-xs uppercase font-semibold opacity-60">
                       SL: x{item.quantity}
                     </div>
+                    {item.variant && (
+                      <div className="text-xs italic text-gray-400">
+                        {item.variant}
+                      </div>
+                    )}
                   </div>
                   <div className="text-warning font-semibold">
                     {formatNumber(item.price * item.quantity)}đ
@@ -145,7 +149,14 @@ export default function Checkout() {
                     <div className="text-xs font-semibold opacity-60">
                       {item.quantity}x
                     </div>
-                    <div className="text-sm">{item.name}</div>
+                    <div className="text-sm flex items-center gap-1">
+                      {item.name}
+                      {item.variant && (
+                        <div className="italic text-gray-400">
+                          {`(${item.variant})`}
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="text-warning">
                     {formatNumber(item.price * item.quantity)}đ
