@@ -6,11 +6,14 @@ const ShoppingBenefits = ({ productData }) => {
 
   return (
     <div className="py-4">
-      <div className="text-lg font-medium mb-2">An tâm mua sắm</div>
+      <div className="text-lg font-medium !mb-2">An tâm mua sắm</div>
       <div className="flex flex-col gap-3">
         {benefits.map((benefit, index) => (
-          <div key={index} className="flex items-start">
-            <img src={benefit.icon} alt="" className="w-5 h-5 mt-1 mr-3" />
+          <div
+            key={index}
+            className="flex items-start border-b border-gray-200 !pb-2"
+          >
+            <img src={benefit.icon} alt="" className="w-5 h-5 !mt-1 !mr-3" />
             <div>
               <div
                 dangerouslySetInnerHTML={{ __html: benefit.text }}
@@ -18,7 +21,7 @@ const ShoppingBenefits = ({ productData }) => {
               />
               {benefit.cta && (
                 <span
-                  className="text-blue-600 cursor-pointer text-sm"
+                  className="text-gray-600 cursor-pointer text-sm underline hover:text-red-500"
                   onClick={() => {
                     if (benefit.cta.type === "open_policy_return_modal") {
                       // Handle opening modal logic here

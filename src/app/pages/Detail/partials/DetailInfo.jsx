@@ -29,7 +29,7 @@ export const DetailInfo = ({ productData }) => {
           {attributes.map((attribute, index) => (
             <div
               key={attribute.code}
-              className={`flex justify-between items-center flex-row py-3 ${
+              className={`flex justify-between items-center flex-row !py-3 ${
                 index % 2 === 0 ? "bg-white" : "bg-gray-50"
               }`}
             >

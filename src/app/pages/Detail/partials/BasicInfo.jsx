@@ -29,7 +29,7 @@ export const BasicInfo = ({ productData }) => {
   return (
     <div className="p-4">
       {/* Badges section */}
-      <div className="flex gap-2 mb-3 flex-wrap items-center">
+      <div className="flex gap-2 !mb-3 flex-wrap items-center">
         {freeshippingIcon && (
           <img src={freeshippingIcon} alt="Freeship Xtra" className="h-5" />
         )}
@@ -42,17 +42,17 @@ export const BasicInfo = ({ productData }) => {
           <img src={authenticIcon} alt="Authentic" className="h-5" />
         )}
 
-        <span className="text-gray-700 text-xs px-2 py-1 flex items-center">
+        <span className="text-gray-700 text-xs !px-2 !py-1 flex items-center">
           Thương hiệu:{" "}
-          <span className="text-blue-600 ml-1">{productData?.brand?.name}</span>
+          <span className="text-red-400 !ml-1">{productData?.brand?.name}</span>
         </span>
       </div>
 
       {/* Product title */}
-      <h1 className="text-2xl font-bold mb-1">{productData?.name}</h1>
+      <h1 className="text-2xl font-bold !mb-1">{productData?.name}</h1>
 
       {/* Ratings and sold count */}
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 !mb-2">
         <span className="font-semibold">{productData?.rating_average}</span>
         <div className="flex">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -73,19 +73,19 @@ export const BasicInfo = ({ productData }) => {
       </div>
 
       {/* Price section */}
-      <div className="mb-2">
-        <div className="flex items-end gap-2">
+      <div className="!mb-2">
+        <div className="flex items-end !gap-2">
           <span className="text-red-500 text-3xl font-bold">
             {formatPrice(productData?.price)}₫
           </span>
           <span className="text-gray-500 line-through">
             {formatPrice(productData?.original_price)}₫
           </span>
-          <span className="bg-red-100 text-red-600 px-1 text-sm">
+          <span className="bg-red-100 text-red-600 !px-1 text-sm">
             -{discountPercent}%
           </span>
         </div>
-        <div className="text-gray-500 text-sm mt-1">
+        <div className="text-gray-500 text-sm !mt-1">
           Giá sau áp dụng mã khuyến mãi
         </div>
       </div>

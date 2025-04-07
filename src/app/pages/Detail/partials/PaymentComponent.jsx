@@ -192,12 +192,12 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
   // Render loading state
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg p-4 shadow-md max-w-md mx-auto">
+      <div className="bg-white rounded-lg !p-4 shadow-md mx-auto">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded mb-4"></div>
-          <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
-          <div className="h-10 bg-gray-200 rounded mb-4"></div>
-          <div className="h-12 bg-gray-200 rounded mb-4"></div>
+          <div className="h-8 bg-gray-200 rounded !mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded !mb-4 w-3/4"></div>
+          <div className="h-10 bg-gray-200 rounded !mb-4"></div>
+          <div className="h-12 bg-gray-200 rounded !mb-4"></div>
         </div>
       </div>
     );
@@ -208,16 +208,25 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
   const optionsDisplay = getOptionsDisplay();
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md max-w-md mx-auto">
+    <div className="bg-white rounded-lg !p-4 shadow-md max-w-md !mx-auto">
       {/* Header with seller info and search */}
-      <div className="flex items-center justify-between mb-6 pb-2 border-b">
+      <div className="flex items-center justify-between !mb-6 !pb-2 border-b border-gray-200">
         <div className="flex items-center">
-          <img src={sellerData?.icon} alt="Tiki" className="h-8 mr-2" />
+          {console.log(sellerData?.icon)}
+          <img
+            src={sellerData?.icon
+              .split(
+                "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
+              )
+              .join("src/app/assets/favicon.png")}
+            alt="MAVT"
+            className="h-8 !mr-2"
+          />
           <div className="flex flex-col">
-            <span className="font-bold text-lg">Tiki Trading</span>
+            <span className="font-bold text-lg">MAVT Trading</span>
             <div className="flex items-center">
               {sellerData?.is_official && (
-                <div className="flex items-center mr-2">
+                <div className="flex items-center !mr-2">
                   <img
                     src={sellerData?.badge_img?.url}
                     alt="Official"
@@ -225,11 +234,11 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
                   />
                 </div>
               )}
-              <span className="font-bold mr-1 text-yellow-500">
+              <span className="font-bold !mr-1 text-yellow-500">
                 {sellerData?.avg_rating_point?.toFixed(1) || "4.7"}
               </span>
               <span className="text-yellow-500">★</span>
-              <span className="text-gray-500 text-sm ml-1">
+              <span className="text-gray-500 text-sm !ml-1">
                 (
                 {sellerData?.review_count
                   ? `${(sellerData.review_count / 1000000).toFixed(
@@ -245,49 +254,49 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
 
       {/* Product variant */}
       {selectedVariant && (
-        <div className="flex items-center border-t border-b py-3 mb-4">
+        <div className="flex items-center !py-3 !mb-4">
           <img
             src={selectedVariant?.thumbnail_url || productData?.thumbnail_url}
             alt={productData?.name}
-            className="w-12 h-12 object-contain mr-3 border rounded"
+            className="w-12 h-12 object-contain !mr-3 border rounded"
           />
           <span className="font-medium">{optionsDisplay}</span>
         </div>
       )}
 
       {/* Quantity selector */}
-      <div className="mb-6">
-        <label className="block font-medium mb-2">Số Lượng</label>
+      <div className="!mb-6">
+        <label className="block font-medium !mb-2">Số Lượng</label>
         <div className="flex items-center">
           <button
             onClick={handleDecrement}
-            className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-l-md"
+            className="w-10 h-10 flex items-center justify-center border border-red-300 rounded-l-md cursor-pointer hover:bg-red-100"
             disabled={quantity <= 1}
           >
-            <MinusOutlined />
+            <MinusOutlined style={{ color: "red" }} />
           </button>
           <input
             type="text"
             value={quantity}
             onChange={handleQuantityChange}
             onBlur={handleBlur}
-            className="w-16 h-10 border-t border-b text-center"
+            className="w-16 h-10 border-t border-b border-red-300 text-center text-red-500 rounded-none focus:outline-none focus:border-red-500"
           />
           <button
             onClick={handleIncrement}
-            className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-r-md"
+            className="w-10 h-10 flex items-center justify-center border border-red-300 rounded-r-md cursor-pointer hover:bg-red-100"
           >
-            <PlusOutlined />
+            <PlusOutlined style={{ color: "red" }} />
           </button>
         </div>
         {quantity === 100 && (
-          <p className="text-xs text-red-500 mt-1">Số lượng tối đa: 100</p>
+          <p className="text-xs text-red-500 !mt-1">Số lượng tối đa: 100</p>
         )}
       </div>
 
       {/* Price */}
-      <div className="mb-6">
-        <div className="text-gray-800 font-medium mb-1">Tạm tính</div>
+      <div className="!mb-6">
+        <div className="text-gray-800 font-medium !mb-1">Tạm tính</div>
         <div className="text-3xl font-bold">
           {formatPrice(calculateTotalPrice())}đ
         </div>
@@ -296,18 +305,18 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       {/* Action buttons */}
       <div className="flex flex-col gap-3">
         <button
-          className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium"
+          className="w-full bg-red-400 hover:bg-red-600 text-white !py-3 rounded-md font-medium"
           onClick={handleBuyNow}
         >
           Mua ngay
         </button>
         <button
-          className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium"
+          className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium"
           onClick={handleAddToCart}
         >
           Thêm vào giỏ
         </button>
-        <button className="w-full border border-blue-500 text-blue-500 hover:bg-blue-50 py-3 rounded-md font-medium">
+        <button className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium">
           Mua trả góp - trả sau
         </button>
       </div>
