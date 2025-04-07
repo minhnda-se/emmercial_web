@@ -13,11 +13,11 @@ a:hover {
 }
 
 .information-container {
-    padding: 16px 0px;
+    padding: 50px 0px;
 }
 
 .information {
-    width: 1270px;
+    width: 93vw;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: auto;
@@ -27,20 +27,21 @@ a:hover {
 }
 
 .address-container {
-    padding: 16px 0px;
+    padding: 50px 0px;
     background-color: rgb(255, 255, 255);
 }
 
 .address {
-    width: 1270px;
+    width: 93vw;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 .categories-container {
-    width: 1270px;
+    width: 93vw;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: auto;
