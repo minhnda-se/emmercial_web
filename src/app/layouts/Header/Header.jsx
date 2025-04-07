@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faHouse, faSearch } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/favicon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [commitment, setCommitment] = useState({});
   const [error, setError] = useState(null); // Error state
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
+  const searchValue = useRef(); // Reference to the search input
+  const navigate = useNavigate(); // For navigation
+
   useEffect(() => {
     const fetchCommitment = async () => {
       const DOMAIN = import.meta.env.VITE_API_URL;
@@ -35,6 +38,15 @@ const Header = () => {
 
     fetchCommitment();
   }, []); // Empty dependency array, so this runs only once on mount
+
+  // Handle Search Click
+  const handleSearchClick = () => {
+    const searchQuery = searchValue.current.value;
+    if (searchQuery.trim() !== "") {
+      // Redirect to a search results page with the query as a URL parameter
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <div className="header !mb-6 bg-white shadow-sm overflow-hidden">
@@ -78,9 +90,17 @@ const Header = () => {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search" />
+            <input
+              ref={searchValue}
+              type="search"
+              required
+              placeholder="Search"
+            />
           </label>
-          <button className="btn btn-secondary w-[10%]">
+          <button
+            className="btn btn-secondary w-[10%]"
+            onClick={handleSearchClick}
+          >
             <FontAwesomeIcon
               icon={faSearch}
               size="xl"
@@ -125,6 +145,32 @@ const Header = () => {
               <p>Tài khoản</p>
             </Link>
           )}
+          <Link
+            to={"/cart"}
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle"
+          >
+            <div className="indicator">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                />{" "}
+              </svg>
+              <span className="badge badge-accent badge-xs indicator-item !px-1 text-accent-content text-[10px]">
+                0
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
