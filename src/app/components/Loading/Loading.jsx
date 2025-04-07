@@ -23,7 +23,7 @@ export default function Loading() {
       </div>
 
       <div className="loading-icon">
-        <img src="public/Loading icon.png" alt="Loading" />
+        <img src="/public/Loading icon.png" alt="Loading" />
         <h1 className="loading-text">
           <span className="p1">Loading</span>
           <span className="p2 dot">.</span>

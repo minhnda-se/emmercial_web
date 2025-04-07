@@ -49,7 +49,7 @@ const InstallmentServices = ({ productData, productId, spid }) => {
                     .split(
                       "https://salt.tikicdn.com/ts/upload/73/4d/f7/f86e767bffc14aa3d6abed348630100b.png"
                     )
-                    .join("public/MAVTCard.png")}
+                    .join("/public/MAVTCard.png")}
                   alt={service.title.split("Tiki").join("MAVT")}
                   className="w-8 h-8 object-contain rounded-md"
                 />
