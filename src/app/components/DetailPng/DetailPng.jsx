@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./DetailPng.scss";
 import Loading from "../Loading";
 
-import { sProductData } from "../../pages/Detail/Detail.store";
-
-export default function ImageGallery({ data }) {
+// Using memo to prevent unnecessary re-renders
+const ImageGallery = memo(({ data, spid }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,57 +12,46 @@ export default function ImageGallery({ data }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [highlightItems, setHighlightItems] = useState([]);
   const [highlightTitle, setHighlightTitle] = useState("");
-  // Add states to track scroll position
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const thumbnailsRef = useRef(null);
-  const thumbWidth = 80; // Width of each thumbnail including padding
-  const visibleThumbs = 6; // Limit the number of visible thumbnails to 6
+  const thumbWidth = 80;
+  const visibleThumbs = 6;
   const containerWidth = thumbWidth * visibleThumbs;
 
-  // Fetch product images from API
+  // Process product images
   useEffect(() => {
-    const fetchProductImages = async () => {
+    const processProductImages = () => {
       try {
-        console.log(data);
+        console.log("New Data", data);
 
-        // Extract highlights based on the provided data structure
-        if (data.highlight) {
+        // Extract highlights if available
+        if (data?.highlight) {
           if (data.highlight.items && Array.isArray(data.highlight.items)) {
             setHighlightItems(data.highlight.items);
           }
           if (data.highlight.title) {
             setHighlightTitle(data.highlight.title);
           }
-        } else if (data.hightlight == null) {
+        } else {
           setHighlightItems([]);
           setHighlightTitle("");
         }
 
-        // Extract images from configurable_products.images
+        // Process images from .images property or directly from data array
         let productImages = [];
-        if (
-          data.configurable_products &&
-          Array.isArray(data.configurable_products)
-        ) {
-          // Find the specific configurable product that matches the spid
-          const configurableProduct = data.configurable_products.find(
-            (product) => product.id.toString() === spid
-          );
 
-          if (configurableProduct && configurableProduct.images) {
-            productImages = configurableProduct.images.map((image) => ({
-              large_url: image.large_url || image.base_url,
-              medium_url: image.medium_url || image.base_url,
-              small_url:
-                image.small_url || image.thumbnail_url || image.base_url,
-            }));
-          }
+        // If data is an array (direct images array like in your JSON sample)
+        if (Array.isArray(data)) {
+          productImages = data.map((image) => ({
+            large_url: image.large_url || image.base_url,
+            medium_url: image.medium_url || image.base_url,
+            small_url: image.small_url || image.thumbnail_url || image.base_url,
+          }));
         }
-
-        // If no configurable product images found, try using main product images
-        if (productImages.length === 0 && data.images) {
+        // If data has an images property
+        else if (data?.images) {
           productImages = data.images.map((image) => ({
             large_url: image.large_url || image.base_url,
             medium_url: image.medium_url || image.base_url,
@@ -76,6 +64,7 @@ export default function ImageGallery({ data }) {
         // Set the first image as selected if available
         if (productImages.length > 0) {
           setSelectedImage(productImages[0].large_url);
+          setSelectedIndex(0); // Reset selected index to first image
           // Show/hide arrows based on image count
           setShowRightArrow(productImages.length > visibleThumbs);
         }
@@ -87,8 +76,12 @@ export default function ImageGallery({ data }) {
       }
     };
 
-    fetchProductImages();
-  }, []);
+    // Only process if there's data
+    if (data) {
+      setLoading(true); // Reset loading state when processing new data
+      processProductImages();
+    }
+  }, [data]); // Remove spid dependency since we're not using it for configurable products
 
   // Handle selecting an image
   const handleSelectImage = (url, index) => {
@@ -176,10 +169,7 @@ export default function ImageGallery({ data }) {
 
   // If loading, show a loading indicator
   if (loading) {
-    return (
-      // <div className="image-gallery__loading">Loading product images...</div>
-      <Loading />
-    );
+    return <Loading />;
   }
 
   // If error, show error message
@@ -203,7 +193,7 @@ export default function ImageGallery({ data }) {
         <img
           src={selectedImage}
           alt="Selected Product"
-          className="image-gallery__main-image"
+          className="image-gallery__main-image border border-gray-200 rounded-md"
         />
       </div>
 
@@ -272,4 +262,6 @@ export default function ImageGallery({ data }) {
       )}
     </div>
   );
-}
+});
+
+export default ImageGallery;

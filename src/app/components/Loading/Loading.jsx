@@ -1,23 +1,23 @@
 import React from "react";
 import "./Loading.css";
+import { MessageOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 
 export default function Loading() {
   return (
     <>
-      <div className="flex flex-col justify-between fixed bottom-2 right-2 bg-primary rounded-lg p-4 w-20 h-30">
+      <div className="flex flex-col justify-between fixed bottom-2 right-2 rounded-lg p-4 w-20 h-30 !gap-0.5">
         <button
-          className="btn btn-ghost text-white h-1/2"
+          className="btn flex flex-col btn-primary text-white h-1/2"
           aria-label="Message"
-          disabled
         >
+          <MessageOutlined style={{ fontSize: "24px" }} />
           Message
         </button>
-        <div className="border-t border-white"></div>
         <button
-          className="btn btn-ghost text-white h-1/2"
+          className="btn flex flex-col btn-primary text-white h-1/2"
           aria-label="Support"
-          disabled
         >
+          <CustomerServiceOutlined style={{ fontSize: "24px" }} />
           Support
         </button>
       </div>
