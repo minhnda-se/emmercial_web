@@ -1,10 +1,12 @@
 import React from "react";
 import { RatingStar } from "../../Home/partials/RatingStar";
+import { useNavigate } from "react-router-dom";
 
 export const Product = ({ productsList }) => {
   if (!productsList || productsList.length === 0) {
     return <p>No products available</p>;
   }
+  const nav = useNavigate();
 
   return (
     <div className="w-[100%] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded-lg">
@@ -13,6 +15,12 @@ export const Product = ({ productsList }) => {
           key={item.id + index}
           id={`product-${item.id}`}
           className="card shadow-sm border-1 border-zinc-100 home-card"
+          onClick={() => {
+            // Navigate with name as part of the URL and spid as a query parameter
+            nav(`/detail/${item.url_path}`, {
+              state: { productId: item.id }, // Pass productId here
+            });
+          }}
         >
           <figure className="relative">
             <img
