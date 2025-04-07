@@ -2,8 +2,10 @@ import React from "react";
 import { GetTimeRemain } from "../usecases/getTimeRemain";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useNavigate } from "react-router-dom";
 
 export const FlashSale = ({ flashSale }) => {
+  const nav = useNavigate();
   return (
     <div className=" bg-white shadow-md !px-3 !py-3 flex flex-col justify-around !gap-4">
       {/* Header */}
@@ -31,8 +33,19 @@ export const FlashSale = ({ flashSale }) => {
           spaceBetween={10}
         >
           {flashSale.data.map((item, index) => (
-            <SwiperSlide key={item.product.id}>
-              <div className="card shadow-sm  border-1 border-zinc-100 home-card items-center gap-2 !py-2 relative">
+            <SwiperSlide key={index}>
+              <div
+                className="card shadow-sm  border-1 border-zinc-100 home-card items-center gap-2 !py-2 relative"
+                onClick={() => {
+                  // Navigate with name as part of the URL and spid as a query parameter
+                  nav(
+                    `/detail/${item.product.name}$spid=${item.product.seller_product_id}`,
+                    {
+                      state: { productId: item.product.master_id }, // Pass productId here
+                    }
+                  );
+                }}
+              >
                 <div className="badge badge-primary absolute top-0 left-0 text-sm rounded-lg font-bold !p-2">
                   -{item.product.discount_rate}%
                 </div>

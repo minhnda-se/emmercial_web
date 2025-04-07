@@ -3,6 +3,7 @@ import { fetchRecommendProduct } from "../services/fetchRecommendProduct";
 import { RatingStar } from "./RatingStar";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductSkeleton from "./ProductSkeleton";
+import { useNavigate } from "react-router-dom";
 
 export const RecommendProduct = () => {
   const [product, setProduct] = useState({}); // State for the current product tab
@@ -12,6 +13,7 @@ export const RecommendProduct = () => {
   const [page, setPage] = useState(1); // Track current page for pagination
   const [loading, setLoading] = useState(false); // State for loading
   const [isViewMore, setIsViewMore] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
     const recommendProductData = async () => {
@@ -102,17 +104,24 @@ export const RecommendProduct = () => {
         dataLength={productsList.length} // Current length of the list
         next={fetchMoreProducts} // Function to call when more items are required
         hasMore={true} // You can condition this based on whether there are more items to load
-        scrollThreshold={0.95} // Trigger fetch when 90% of the list is scrolled
+        scrollThreshold={0.92} // Trigger fetch when 90% of the list is scrolled
         endMessage={<p className="text-center">No more products to load.</p>} // End message when no more products
       >
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded-lg">
           {productsList.length ? (
             productsList.map((item, index) => (
               <div
-                key={item.id + index}
-                id={`product-${item.id}`}
+                key={index}
+                id={`product-${index}`}
                 className="card shadow-sm border-1 border-zinc-100 home-card"
+                onClick={() => {
+                  // Navigate with name as part of the URL and spid as a query parameter
+                  nav(`/detail/${item.name}&spid=${item.default_spid}`, {
+                    state: { productId: item.id }, // Pass productId here
+                  });
+                }}
               >
+                {console.log(item)}
                 <figure className="relative">
                   <img
                     src={item?.thumbnail_url}

@@ -11,6 +11,7 @@ import PaymentComponent from "./partials/PaymentComponent";
 import InstallmentServices from "./partials/InstallmentServices";
 import WarrantyInfo from "./partials/WarrantyInfo";
 import ShoppingBenefits from "./partials/ShoppingBenefits";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 // Configurable Options component with memoization
 const ConfigurableOptions = React.memo(
@@ -295,10 +296,15 @@ const fetchVariantData = async (productId, spid) => {
 // Cache for variant data
 const variantCache = new Map();
 
-export default function Detail({
-  productId = "277063012",
-  spid = "277165128",
-}) {
+export default function Detail({}) {
+  const [searchParams] = useSearchParams(); // Get query parameters
+  const location = useLocation(); // Get the location object (includes state)
+
+  // Access `spid` from the query parameters
+  const spid = searchParams.get("spid") || "277165128"; // Provide a default if `spid` is missing
+
+  // Access `productId` from the location state
+  const productId = location.state?.productId || "277063012";
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);

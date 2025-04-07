@@ -2,8 +2,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { RatingStar } from "./RatingStar";
+import { useNavigate } from "react-router-dom";
 
 export const ProductSlide = ({ data }) => {
+  const nav = useNavigate();
   return (
     <>
       {/* Header */}
@@ -32,8 +34,16 @@ export const ProductSlide = ({ data }) => {
           spaceBetween={10}
         >
           {data?.items?.slice(0, 34).map((item, index) => (
-            <SwiperSlide key={item.id}>
-              <div className="card shadow-sm  border-1 border-zinc-100 home-card">
+            <SwiperSlide key={index}>
+              <div
+                className="card shadow-sm border-1 border-zinc-100 home-card"
+                onClick={() => {
+                  // Navigate with name as part of the URL and spid as a query parameter
+                  nav(`/detail/${item.name}&spid=${item.seller_product_id}`, {
+                    state: { productId: item.id }, // Pass productId here
+                  });
+                }}
+              >
                 <figure className="relative">
                   <img
                     src={item.thumbnail_url}
@@ -52,7 +62,6 @@ export const ProductSlide = ({ data }) => {
                     }}
                   />
                 </figure>
-
                 <div className="card-body !mt-3 !p-3 ">
                   <h2 className="card-title text-[12px] h-9 truncate-multiline">
                     {item.name}
