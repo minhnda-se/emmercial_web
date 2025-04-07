@@ -166,15 +166,20 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
     }
 
     // Lưu lại vào localStorage
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
     // Nếu là "Mua ngay", lưu thêm thông tin cho quá trình thanh toán
     if (isBuyNow) {
-      localStorage.setItem("checkoutItem", JSON.stringify(productInfo));
+      const ar = [];
+      ar.push(productInfo);
+      localStorage.setItem("checkoutItem", JSON.stringify(ar));
       // Chuyển hướng đến trang thanh toán
       navigate("/checkout");
     } else {
+
       alert("Đã thêm vào giỏ hàng!");
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
       console.log("Added to cart:", productInfo);
       // Bạn có thể thêm code hiển thị thông báo "Đã thêm vào giỏ hàng" ở đây
     }

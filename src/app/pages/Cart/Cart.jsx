@@ -87,7 +87,8 @@ export default function Cart() {
       }));
 
     // Save to localStorage
-    localStorage.setItem("cartItems", JSON.stringify(selectedItems));
+
+    localStorage.setItem("checkoutItem", JSON.stringify(selectedItems));
 
     // Navigate to checkout
     navigate("/checkout");
