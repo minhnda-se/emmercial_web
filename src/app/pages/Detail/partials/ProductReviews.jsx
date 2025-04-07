@@ -6,6 +6,7 @@ import {
   MessageOutlined,
   LeftOutlined,
   RightOutlined,
+  ShareAltOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -426,13 +427,20 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
 
                       {/* Action buttons */}
                       <div className="flex items-center !mt-3 text-sm justify-between">
-                        <button className="flex items-center !mr-4 text-gray-500 hover:text-red-400">
-                          <LikeOutlined className="!mr-1" />
-                          <span>Hữu ích ({review.thank_count || 0})</span>
-                        </button>
-                        <button className="flex items-center text-gray-500 hover:text-rose-400">
-                          <MessageOutlined className="!mr-1" />
-                          <span>{review.comments?.length || 0}</span>
+                        <div className="flex items-center">
+                          <button className="flex items-center !mr-4 text-gray-500 hover:text-red-400 cursor-pointer">
+                            <LikeOutlined className="!mr-1" />
+                            <span>{review.thank_count || "Hữu ích"}</span>
+                          </button>
+                          <button className="flex items-center text-gray-500 hover:text-red-400 cursor-pointer">
+                            <MessageOutlined className="!mr-1" />
+                            <span>{review.comments?.length || 0}</span>
+                          </button>
+                        </div>
+
+                        <button className="flex items-center text-gray-500 hover:text-red-400 cursor-pointer">
+                          <ShareAltOutlined className="!mr-1" />
+                          <span>Chia sẻ</span>
                         </button>
                       </div>
 
@@ -471,7 +479,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
               ))
             ) : (
               <div className="!py-8 text-center text-gray-500">
-                Không có đánh giá nào
+                Chưa có đánh giá nào cho sản phẩm này.
               </div>
             )}
           </div>
