@@ -116,7 +116,7 @@ export const RecommendProduct = () => {
                 className="card shadow-sm border-1 border-zinc-100 home-card"
                 onClick={() => {
                   // Navigate with name as part of the URL and spid as a query parameter
-                  nav(`/detail/${item.name}&spid=${item.default_spid}`, {
+                  nav(`/detail/${item.url_path}`, {
                     state: { productId: item.id }, // Pass productId here
                   });
                 }}
