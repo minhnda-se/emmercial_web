@@ -468,6 +468,7 @@ export default function Detail({
     return <div className="error-message">{error}</div>;
   }
 
+  console.log("current", currentVariantData);
   return (
     <>
       {/* Floating buttons for Message and Support */}
@@ -520,21 +521,26 @@ export default function Detail({
                   <DetailInfo productData={currentVariantData} />
                 </div>
               )}
-
-              <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                <InstallmentServices
-                  productData={currentVariantData}
-                  productId={productId}
-                  spid={selectedSpid}
-                />
-              </div>
-
-              {!currentVariantData?.warranty_info ||
+              {currentVariantData?.installment_info_v3 != null ? (
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  <div className="flex justify-between"></div>
+                  <InstallmentServices
+                    productData={currentVariantData}
+                    productId={productId}
+                    spid={selectedSpid}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              {currentVariantData?.warranty_info != null ||
               currentVariantData?.warranty_info.length === 0 ? (
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                   <WarrantyInfo productData={currentVariantData} />
                 </div>
-              ) : null}
+              ) : (
+                <></>
+              )}
 
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                 <ShoppingBenefits productData={currentVariantData} />
