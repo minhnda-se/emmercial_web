@@ -18,7 +18,6 @@ import ProductReviews from "../pages/Detail/partials/ProductReviews";
 
 import Cart from "../pages/Cart";
 
-
 const MainRoutes = () => {
   return (
     <BrowserRouter>
@@ -33,7 +32,7 @@ const MainRoutes = () => {
         <Route path="/loading" element={<Loading />} />
 
         {/* <Route path="/detail" element={<Detail />} /> */}
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:name" element={<Detail />} />
 
         <Route path="/checkout" element={<Checkout />}></Route>
 
@@ -44,10 +43,8 @@ const MainRoutes = () => {
           element={<ProductReviews productId="272126105" spid="272126106" />}
         ></Route>
 
-        <Route path="/checkout" element={<Checkout />}/>
-        <Route path="/cart" element={<Cart/>}/>
-
-
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
