@@ -76,6 +76,7 @@ export default function Search() {
     setSelectedCategory("");
     setQuery(""); // Reset the query string as well
     setSelectedServices({}); // Reset services checkboxes
+    setCurrentPage(1);
   };
 
   // Update query string based on selected filters
@@ -266,8 +267,7 @@ export default function Search() {
                   <button
                     className="btn btn-ghost"
                     onClick={() => {
-                      setQuery("");
-                      setCurrentPage(1);
+                      resetFilters();
                     }}
                   >
                     <FontAwesomeIcon
