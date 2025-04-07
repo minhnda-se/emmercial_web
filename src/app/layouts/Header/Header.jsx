@@ -11,9 +11,14 @@ const Header = () => {
   const [error, setError] = useState(null); // Error state
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
   const searchValue = useRef(); // Reference to the search input
+  const [cartIndex, setCartIndex] = useState(0);
   const navigate = useNavigate(); // For navigation
 
   useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cartItems"));
+    if (cart && Array.isArray(cart)) {
+      setCartIndex(cart.length);
+    }
     const fetchCommitment = async () => {
       const DOMAIN = import.meta.env.VITE_API_URL;
       try {
@@ -50,6 +55,7 @@ const Header = () => {
 
   return (
     <div className="header !mb-6 bg-white shadow-sm overflow-hidden">
+      {console.log(cartIndex)}
       <div className=" bg-emerald-100 ">
         <div className="header-commitment flex justify-around !p-2 ">
           {commitment.data?.map((item, index) => (
@@ -147,7 +153,7 @@ const Header = () => {
           )}
           <Link
             to={"/cart"}
-            tabIndex={0}
+            tabIndex={cartIndex}
             role="button"
             className="btn btn-ghost btn-circle"
           >
@@ -167,7 +173,7 @@ const Header = () => {
                 />{" "}
               </svg>
               <span className="badge badge-accent badge-xs indicator-item !px-1 text-accent-content text-[10px]">
-                0
+                {cartIndex}
               </span>
             </div>
           </Link>
