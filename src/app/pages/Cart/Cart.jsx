@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Cart.scss";
 import { useNavigate } from "react-router-dom";
+import "./Cart.scss";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -14,12 +14,10 @@ export default function Cart() {
   // Load cart from localStorage on mount
   useEffect(() => {
     const storedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
     setBooked(storedItems);
 
     const priceMap = {};
     const quantityMap = {};
-
     storedItems.forEach((item) => {
       priceMap[item.id] = item.price;
       quantityMap[item.id] = item.quantity;
@@ -27,6 +25,10 @@ export default function Cart() {
 
     setPrices(priceMap);
     setQuantities(quantityMap);
+
+    // Set all items to checked by default when the page first loads
+    const initialCheckedItems = storedItems.map((item) => item.id);
+    setCheckedItems(initialCheckedItems);
   }, []);
 
   const handleCheck = (itemId) => {
@@ -87,7 +89,7 @@ export default function Cart() {
     // Save to localStorage
     localStorage.setItem("cartItems", JSON.stringify(selectedItems));
 
-    // Navigate without state
+    // Navigate to checkout
     navigate("/checkout");
   };
 
@@ -97,7 +99,9 @@ export default function Cart() {
   return (
     <div className="cart-wrapper">
       <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
-      <div className="text-xs opacity-75 font-semibold">{booked.length} sản phẩm.</div>
+      <div className="text-xs opacity-75 font-semibold">
+        {booked.length} sản phẩm.
+      </div>
       <div className="userCart-container">
         <div className="userCart-content">
           <ul className="list bg-white rounded-sm shadow-md userCart-item">
@@ -185,10 +189,6 @@ export default function Cart() {
                 ))}
             </div>
 
-            {/* <div className="order-section order-item-total">
-              <div className="text-xs font-semibold">Tổng tiền hàng</div>
-              <div>{formatNumber(total)}đ</div>
-            </div> */}
             <div className="order-section order-total">
               <div className="text-xs font-bold">Tổng tiền thanh toán</div>
               <div>{formatNumber(total)}đ</div>

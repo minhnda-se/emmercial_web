@@ -38,12 +38,9 @@ export const FlashSale = ({ flashSale }) => {
                 className="card shadow-sm  border-1 border-zinc-100 home-card items-center gap-2 !py-2 relative"
                 onClick={() => {
                   // Navigate with name as part of the URL and spid as a query parameter
-                  nav(
-                    `/detail/${item.product.name}$spid=${item.product.seller_product_id}`,
-                    {
-                      state: { productId: item.product.master_id }, // Pass productId here
-                    }
-                  );
+                  nav(`/detail/${item.url_path}`, {
+                    state: { productId: item.product.master_id }, // Pass productId here
+                  });
                 }}
               >
                 <div className="badge badge-primary absolute top-0 left-0 text-sm rounded-lg font-bold !p-2">

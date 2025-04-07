@@ -301,10 +301,11 @@ export default function Detail({}) {
   const location = useLocation(); // Get the location object (includes state)
 
   // Access `spid` from the query parameters
-  const spid = searchParams.get("spid") || "277165128"; // Provide a default if `spid` is missing
+  const spid = searchParams.get("spid"); // Provide a default if `spid` is missing
 
   // Access `productId` from the location state
-  const productId = location.state?.productId || "277063012";
+  const productId = location.state?.productId;
+  console.log(productId, spid);
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
