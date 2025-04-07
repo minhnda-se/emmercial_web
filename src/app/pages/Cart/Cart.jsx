@@ -97,6 +97,7 @@ export default function Cart() {
   return (
     <div className="cart-wrapper">
       <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
+      <div className="text-xs opacity-75 font-semibold">{booked.length} sản phẩm.</div>
       <div className="userCart-container">
         <div className="userCart-content">
           <ul className="list bg-white rounded-sm shadow-md userCart-item">
