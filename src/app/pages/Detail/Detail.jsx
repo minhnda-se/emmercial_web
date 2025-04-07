@@ -539,8 +539,7 @@ export default function Detail({}) {
               ) : (
                 <></>
               )}
-              {currentVariantData?.warranty_info != null ||
-              currentVariantData?.warranty_info.length === 0 ? (
+              {currentVariantData?.warranty_info.length > 0 ? (
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                   <WarrantyInfo productData={currentVariantData} />
                 </div>

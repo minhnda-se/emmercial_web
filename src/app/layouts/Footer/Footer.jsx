@@ -198,7 +198,7 @@ const Footer = () => {
             <p className="security">
               Hỗ trợ khách hàng:{" "}
               <a
-                href="#mailto:hotro@tiki.vn"
+                href="#mailto:hotro@MAVT.vn"
                 style={{ color: "rgb(128, 128, 137)" }}
               >
                 hotro@mavt.vn
@@ -207,7 +207,7 @@ const Footer = () => {
             <p className="security" style={{ marginBottom: "0px" }}>
               Báo lỗi bảo mật:{" "}
               <a
-                href="#mailto:security@tiki.vn"
+                href="#mailto:security@MAVT.vn"
                 style={{ color: "rgb(128, 128, 137)" }}
               >
                 security@mavt.vn
@@ -220,7 +220,7 @@ const Footer = () => {
             <a href="#gioi-thieu" className="small-text">
               Giới thiệu MAVT
             </a>
-            <a href="#tiki-blog" className="small-text">
+            <a href="#MAVT-blog" className="small-text">
               MAVT Blog
             </a>
             <a href="#tuyen-dung" className="small-text">
@@ -241,10 +241,10 @@ const Footer = () => {
             <a href="#dieu-khoan-su-dung" className="small-text">
               Điều khoản sử dụng
             </a>
-            <a href="#gioi-thieu-tiki-xu" className="small-text">
+            <a href="#gioi-thieu-MAVT-xu" className="small-text">
               Giới thiệu MAVT Xu
             </a>
-            <a href="#tiep-thi-lien-ket-cung-tiki" className="small-text">
+            <a href="#tiep-thi-lien-ket-cung-MAVT" className="small-text">
               Tiếp thị liên kết cùng MAVT
             </a>
             <a href="#ban-hang-doanh-nghiep" className="small-text">
@@ -261,7 +261,7 @@ const Footer = () => {
               <a href="#quy-che-hoat-dong-san-gdtmdt" className="small-text">
                 Quy chế hoạt động Sàn GDTMĐT
               </a>
-              <a href="#ban-hang-cung-tiki" className="small-text">
+              <a href="#ban-hang-cung-MAVT" className="small-text">
                 Bán hàng cùng MAVT
               </a>
             </div>
@@ -840,11 +840,11 @@ const Footer = () => {
               Dịch vụ giao hàng
             </h4>
             <img
-              src="public/delivery.png"
+              src="/public/delivery.png"
               width="80%"
               height="20"
               style={{ marginLeft: "-9px", marginTop: "-50px" }}
-              alt="tikinow-icon"
+              alt="MAVTnow-icon"
             ></img>
           </div>
 
@@ -927,10 +927,10 @@ const Footer = () => {
               </h4>
               <div className="flex gap-4">
                 <img
-                  src="public/Logo_qrcode.png"
+                  src="/public/Logo_qrcode.png"
                   width="80"
                   height="80"
-                  alt="tiki-qr"
+                  alt="MAVT-qr"
                 />
                 <div
                   style={{
@@ -944,12 +944,12 @@ const Footer = () => {
                   <img
                     src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/appstore.png"
                     width="122"
-                    alt="tiki-app-store"
+                    alt="MAVT-app-store"
                   />
                   <img
                     src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/playstore.png"
                     width="122"
-                    alt="tiki-google-play"
+                    alt="MAVT-google-play"
                   />
                 </div>
               </div>
@@ -961,14 +961,13 @@ const Footer = () => {
       <div className="seperator"></div>
       <div className="address-container">
         <div className="address">
-          <h4 class="footer-heading">Công ty TNHH TI KI</h4>
+          <h4 class="footer-heading">Công ty TNHH MAVT</h4>
           <p className="small-text">
-            Tòa nhà số 52 đường Út Tịch, Phường 4, Quận Tân Bình, Thành phố Hồ
-            Chí Minh
+            Tòa nhà số xx đường xx, Phường x, Quận xx, Thành phố Hồ Chí Minh
           </p>
           <p className="small-text">
-            Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và
-            Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày 06/01/2010.
+            Giấy chứng nhận đăng ký doanh nghiệp số 0309xxxxxx do Sở Kế Hoạch và
+            Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày xx/xx/20xx.
           </p>
           <p className="small-text" style={{ marginBottom: "0px" }}>
             <span>Hotline: </span>
@@ -1486,7 +1485,7 @@ const Footer = () => {
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#nha-sach-tiki">Nhà Sách Tiki</a>
+                  <a href="#nha-sach-MAVT">Nhà Sách MAVT</a>
                 </div>
                 <p>
                   <a href="#sach-tieng-viet">Sách tiếng Việt</a>&nbsp;/&nbsp;

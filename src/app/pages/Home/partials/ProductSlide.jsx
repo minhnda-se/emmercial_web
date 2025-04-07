@@ -110,10 +110,9 @@ export const ProductSlide = ({ data }) => {
                         height: `${item.badges_new[0].icon_height}px`,
                       }}
                     >
-                      <img
-                        src={item.badges_new[0].icon}
-                        alt="Tailwind-CSS-Avatar-component"
-                      />
+                      {item.badges_new[0].icon && (
+                        <img src={item.badges_new[0].icon} alt="Icon" />
+                      )}
                     </div>
                     <p className="text-[10px]">{item.badges_new[0].text}</p>
                   </div>
