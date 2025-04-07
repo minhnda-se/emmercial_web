@@ -72,12 +72,12 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
       url ===
       "https://salt.tikicdn.com/ts/ta/21/ce/5c/f3809056f0195db1a6295a50ac68ee0e.jpg"
     ) {
-      return "src/app/assets/favicon.png";
+      return "/src/app/assets/favicon.png";
     } else if (
       url ===
       "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
     ) {
-      return "src/app/assets/favicon.png";
+      return "/src/app/assets/favicon.png";
     } else {
       return url;
     }
