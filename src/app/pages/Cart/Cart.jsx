@@ -161,7 +161,11 @@ export default function Cart() {
         <div className="order-details bg-white shadow-md rounded-sm">
           <div>
             <h1 className="font-bold">Đơn hàng</h1>
-            <div className="text-xs opacity-75 font-semibold">{booked.length} sản phẩm.</div>
+            {checkedItems.length > 0 && (
+              <div className="text-xs opacity-75 font-semibold">
+                {checkedItems.length} sản phẩm.
+              </div>
+            )}
           </div>
           <div className="order-content">
             <div className="order-info">
@@ -175,9 +179,7 @@ export default function Cart() {
                       </div>
                       <div className="text-sm">{item.name}</div>
                     </div>
-                    <div>
-                      {formatNumber(quantities[item.id] * item.price)}đ
-                    </div>
+                    <div>{formatNumber(quantities[item.id] * item.price)}đ</div>
                   </div>
                 ))}
             </div>

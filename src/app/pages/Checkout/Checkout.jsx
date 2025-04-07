@@ -19,7 +19,6 @@ export default function Checkout() {
     return total + item.price * item.quantity;
   }, 0);
 
-  const shippingFee = 10000;
 
   return (
     <div className="checkout-wrapper">
@@ -154,8 +153,7 @@ export default function Checkout() {
                 </div>
               ))}
             </div>
-            <p className="border-b-1 border-solid border-neutral"></p>
-            <div className="bill-price bill-content">
+            {/* <div className="bill-price bill-content">
               <div className="bill-price-row">
                 <div className="bill-price-item">
                   <div className="text-sm opacity-70 font-semibold">
@@ -174,13 +172,13 @@ export default function Checkout() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <p className="border-b-1 border-solid border-neutral"></p>
             <div className="bill-total bill-content">
               <div className="bill-total-row">
                 <div className="font-bold">Tổng tiền thanh toán</div>
                 <div className="text-warning font-bold">
-                  {formatNumber(totalPrice + shippingFee)}đ
+                  {formatNumber(totalPrice)}đ
                 </div>
               </div>
             </div>
