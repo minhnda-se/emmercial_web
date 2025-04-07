@@ -129,9 +129,9 @@ const ConfigurableOptions = React.memo(
                     onVariantSelect(product.id, product);
                   }
                 }}
-                className={`flex items-center border rounded-lg p-2 cursor-pointer transition-all ${
+                className={`flex items-center border rounded-lg !py-2 !px-1 cursor-pointer transition-all ${
                   selectedColor === option.color
-                    ? "border-blue-500 bg-blue-50"
+                    ? "border-red-500 bg-red-50 text-red-500"
                     : "border-gray-300 hover:border-gray-400"
                 }`}
               >
@@ -140,7 +140,7 @@ const ConfigurableOptions = React.memo(
                     <img
                       src={option.thumbnail}
                       alt={option.color}
-                      className="w-10 h-10 object-cover mr-2"
+                      className="w-10 h-10 object-cover !mr-2"
                     />
                   )}
                   <span>{option.color}</span>
@@ -180,13 +180,13 @@ const ConfigurableOptions = React.memo(
                   }}
                   className={`${
                     showImages ? "flex items-center" : ""
-                  } border rounded-lg px-4 py-2 ${
+                  } border rounded-lg !px-4 !py-2 ${
                     !showImages ? "text-center" : ""
                   } transition-all ${
                     !isAvailable
                       ? "border-gray-200 text-gray-400 cursor-not-allowed"
                       : selectedSize === option.size
-                      ? "border-blue-500 bg-blue-50 cursor-pointer"
+                      ? "border-red-500 bg-red-50 text-red-500 cursor-pointer"
                       : "border-gray-300 hover:border-gray-400 cursor-pointer"
                   }`}
                 >
@@ -194,7 +194,7 @@ const ConfigurableOptions = React.memo(
                     <img
                       src={product.thumbnail_url}
                       alt={option.size}
-                      className="w-10 h-10 object-cover mr-2"
+                      className="w-10 h-10 object-cover !mr-2"
                     />
                   )}
                   <span>{option.size}</span>
@@ -220,14 +220,14 @@ const ConfigurableOptions = React.memo(
             case "option1":
               return (
                 <div key={option.code} className="mt-4">
-                  <h3 className="text-lg font-medium mb-2">{option.name}</h3>
+                  <h3 className="text-lg font-medium !mb-2">{option.name}</h3>
                   {renderColorOptions()}
                 </div>
               );
             case "option2":
               return (
-                <div key={option.code} className="mt-4">
-                  <h3 className="text-lg font-medium mb-2">{option.name}</h3>
+                <div key={option.code} className="!mt-4">
+                  <h3 className="text-lg font-medium !mb-2">{option.name}</h3>
                   {renderSizeOptions()}
                 </div>
               );
@@ -247,7 +247,7 @@ const ProductDescription = React.memo(({ description }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col gap-2">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+      <h2 className="text-xl font-semibold text-gray-800 !mb-4">
         Mô tả sản phẩm
       </h2>
 
@@ -264,7 +264,7 @@ const ProductDescription = React.memo(({ description }) => {
         }}
       />
       <a
-        className="seemore text-blue-500 cursor-pointer text-center"
+        className="seemore text-red-500 cursor-pointer text-center"
         onClick={() => setIsFullDescriptionVisible(!isFullDescriptionVisible)}
       >
         {isFullDescriptionVisible ? "Thu gọn" : "Xem thêm"}
@@ -296,8 +296,8 @@ const fetchVariantData = async (productId, spid) => {
 const variantCache = new Map();
 
 export default function Detail({
-  productId = "274392442",
-  spid = "274392448",
+  productId = "277063012",
+  spid = "277165128",
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
@@ -522,7 +522,6 @@ export default function Detail({
               )}
 
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                <div className="flex justify-between"></div>
                 <InstallmentServices
                   productData={currentVariantData}
                   productId={productId}
@@ -533,13 +532,11 @@ export default function Detail({
               {!currentVariantData?.warranty_info ||
               currentVariantData?.warranty_info.length === 0 ? (
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                  <div className="flex justify-between"></div>
                   <WarrantyInfo productData={currentVariantData} />
                 </div>
               ) : null}
 
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                <div className="flex justify-between"></div>
                 <ShoppingBenefits productData={currentVariantData} />
               </div>
 
@@ -556,13 +553,11 @@ export default function Detail({
         {/* Payment Sidebar */}
         <div>
           <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-            <div className="flex flex-col gap-y-2 !p-4">
-              <PaymentComponent
-                mpid={productId}
-                spid={selectedSpid}
-                productData={currentVariantData}
-              />
-            </div>
+            <PaymentComponent
+              mpid={productId}
+              spid={selectedSpid}
+              productData={currentVariantData}
+            />
           </div>
         </div>
       </div>

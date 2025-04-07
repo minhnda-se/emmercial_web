@@ -33,20 +33,25 @@ const InstallmentServices = ({ productData, productId, spid }) => {
 
   return (
     <div className="installment-services p-4">
-      <h3 className="text-lg font-medium mb-3">Dịch vụ bổ sung</h3>
+      <h3 className="text-lg font-medium !mb-3">Dịch vụ bổ sung</h3>
       <div className="flex flex-col">
         {productData.installment_info_v3.map((service, index) => (
           <Link
             key={index}
-            to={processUrl(service.url)}
-            className="flex items-center p-3 hover:bg-gray-50 transition-all"
+            to={processUrl("#")}
+            className="flex items-center !p-3 hover:bg-gray-50 transition-all"
           >
-            <div className="flex-shrink-0 mr-3">
+            {console.log(service.icon)}
+            <div className="flex-shrink-0 !mr-3">
               {service.icon && (
                 <img
-                  src={service.icon}
-                  alt={service.title}
-                  className="w-8 h-8 object-contain"
+                  src={service.icon
+                    .split(
+                      "https://salt.tikicdn.com/ts/upload/73/4d/f7/f86e767bffc14aa3d6abed348630100b.png"
+                    )
+                    .join("public/MAVTCard.png")}
+                  alt={service.title.split("Tiki").join("MAVT")}
+                  className="w-8 h-8 object-contain rounded-md"
                 />
               )}
             </div>
@@ -54,11 +59,15 @@ const InstallmentServices = ({ productData, productId, spid }) => {
               <div
                 className="font-medium"
                 dangerouslySetInnerHTML={{
-                  __html: service.display_text || service.title,
+                  __html:
+                    service.display_text.split("Tiki").join("MAVT") ||
+                    service.title.split("Tiki").join("MAVT"),
                 }}
               />
               {service.summary && (
-                <div className="text-sm text-gray-500">{service.summary}</div>
+                <div className="text-sm text-gray-500">
+                  {service.summary.split("Tiki").join("MAVT")}
+                </div>
               )}
             </div>
           </Link>

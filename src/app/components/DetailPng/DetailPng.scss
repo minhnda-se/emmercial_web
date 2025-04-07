@@ -2,7 +2,7 @@
 $thumbnail-width: 70px;
 $thumbnail-margin: 5px;
 $thumbnail-border-radius: 4px;
-$highlight-color: #2196f3;
+$highlight-color: #d85251;
 $border-color: #ddd;
 $nav-button-size: 30px;
 $nav-button-background: #f0f0f0;
@@ -131,25 +131,24 @@ $transition-duration: 0.3s;
   }
 }
 
-
 // Đặc điểm nổi bật styling - increased text boldness only
 .product-highlights {
   margin-top: 30px;
   padding: 20px;
-  
+
   &__title {
     font-size: 18px;
     font-weight: 700; // Increased from 600 to 700
     margin-bottom: 16px;
     color: #212121;
   }
-  
+
   &__list {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
-  
+
   &__item {
     display: flex;
     align-items: flex-start;
@@ -157,7 +156,7 @@ $transition-duration: 0.3s;
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   &__check-icon {
     color: $highlight-color;
     font-size: 18px;
@@ -165,7 +164,7 @@ $transition-duration: 0.3s;
     margin-right: 10px;
     flex-shrink: 0;
   }
-  
+
   &__text {
     color: #212121;
     font-weight: 500; // Increased from normal (400) to medium (500)
