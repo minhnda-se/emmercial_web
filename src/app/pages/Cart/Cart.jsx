@@ -1,45 +1,34 @@
 import React, { useState, useEffect } from "react";
 import "./Cart.scss";
 import { useNavigate } from "react-router-dom";
+
 export default function Cart() {
-  const [booked, setBooked] = useState([
-    {
-      id: 1,
-      image: "https://example.com/image1.jpg",
-      name: "Book 1",
-      price: 100000,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      image: "https://example.com/image2.jpg",
-      name: "Book 2",
-      price: 15000,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      image: "https://example.com/image3.jpg",
-      name: "Book 3",
-      price: 20000,
-      quantity: 1,
-    },
-  ]);
-  
-  const [prices, setPrices] = useState(() =>
-    Object.fromEntries(booked.map((item) => [item.id, item.price]))
-  );
-  
-  const [quantities, setQuantities] = useState(() =>
-    Object.fromEntries(booked.map((item) => [item.id, item.quantity]))
-  );
-  
+  const navigate = useNavigate();
+
+  const [booked, setBooked] = useState([]);
+  const [prices, setPrices] = useState({});
+  const [quantities, setQuantities] = useState({});
   const [total, setTotal] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
 
-  const navigate = useNavigate();
-  
-  
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    setBooked(storedItems);
+
+    const priceMap = {};
+    const quantityMap = {};
+
+    storedItems.forEach((item) => {
+      priceMap[item.id] = item.price;
+      quantityMap[item.id] = item.quantity;
+    });
+
+    setPrices(priceMap);
+    setQuantities(quantityMap);
+  }, []);
+
   const handleCheck = (itemId) => {
     setCheckedItems((prev) =>
       prev.includes(itemId)
@@ -51,20 +40,20 @@ export default function Cart() {
   useEffect(() => {
     const totalPrice = booked
       .filter((item) => checkedItems.includes(item.id))
-      .reduce((total, item) => {
-        return total + prices[item.id] * quantities[item.id];
+      .reduce((sum, item) => {
+        return sum + prices[item.id] * quantities[item.id];
       }, 0);
-  
+
     setTotal(totalPrice);
-  }, [checkedItems, prices, quantities]);
-  
+  }, [checkedItems, prices, quantities, booked]);
+
   const handleUp = (itemId) => {
     setQuantities((prev) => ({
       ...prev,
       [itemId]: Math.min(prev[itemId] + 1, 100),
     }));
   };
-  
+
   const handleDown = (itemId) => {
     setQuantities((prev) => ({
       ...prev,
@@ -73,26 +62,41 @@ export default function Cart() {
   };
 
   const handleRemove = (itemId) => {
-    // Remove item by filtering it out of the "booked" list
-    setBooked((prev) => prev.filter((item) => item.id !== itemId));
+    const updatedBooked = booked.filter((item) => item.id !== itemId);
+    setBooked(updatedBooked);
+
+    // Update localStorage
+    localStorage.setItem("cartItems", JSON.stringify(updatedBooked));
   };
+
   const handleCheckout = () => {
     if (checkedItems.length === 0) {
       alert("Vui lòng chọn sản phẩm để thanh toán!");
       return;
     }
-    const selectedItems = booked.filter((item) => checkedItems.includes(item.id));
-    navigate("/checkout", { state: { selectedItems } });
+
+    // Create selected items with correct quantity
+    const selectedItems = booked
+      .filter((item) => checkedItems.includes(item.id))
+      .map((item) => ({
+        ...item,
+        quantity: quantities[item.id],
+        totalPrice: quantities[item.id] * prices[item.id],
+      }));
+
+    // Save to localStorage
+    localStorage.setItem("cartItems", JSON.stringify(selectedItems));
+
+    // Navigate without state
+    navigate("/checkout");
   };
-  
-  const formatNumber = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
-  console.log(checkedItems)
-  let discount = 0;
+
+  const formatNumber = (num) =>
+    num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
   return (
     <div className="cart-wrapper">
-      <h1 className="cart-title text-lg font-bold">Giỏ Hàng</h1>
+      <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
       <div className="userCart-container">
         <div className="userCart-content">
           <ul className="list bg-white rounded-sm shadow-md userCart-item">
@@ -107,13 +111,22 @@ export default function Cart() {
                     />
                   </div>
                   <div className="item-image">
-                    <img className="size-10 rounded-box" src={item.image} />
+                    <img
+                      className="size-10 rounded-box"
+                      src={item.thumbnail || item.image}
+                      alt={item.name}
+                    />
                   </div>
                   <div className="item-name">
                     <div>{item.name}</div>
                     <div className="text-xs font-semibold opacity-60">
                       {formatNumber(item.price)}đ
                     </div>
+                    {item.variant && (
+                      <div className="text-xs italic text-gray-400">
+                        {item.variant}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="quantity-selector border-1 border-solid border-success">
@@ -137,7 +150,7 @@ export default function Cart() {
                 </div>
                 <button
                   className="btn button-remove bg-white border-none"
-                  onClick={() => handleRemove(item.id)} // Handle Remove
+                  onClick={() => handleRemove(item.id)}
                 >
                   X
                 </button>
@@ -146,24 +159,42 @@ export default function Cart() {
           </ul>
         </div>
         <div className="order-details bg-white shadow-md rounded-sm">
-          <div className="font-bold">
-            <h1>Đơn hàng</h1>
+          <div>
+            <h1 className="font-bold">Đơn hàng</h1>
+            <div className="text-xs opacity-75 font-semibold">{booked.length} sản phẩm.</div>
           </div>
           <div className="order-content">
-            <div className="order-section">
-              <div className="text-xs opacity-75">Tổng tiền hàng</div>
+            <div className="order-info">
+              {booked
+                .filter((item) => checkedItems.includes(item.id))
+                .map((item) => (
+                  <div key={item.id} className="order-info-row">
+                    <div className="order-item-info">
+                      <div className="text-xs font-semibold opacity-60">
+                        {quantities[item.id]}x
+                      </div>
+                      <div className="text-sm">{item.name}</div>
+                    </div>
+                    <div>
+                      {formatNumber(quantities[item.id] * item.price)}đ
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            {/* <div className="order-section order-item-total">
+              <div className="text-xs font-semibold">Tổng tiền hàng</div>
               <div>{formatNumber(total)}đ</div>
-            </div>
-            <div className="order-section">
-              <div className="text-xs opacity-75">Giảm giá trực tiếp</div>
-              <div>{formatNumber(discount)}đ</div>
-            </div>
+            </div> */}
             <div className="order-section order-total">
               <div className="text-xs font-bold">Tổng tiền thanh toán</div>
-              <div>{formatNumber(total - discount)}đ</div>
+              <div>{formatNumber(total)}đ</div>
             </div>
           </div>
-            <button onClick={handleCheckout} className="btn w-full btn-info text-white">
+          <button
+            onClick={handleCheckout}
+            className="btn w-full btn-info text-white"
+          >
             Chuyển sang thanh toán
           </button>
         </div>

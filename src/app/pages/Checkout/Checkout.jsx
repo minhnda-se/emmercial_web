@@ -1,10 +1,15 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 
 export default function Checkout() {
-  const location = useLocation();
-  const booked = location.state?.selectedItems || []; // Use the selected items or an empty array if not passed
+  const [booked, setBooked] = useState([]);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setBooked(JSON.parse(storedCart));
+    }
+  }, []);
 
   const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -13,7 +18,7 @@ export default function Checkout() {
   const totalPrice = booked.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
-  console.log(booked);
+
   const shippingFee = 10000;
 
   return (
@@ -26,7 +31,10 @@ export default function Checkout() {
               {booked.map((item) => (
                 <li key={item.id} className="list-row">
                   <div>
-                    <img className="size-10 rounded-box" src={item.image} />
+                    <img
+                      className="size-10 rounded-box"
+                      src={item.thumbnail || item.image}
+                    />
                   </div>
                   <div>
                     <div>{item.name}</div>
@@ -43,84 +51,82 @@ export default function Checkout() {
           </div>
           <div className="payment-container bg-white shadow-md rounded-sm">
             <h3 className="font-bold">Chọn hình thức thanh toán</h3>
-            <div className="radio-container">
-              <div className="radio-item">
-                <input type="radio" name="radio-1" defaultChecked />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/ce/f6/e8/ea880ef285856f744e3ffb5d282d4b2d.jpg"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" defaultChecked />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/ce/f6/e8/ea880ef285856f744e3ffb5d282d4b2d.jpg"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">Momo E-Wallet</h3>
               </div>
+              <h3 className="text-sm">Momo E-Wallet</h3>
+            </div>
 
-              <div className="radio-item">
-                <input type="radio" name="radio-1" />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/5f/f9/75/d7ac8660aae903818dd7da8e4772e145.png"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/5f/f9/75/d7ac8660aae903818dd7da8e4772e145.png"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">Viettel Money</h3>
               </div>
+              <h3 className="text-sm">Viettel Money</h3>
+            </div>
 
-              <div className="radio-item">
-                <input type="radio" name="radio-1" />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/2f/43/da/dd7ded6d3659036f15f95fe81ac76d93.png"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/2f/43/da/dd7ded6d3659036f15f95fe81ac76d93.png"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">ZaloPay</h3>
               </div>
+              <h3 className="text-sm">ZaloPay</h3>
+            </div>
 
-              <div className="radio-item">
-                <input type="radio" name="radio-1" />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/77/6a/df/a35cb9c62b9215dbc6d334a77cda4327.png"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/77/6a/df/a35cb9c62b9215dbc6d334a77cda4327.png"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">VNPAY</h3>
               </div>
+              <h3 className="text-sm">VNPAY</h3>
+            </div>
 
-              <div className="radio-item">
-                <input type="radio" name="radio-1" />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/7e/48/50/7fb406156d0827b736cf0fe66c90ed78.png"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/7e/48/50/7fb406156d0827b736cf0fe66c90ed78.png"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">Thẻ tín dụng/ Ghi nợ</h3>
               </div>
+              <h3 className="text-sm">Thẻ tín dụng/ Ghi nợ</h3>
+            </div>
 
-              <div className="radio-item">
-                <input type="radio" name="radio-1" />
-                <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src="https://salt.tikicdn.com/ts/upload/92/b2/78/1b3b9cda5208b323eb9ec56b84c7eb87.png"
-                      alt=""
-                    />
-                  </div>
+            <div className="radio-item">
+              <input type="radio" name="radio-1" />
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src="https://salt.tikicdn.com/ts/upload/92/b2/78/1b3b9cda5208b323eb9ec56b84c7eb87.png"
+                    alt=""
+                  />
                 </div>
-                <h3 className="text-sm">Thanh toán tiền mặt</h3>
               </div>
+              <h3 className="text-sm">Thanh toán tiền mặt</h3>
             </div>
           </div>
         </div>
