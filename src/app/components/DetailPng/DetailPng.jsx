@@ -193,7 +193,7 @@ const ImageGallery = memo(({ data, spid }) => {
         <img
           src={selectedImage}
           alt="Selected Product"
-          className="image-gallery__main-image"
+          className="image-gallery__main-image border border-gray-200 rounded-md"
         />
       </div>
 

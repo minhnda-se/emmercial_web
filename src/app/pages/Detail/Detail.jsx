@@ -523,7 +523,6 @@ export default function Detail({
               )}
               {currentVariantData?.installment_info_v3 != null ? (
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                  <div className="flex justify-between"></div>
                   <InstallmentServices
                     productData={currentVariantData}
                     productId={productId}

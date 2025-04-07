@@ -1,9 +1,10 @@
 import React from "react";
-import { RightOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const WarrantyInfo = ({ productData }) => {
   // Check if warranty information exists in productData
   const warrantyInfo = productData?.warranty_info || [];
+  const nav = useNavigate();
 
   // If no warranty info available
   if (!warrantyInfo || warrantyInfo.length === 0) {
@@ -13,7 +14,7 @@ const WarrantyInfo = ({ productData }) => {
 
   return (
     <div className="warranty-info-section mt-4">
-      <h2 className="text-xl font-medium mb-4">Thông tin bảo hành</h2>
+      <h2 className="text-xl font-medium !mb-4">Thông tin bảo hành</h2>
       <div>
         {warrantyInfo.map((item, index) => {
           const hasUrl = !!item.url;
@@ -21,23 +22,21 @@ const WarrantyInfo = ({ productData }) => {
           return (
             <div
               key={item.name}
-              className="flex justify-between items-center px-4 py-4"
+              className="flex items-center px-4 !py-2 border-b border-gray-200"
             >
               <div className="text-gray-600">{item.name}:</div>
-              <div className="flex items-center">
+              <div className="flex items-center !ml-2">
                 {hasUrl ? (
-                  <a
-                    href={item.url}
+                  <div
+                    onClick={() => {
+                      nav("/warrantyInstructions");
+                    }}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 flex items-center"
+                    className="text-red-400 flex items-center cursor-pointer"
                   >
                     {item.value}
-                    <RightOutlined
-                      className="ml-2"
-                      style={{ fontSize: "12px" }}
-                    />
-                  </a>
+                  </div>
                 ) : (
                   <span className="font-medium">{item.value}</span>
                 )}

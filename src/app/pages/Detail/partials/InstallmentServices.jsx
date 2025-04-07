@@ -39,7 +39,7 @@ const InstallmentServices = ({ productData, productId, spid }) => {
           <Link
             key={index}
             to={processUrl("#")}
-            className="flex items-center !p-3 hover:bg-gray-50 transition-all"
+            className="flex items-center !p-3 hover:bg-gray-50 transition-all border-b border-gray-200"
           >
             {console.log(service.icon)}
             <div className="flex-shrink-0 !mr-3">

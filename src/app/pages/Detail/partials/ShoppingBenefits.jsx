@@ -6,7 +6,7 @@ const ShoppingBenefits = ({ productData }) => {
 
   return (
     <div className="py-4">
-      <div className="text-lg font-medium !mb-2">An tâm mua sắm</div>
+      <div className="text-lg font-medium !mb-4">An tâm mua sắm</div>
       <div className="flex flex-col gap-3">
         {benefits.map((benefit, index) => (
           <div
