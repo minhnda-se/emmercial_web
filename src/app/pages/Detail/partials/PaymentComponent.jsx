@@ -142,7 +142,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       quantity: quantity,
       totalPrice: totalPrice,
       variant: getOptionsDisplay(),
-      seller: sellerData?.name || "Tiki Trading",
+      seller: sellerData?.name || "MAVT Trading",
       timestamp: new Date().getTime(),
     };
 
@@ -174,6 +174,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       // Chuyển hướng đến trang thanh toán
       navigate("/checkout");
     } else {
+      alert("Đã thêm vào giỏ hàng!");
       console.log("Added to cart:", productInfo);
       // Bạn có thể thêm code hiển thị thông báo "Đã thêm vào giỏ hàng" ở đây
     }
@@ -218,7 +219,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
               .split(
                 "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
               )
-              .join("src/app/assets/favicon.png")}
+              .join("/src/app/assets/favicon.png")}
             alt="MAVT"
             className="h-8 !mr-2"
           />
@@ -258,7 +259,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
           <img
             src={selectedVariant?.thumbnail_url || productData?.thumbnail_url}
             alt={productData?.name}
-            className="w-12 h-12 object-contain !mr-3 border rounded"
+            className="w-12 h-12 object-contain !mr-3 border rounded border-gray-200 !p-1"
           />
           <span className="font-medium">{optionsDisplay}</span>
         </div>
@@ -305,18 +306,21 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       {/* Action buttons */}
       <div className="flex flex-col gap-3">
         <button
-          className="w-full bg-red-400 hover:bg-red-600 text-white !py-3 rounded-md font-medium"
+          className="w-full bg-red-400 hover:bg-red-600 text-white !py-3 rounded-md font-medium cursor-pointer"
           onClick={handleBuyNow}
         >
           Mua ngay
         </button>
         <button
-          className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium"
+          className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium cursor-pointer"
           onClick={handleAddToCart}
         >
           Thêm vào giỏ
         </button>
-        <button className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium">
+        <button
+          className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium cursor-pointer"
+          onClick={handleBuyNow}
+        >
           Mua trả góp - trả sau
         </button>
       </div>

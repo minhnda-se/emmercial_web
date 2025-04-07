@@ -17,10 +17,12 @@ import Search from "../pages/Search/Search";
 import ProductReviews from "../pages/Detail/partials/ProductReviews";
 
 import Cart from "../pages/Cart";
+import ScrollToTop from "../components/ScrollToTop";
 
 const MainRoutes = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
