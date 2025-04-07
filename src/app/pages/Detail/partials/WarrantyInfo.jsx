@@ -9,6 +9,7 @@ const WarrantyInfo = ({ productData }) => {
   if (!warrantyInfo || warrantyInfo.length === 0) {
     return null;
   }
+  console.log("adfsasdf", productData);
 
   return (
     <div className="warranty-info-section mt-4">

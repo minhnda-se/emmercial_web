@@ -296,8 +296,8 @@ const fetchVariantData = async (productId, spid) => {
 const variantCache = new Map();
 
 export default function Detail({
-  productId = "274392442",
-  spid = "274392448",
+  productId = "277063012",
+  spid = "277165128",
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
@@ -468,6 +468,7 @@ export default function Detail({
     return <div className="error-message">{error}</div>;
   }
 
+  console.log("current", currentVariantData);
   return (
     <>
       {/* Floating buttons for Message and Support */}
@@ -521,22 +522,28 @@ export default function Detail({
                 </div>
               )}
 
-              <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
-                <div className="flex justify-between"></div>
-                <InstallmentServices
-                  productData={currentVariantData}
-                  productId={productId}
-                  spid={selectedSpid}
-                />
-              </div>
+              {currentVariantData?.installment_info_v3 != null ? (
+                <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
+                  <div className="flex justify-between"></div>
+                  <InstallmentServices
+                    productData={currentVariantData}
+                    productId={productId}
+                    spid={selectedSpid}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
 
-              {!currentVariantData?.warranty_info ||
+              {currentVariantData?.warranty_info != null ||
               currentVariantData?.warranty_info.length === 0 ? (
                 <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                   <div className="flex justify-between"></div>
                   <WarrantyInfo productData={currentVariantData} />
                 </div>
-              ) : null}
+              ) : (
+                <></>
+              )}
 
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                 <div className="flex justify-between"></div>
