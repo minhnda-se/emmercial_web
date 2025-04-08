@@ -85,129 +85,126 @@ const Header = () => {
             </Link>
           </div>
         </div>
-        
-        <div className="flex flex-col w-[50%] justify-center gap-1">
-        <div className="flex items-center gap-2">
-          <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
-            <svg
-              className="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              type="search"
-              ref={searchValue}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearchClick();
-                }
-              }}
-              placeholder="Search"
-              aria-label="Search input"
-              className="z-10"
-            />
-          </label>
-          <button
-            className="btn btn-secondary w-[10%]"
-            onClick={handleSearchClick}
-            aria-label="Search button"
-          >
-            <FontAwesomeIcon
-              icon={faSearch}
-              size="xl"
-              fixedWidth
-              color="white"
-              className="!p-2 rounded-full"
-            />
-          </button>
-        </div>
 
-        <div className="w-full ">
+        <div className="flex flex-col w-[50%] justify-center gap-2">
+          <div className="flex items-center gap-2">
+            <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                ref={searchValue}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearchClick();
+                  }
+                }}
+                placeholder="Search"
+                aria-label="Search input"
+                className="z-10"
+              />
+            </label>
+            <button
+              className="btn btn-secondary w-[10%]"
+              onClick={handleSearchClick}
+              aria-label="Search button"
+            >
+              <FontAwesomeIcon
+                icon={faSearch}
+                size="xl"
+                fixedWidth
+                color="white"
+                className="!p-2 rounded-full"
+              />
+            </button>
+          </div>
+
+          <div className="w-full ">
             <ul className="flex gap-5 text-sm text-gray-400 font-bold ">
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Điện da dụng
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Xe cộ
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Mẹ & bé
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Nhà cửa
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Sách
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Thể thao
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="flex gap-4 font-bold">
-          <Link
-            to="/"
-            className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3 font-bold text-[20px]"
-          >
-            <FontAwesomeIcon
-              icon={faHouse}
-              size="l"
-              fixedWidth
-              color="primary"
-              className="!p-2 rounded-full"
-            />
-            <p>Trang chủ</p>
-          </Link>
-
-          {isLoggedIn ? ( // Conditional rendering based on login status
+        <div className="flex font-bold flex-col w-[25%] gap-2">
+          <div className="flex">
             <Link
-              to={"/profile"}
-              className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
+              to="/"
+              className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3 font-bold text-[20px]"
             >
               <FontAwesomeIcon
-                icon={faUser}
+                icon={faHouse}
                 size="l"
                 fixedWidth
-                color="black"
-                className="!p-2 rounded-full"
+                color="primary"
+                className="p-2 rounded-full"
               />
-              <p>Profile</p>
+              <p>Trang chủ</p>
             </Link>
-          ) : (
-            <Link
-              to={"/login"}
-              className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
-            >
-              <FontAwesomeIcon
-                icon={faUser}
-                size="l"
-                fixedWidth
-                color="black"
-                className="!p-2 rounded-full"
-              />
-              <p>Tài khoản</p>
-            </Link>
-          )}
 
-          <Link to={"/cart"} className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              
-        {/* <div className="flex flex-col w-[50%] justify-center gap-1">
-          <div className="flex items-center  gap-2">
-            <label className="input w-[90%] !px-5 !mr-2 bg-transparent"> */}
+            {isLoggedIn ? ( // Conditional rendering based on login status
+              <Link
+                to={"/profile"}
+                className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
+              >
+                <FontAwesomeIcon
+                  icon={faUser}
+                  size="l"
+                  fixedWidth
+                  color="black"
+                  className="p-2 rounded-full"
+                />
+                <p>Profile</p>
+              </Link>
+            ) : (
+              <Link
+                to={"/login"}
+                className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
+              >
+                <FontAwesomeIcon
+                  icon={faUser}
+                  size="l"
+                  fixedWidth
+                  color="black"
+                  className="p-2 rounded-full"
+                />
+                <p>Tài khoản</p>
+              </Link>
+            )}
+
+            <Link to={"/cart"} className="btn btn-ghost btn-circle">
+              <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -229,25 +226,20 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <div className="flex items-center text-sm">
-            <div className="flex font-bold">
-              <Link
-                to="/"
-                className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3"
-              >
-                <FontAwesomeIcon
-                  icon={faMapLocation}
-                  size="l"
-                  fixedWidth
-                  color="gray"
-                  className="rounded-full"
-                />
-              </Link>
-              <p className="flex items-center">
-                <span className="font-bold text-gray-400 !mr-1">
-                  Giao đến:{" "}
+          <div className="flex text-sm">
+            <div className="flex font-bold items-center gap-1 cursor-pointer">
+              <FontAwesomeIcon
+                icon={faMapLocation}
+                size="l"
+                fixedWidth
+                color="gray"
+                className="rounded-full"
+              />
+              <p className="flex">
+                <span className="font-bold text-gray-400 !mr-1">Giao đến:</span>
+                <span className="hover:underline">
+                  Thành phố Thủ Đức, Hồ Chí Minh
                 </span>
-                <span className="link">Thành phố Thủ Đức, Hồ Chí Minh</span>
               </p>
             </div>
           </div>
