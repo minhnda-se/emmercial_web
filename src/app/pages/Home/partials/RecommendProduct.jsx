@@ -121,7 +121,6 @@ export const RecommendProduct = () => {
                   });
                 }}
               >
-                {console.log(item)}
                 <figure className="relative">
                   <img
                     src={item?.thumbnail_url}

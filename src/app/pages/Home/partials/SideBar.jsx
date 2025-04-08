@@ -1,12 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { getIdFromUrl } from "../usecases/GetIdFromUrl";
 
 export const SideBar = (props) => {
   const categories = props.categories.menu_block;
   const benifits = props.categories.highlight_block;
-
+  const nav = useNavigate();
+  const handleCategoryClick = (text, url) => {
+    nav(`/category/${text}?cid=${getIdFromUrl(url)}`);
+  };
   return (
     <>
       <div className="flex flex-col bg-white rounded-lg gap-y-2 !p-4">
+        {console.log(categories)}
         <h3>{categories?.title}</h3>
         {categories?.items?.length > 0 ? (
           categories.items.map((category, index) => (
@@ -14,6 +20,9 @@ export const SideBar = (props) => {
               <button
                 className="btn btn-ghost flex justify-start text-left !px-1  !mt-2 text-[14px]"
                 style={{ width: "100%" }}
+                onClick={() =>
+                  handleCategoryClick(category.text, category.link)
+                }
               >
                 <div className="avatar !mr-2">
                   <div className="w-9">

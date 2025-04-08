@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductSkeleton from "../Home/partials/ProductSkeleton";
 import { Pagination } from "antd";
+import Loading from "../../components/Loading/Loading";
 
 export default function Search() {
   const [product, setProduct] = useState({});
@@ -306,7 +307,9 @@ export default function Search() {
           </div>
         </>
       ) : (
-        <p>No search query provided.</p>
+        <p>
+          <Loading />
+        </p>
       )}
     </div>
   );
