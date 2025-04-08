@@ -220,7 +220,7 @@ const Header = () => {
                   />
                 </svg>
 
-                <span className="badge text-white rounded-full badge-xs indicator-item !px-1.25 text-accent-content text-[10px] bg-red-500">
+                <span className="badge text-white rounded-full badge-xs indicator-item z-0 !px-1.25 text-accent-content text-[10px] bg-red-500">
                   {cartIndex}
                 </span>
               </div>

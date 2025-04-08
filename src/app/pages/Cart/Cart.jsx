@@ -10,6 +10,7 @@ import {
   faTrashCanArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ export default function Cart() {
 
   const handleCheckout = () => {
     if (checkedItems.length === 0) {
-      alert("Vui lòng chọn sản phẩm để thanh toán!");
+      toast.error("Vui lòng chọn ít nhất một sản phẩm!");
       return;
     }
 
@@ -109,151 +110,171 @@ export default function Cart() {
     cartItems.length > 0 && checkedItems.length === cartItems.length;
 
   return (
-    <div className="cart-wrapper flex justify-around">
-      {/* <div className="flex flex-col justify-center"> */}
-      <div className="userCart-content">
-        <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4">
-          {/* Check All checkbox */}
-          <div className="flex items-center justify-between !pb-3 border-b border-gray-200">
-            <div className="flex flex-col">
-              <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
-              <div className="text-xs opacity-75 font-semibold">
-                {cartItems.length} sản phẩm.
+    <>
+      <ToastContainer />
+      <div className="cart-wrapper flex justify-around">
+        {/* <div className="flex flex-col justify-center"> */}
+        <div className="userCart-content">
+          <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4">
+            {/* Check All checkbox */}
+            <div className="flex items-center justify-between !pb-3 border-b border-gray-200">
+              <div className="flex flex-col">
+                <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
+                <div className="text-xs opacity-75 font-semibold">
+                  {cartItems.length} sản phẩm
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <label className="text-sm font-semibold">Chọn tất cả</label>
-              <input
-                type="checkbox"
-                checked={isAllChecked}
-                onChange={handleCheckAll}
-                className="checkbox checkbox-secondary !p-1 text-white"
-              />
-            </div>
-          </div>
-
-          {cartItems.map((item) => (
-            <li key={item.id} className="list-row userCart-list">
-              <div className="item-details flex justify-start items-center gap-5">
+              <div className="flex items-center gap-2">
+                <label className="text-sm font-semibold">Chọn tất cả</label>
                 <input
                   type="checkbox"
-                  checked={checkedItems.includes(item.id)}
-                  onChange={() => handleCheck(item.id)}
+                  checked={isAllChecked}
+                  onChange={handleCheckAll}
                   className="checkbox checkbox-secondary !p-1 text-white"
                 />
-                <img
-                  className="size-20"
-                  src={item.thumbnail || item.image}
-                  alt={item.name}
-                />
-                <div className="item-name">
-                  <div>{item.name}</div>
+              </div>
+            </div>
 
-                  {item.variant && (
-                    <div className="text-xs italic text-gray-400">
-                      {item.variant}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="text-xs font-semibold opacity-60">
-                {formatNumber(item.price)}đ
-              </div>
-              <div className="quantity-selector border-1 border-solid border-secondary">
-                <div className="border-r-1 border-solid border-secondary">
-                  <button
-                    className="quantity-button"
-                    onClick={() => handleDown(item.id)}
-                  >
-                    -
-                  </button>
-                </div>
-                <div className="item-quantity">{quantities[item.id]}</div>
-                <div className="border-l-1 border-solid border-secondary">
-                  <button
-                    className="quantity-button"
-                    onClick={() => handleUp(item.id)}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <button
-                  className="btn button-remove bg-transparent border-none shadow-none"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    size="lg"
-                    fixedWidth
-                    className="!p-2 rounded-full "
+            {cartItems.map((item) => (
+              <li key={item.id} className="list-row userCart-list">
+                <div className="item-details flex justify-start items-center gap-5">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.includes(item.id)}
+                    onChange={() => handleCheck(item.id)}
+                    className="checkbox checkbox-secondary !p-1 text-white"
                   />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* </div> */}
+                  <img
+                    className="size-20"
+                    src={item.thumbnail || item.image}
+                    alt={item.name}
+                  />
+                  <div className="item-name">
+                    <div>{item.name}</div>
 
-      <div className="userCart-container">
-        <div className="order-details sticky top-4 w-[30vw] !p-4 bg-white rounded-lg shadow-md">
-          <div className="!pb-3">
-            <h1 className="font-bold text-lg">Đơn hàng</h1>
-            {checkedItems.length > 0 && (
-              <div className="text-xs opacity-75 font-semibold">
-                {checkedItems.length} sản phẩm.
-              </div>
-            )}
-          </div>
-
-          <div className="order-content mt-4 border-t border-gray-200 !pt-4">
-            <div className="order-info">
-              {cartItems
-                .filter((item) => checkedItems.includes(item.id))
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    className="order-info-row flex mt-2 border-b border-gray-200 !pb-3 !mb-3"
+                    {item.variant && (
+                      <div className="text-xs italic text-gray-400">
+                        {item.variant}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="text-xs font-semibold opacity-90 text-secondary">
+                  {formatNumber(item.price)}đ
+                </div>
+                <div className="quantity-selector border-1 border-solid border-secondary rounded-sm">
+                  <div className="border-r-1 border-solid border-secondary rounded-l-sm">
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleDown(item.id)}
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div className="item-quantity">{quantities[item.id]}</div>
+                  <div className="border-l-1 border-solid border-secondary rounded-r-sm">
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleUp(item.id)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <button
+                    className="btn button-remove bg-transparent border-none shadow-none"
+                    onClick={() => handleRemove(item.id)}
                   >
-                    <div className="order-item-info w-4/5">
-                      <div className="text-xs font-semibold opacity-60 w-1/10">
-                        {quantities[item.id]}x
-                      </div>
-                      <div className="flex flex-col text-wrap w-9/10">
-                        <div className="text-sm items-start">{item.name}</div>
-                        {item.variant && (
-                          <div className="text-xs italic text-gray-400">
-                            {item.variant}
-                          </div>
-                        )}
-                      </div>
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      size="lg"
+                      fixedWidth
+                      className="!p-2 rounded-full "
+                    />
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* </div> */}
+
+        <div className="userCart-container">
+          <div className="order-details !sticky top-4 w-[30vw] !p-4 bg-white rounded-lg shadow-md">
+            <div className="!pb-3">
+              <h1 className="font-bold text-lg">Đơn hàng</h1>
+              {checkedItems.length > 0 && (
+                <div className="text-xs opacity-75 font-semibold">
+                  {checkedItems.length} sản phẩm
+                </div>
+              )}
+            </div>
+
+            <div className="order-content mt-4 border-t border-gray-200 !pt-4">
+              <div className="order-info">
+                <div className="order-info-row flex justify-between border-b border-gray-200 !pb-3 !mb-3">
+                  <div className="order-item-info w-4/5">
+                    <div className="text-sm text-secondary font-bold w-1/10">
+                      SL
                     </div>
-                    <div className="flex flex-col w-1/5 items-end">
-                      <div>{formatNumber(item.price)}đ</div>
-                      <div className="text-xs font-semibold opacity-60">
-                        {formatNumber(quantities[item.id] * prices[item.id])}đ
-                      </div>
+                    <div className="text-sm text-center font-bold w-9/10">
+                      Sản phẩm đã chọn
                     </div>
                   </div>
-                ))}
-            </div>
+                  <div className="flex flex-col w-1/5 items-end text-secondary font-bold">
+                    Thành tiền
+                  </div>
+                </div>
+                {cartItems
+                  .filter((item) => checkedItems.includes(item.id))
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      className="order-info-row flex mt-2 border-b border-gray-200 !pb-3 !mb-3"
+                    >
+                      <div className="order-item-info w-4/5">
+                        <div className="text-sm text-secondary font-semibold opacity-90 w-1/10">
+                          {quantities[item.id]}x
+                        </div>
+                        <div className="flex flex-col text-wrap w-9/10">
+                          <div className="text-sm items-start">{item.name}</div>
+                          {item.variant && (
+                            <div className="text-xs italic text-gray-400">
+                              {item.variant}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex flex-col w-1/5 items-end text-secondary">
+                        <div>
+                          {formatNumber(quantities[item.id] * prices[item.id])}đ
+                        </div>
+                        <div className="text-xs font-semibold opacity-60">
+                          {formatNumber(item.price)}đ
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
 
-            <div className="order-section order-total mt-4">
-              <div className="text-s font-bold">Tổng tiền thanh toán</div>
-              <div>{formatNumber(total)}đ</div>
+              <div className="order-section order-total mt-4">
+                <div className="text-s font-bold">Tổng tiền thanh toán</div>
+                <div className="font-bold text-secondary">
+                  {formatNumber(total)}đ
+                </div>
+              </div>
             </div>
+            <button
+              onClick={handleCheckout}
+              className="btn w-full btn-secondary text-white !mt-2"
+            >
+              Chuyển sang thanh toán
+            </button>
           </div>
-          <button
-            onClick={handleCheckout}
-            className="btn w-full btn-secondary text-white !mt-2"
-          >
-            Chuyển sang thanh toán
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

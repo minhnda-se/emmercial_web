@@ -656,11 +656,16 @@ export default function Detail({}) {
         {/* Payment Sidebar */}
         <div>
           <div className="detail_sidebar rounded-lg bg-white !sticky top-4 h-screen overflow-y-auto custom-scrollbar shadow-md">
-            <PaymentComponent
-              mpid={productId}
-              spid={selectedSpid}
-              productData={currentVariantData}
-            />
+            <div>
+              <PaymentComponent
+                mpid={productId}
+                spid={selectedSpid}
+                productData={currentVariantData}
+              />
+            </div>
+            {/* <div className="!m-auto !mt-4 bg-white rounded-lg !shadow-md">
+              <img src={"/public/Shop's Logo.png"} alt="Logo" />
+            </div> */}
           </div>
         </div>
       </div>
