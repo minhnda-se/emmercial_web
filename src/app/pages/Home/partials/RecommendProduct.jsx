@@ -104,7 +104,7 @@ export const RecommendProduct = () => {
         dataLength={productsList.length} // Current length of the list
         next={fetchMoreProducts} // Function to call when more items are required
         hasMore={true} // You can condition this based on whether there are more items to load
-        scrollThreshold={0.92} // Trigger fetch when 90% of the list is scrolled
+        scrollThreshold={0.9} // Trigger fetch when 90% of the list is scrolled
         endMessage={<p className="text-center">No more products to load.</p>} // End message when no more products
       >
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded-lg">

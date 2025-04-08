@@ -44,7 +44,7 @@ const MainRoutes = () => {
           element={<ProductReviews productId="272126105" spid="272126106" />}
         />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/category/:name" element={<Category />} />
+        <Route path="/category/:urlKey/:cid" element={<Category />} />
       </Routes>
       <Footer />
     </BrowserRouter>

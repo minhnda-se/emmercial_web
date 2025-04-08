@@ -231,7 +231,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
         className={`w-8 h-8 flex items-center justify-center rounded ${
           currentPage === 1
             ? "text-gray-400 cursor-not-allowed"
-            : "text-gray-700 hover:bg-gray-100"
+            : "text-gray-700 hover:bg-gray-100  cursor-pointer"
         }`}
       >
         <LeftOutlined />
@@ -246,9 +246,9 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
           <button
             key={i}
             onClick={() => handlePageChange(i)}
-            className={`w-8 h-8 flex items-center justify-center rounded ${
+            className={`w-8 h-8 flex items-center justify-center rounded cursor-pointer ${
               currentPage === i
-                ? "bg-red-400 text-white"
+                ? "bg-secondary text-white"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >
@@ -273,8 +273,8 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
               onClick={() => handlePageChange(i)}
               className={`w-8 h-8 flex items-center justify-center rounded ${
                 currentPage === i
-                  ? "bg-red-400 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
+                  ? "bg-secondary text-white"
+                  : "text-gray-700 hover:bg-gray-100 cursor-pointer"
               }`}
             >
               {i}
@@ -295,7 +295,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
           <button
             key={lastPage}
             onClick={() => handlePageChange(lastPage)}
-            className="w-8 h-8 flex items-center justify-center rounded text-gray-700 hover:bg-gray-100"
+            className="w-8 h-8 flex items-center justify-center rounded cursor-pointer text-gray-700 hover:bg-gray-100"
           >
             {lastPage}
           </button>
@@ -310,7 +310,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
           <button
             key={1}
             onClick={() => handlePageChange(1)}
-            className="w-8 h-8 flex items-center justify-center rounded text-gray-700 hover:bg-gray-100"
+            className="w-8 h-8 flex items-center justify-center rounded cursor-pointer text-gray-700 hover:bg-gray-100"
           >
             1
           </button>
@@ -330,9 +330,9 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             <button
               key={i}
               onClick={() => handlePageChange(i)}
-              className={`w-8 h-8 flex items-center justify-center rounded ${
+              className={`w-8 h-8 flex items-center justify-center rounded cursor-pointer ${
                 currentPage === i
-                  ? "bg-red-400 text-white"
+                  ? "bg-secondary text-white"
                   : "text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -370,9 +370,9 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             <button
               key={i}
               onClick={() => handlePageChange(i)}
-              className={`w-8 h-8 flex items-center justify-center rounded ${
+              className={`w-8 h-8 flex items-center justify-center rounded cursor-pointer ${
                 currentPage === i
-                  ? "bg-red-400 text-white"
+                  ? "bg-secondary text-white"
                   : "text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -394,7 +394,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
           <button
             key={lastPage}
             onClick={() => handlePageChange(lastPage)}
-            className="w-8 h-8 flex items-center justify-center rounded text-gray-700 hover:bg-gray-100"
+            className="w-8 h-8 flex items-center justify-center rounded cursor-pointer text-gray-700 hover:bg-gray-100"
           >
             {lastPage}
           </button>
@@ -411,7 +411,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
         className={`w-8 h-8 flex items-center justify-center rounded ${
           currentPage === lastPage
             ? "text-gray-400 cursor-not-allowed"
-            : "text-gray-700 hover:bg-gray-100"
+            : "text-gray-700 hover:bg-gray-100 cursor-pointer"
         }`}
       >
         <RightOutlined />
@@ -431,7 +431,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
       <div className="flex justify-center !gap-6 border-b border-gray-200 !pb-4">
         {/* Average rating display */}
         <div className="flex justify-center items-center w-full max-w-xs border-r border-gray-200 !pr-8">
-          <div className="text-3xl font-bold text-red-400 !mr-3">
+          <div className="text-3xl font-bold text-secondary !mr-3">
             {ratingStats.average?.toFixed(1) || "0.0"}
           </div>
           <div>
@@ -485,7 +485,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                 <div key={review.id} className="!pb-4 border-b border-gray-100">
                   <div className="flex items-start">
                     <div className="flex-shrink-0 !mr-3 !mt-4">
-                      <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-red-400 font-medium">
+                      <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-secondary font-medium">
                         {review.created_by?.name
                           ?.trim()
                           .charAt(0)
@@ -507,7 +507,7 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                         <div className="flex text-yellow-400 !mr-2">
                           {renderStars(review.rating)}
                         </div>
-                        <div className="text-red-400 font-medium">
+                        <div className="text-secondary font-medium">
                           {review.title}
                         </div>
                       </div>
@@ -538,17 +538,17 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                       {/* Action buttons */}
                       <div className="flex items-center !mt-3 text-sm justify-between">
                         <div className="flex items-center">
-                          <button className="flex items-center !mr-4 text-gray-500 hover:text-red-400 cursor-pointer">
+                          <button className="flex items-center !mr-4 text-gray-500 hover:text-secondary cursor-pointer">
                             <LikeOutlined className="!mr-1" />
                             <span>{review.thank_count || "Hữu ích"}</span>
                           </button>
-                          <button className="flex items-center text-gray-500 hover:text-red-400 cursor-pointer">
+                          <button className="flex items-center text-gray-500 hover:text-secondary cursor-pointer">
                             <MessageOutlined className="!mr-1" />
                             <span>{review.comments?.length || 0}</span>
                           </button>
                         </div>
 
-                        <button className="flex items-center text-gray-500 hover:text-red-400 cursor-pointer">
+                        <button className="flex items-center text-gray-500 hover:text-secondary cursor-pointer">
                           <ShareAltOutlined className="!mr-1" />
                           <span>Chia sẻ</span>
                         </button>
