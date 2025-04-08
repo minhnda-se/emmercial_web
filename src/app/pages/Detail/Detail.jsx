@@ -132,7 +132,7 @@ const ConfigurableOptions = React.memo(
                 }}
                 className={`flex items-center border rounded-lg !py-2 !px-1 cursor-pointer transition-all ${
                   selectedColor === option.color
-                    ? "border-red-500 bg-red-50 text-red-500"
+                    ? "border-secondary bg-red-50 text-secondary"
                     : "border-gray-300 hover:border-gray-400"
                 }`}
               >
@@ -187,7 +187,7 @@ const ConfigurableOptions = React.memo(
                     !isAvailable
                       ? "border-gray-200 text-gray-400 cursor-not-allowed"
                       : selectedSize === option.size
-                      ? "border-red-500 bg-red-50 text-red-500 cursor-pointer"
+                      ? "border-secondary bg-red-50 text-secondary cursor-pointer"
                       : "border-gray-300 hover:border-gray-400 cursor-pointer"
                   }`}
                 >
@@ -265,7 +265,7 @@ const ProductDescription = React.memo(({ description }) => {
         }}
       />
       <a
-        className="seemore text-red-500 cursor-pointer text-center"
+        className="seemore text-secondary cursor-pointer text-center"
         onClick={() => setIsFullDescriptionVisible(!isFullDescriptionVisible)}
       >
         {isFullDescriptionVisible ? "Thu gọn" : "Xem thêm"}
@@ -563,7 +563,7 @@ export default function Detail({}) {
         </div>
         {/* Payment Sidebar */}
         <div>
-          <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+          <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar shadow-md">
             <PaymentComponent
               mpid={productId}
               spid={selectedSpid}

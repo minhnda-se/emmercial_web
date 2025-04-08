@@ -79,7 +79,7 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center w-[60%] gap-2">
-          <label className="input w-[90%] !px-5 bg-transparent">
+          <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,10 @@ const Header = () => {
         </div>
 
         <div className="flex gap-4 font-bold">
-          <Link to="/" className="flex items-center text-secondary ">
+          <Link
+            to="/"
+            className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3"
+          >
             <FontAwesomeIcon
               icon={faHouse}
               size="l"
@@ -129,18 +132,24 @@ const Header = () => {
             <p>Trang chủ</p>
           </Link>
           {isLoggedIn ? ( // Conditional rendering based on login status
-            <Link to={"/profile"} className="flex items-center">
+            <Link
+              to={"/profile"}
+              className="btn btn-ghost flex items-center hover:!no-underline !pr-3"
+            >
               <FontAwesomeIcon
                 icon={faUser}
                 size="l"
                 fixedWidth
                 color="black"
-                className="!p-2 rounded-full "
+                className="!p-2 rounded-full"
               />
               <p>Profile</p>
             </Link>
           ) : (
-            <Link to={"/login"} className="flex items-center">
+            <Link
+              to={"/login"}
+              className="btn btn-ghost flex items-center hover:!no-underline !pr-3"
+            >
               <FontAwesomeIcon
                 icon={faUser}
                 size="l"

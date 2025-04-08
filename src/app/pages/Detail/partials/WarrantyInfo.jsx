@@ -33,7 +33,7 @@ const WarrantyInfo = ({ productData }) => {
                     }}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-red-400 flex items-center cursor-pointer"
+                    className="text-secondary flex items-center cursor-pointer"
                   >
                     {item.value}
                   </div>

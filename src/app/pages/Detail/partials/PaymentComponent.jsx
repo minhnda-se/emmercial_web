@@ -264,7 +264,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
             <img
               src={selectedVariant?.thumbnail_url || productData?.thumbnail_url}
               alt={productData?.name}
-              className="w-12 h-12 object-contain !mr-3 border rounded"
+              className="w-12 h-12 object-contain !mr-3 border border-gray-200 rounded"
             />
             <span className="font-medium">{optionsDisplay}</span>
           </div>
@@ -276,27 +276,27 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
           <div className="flex items-center">
             <button
               onClick={handleDecrement}
-              className="w-10 h-10 flex items-center justify-center border border-red-300 rounded-l-md cursor-pointer hover:bg-red-100"
+              className="w-10 h-10 flex items-center justify-center border border-secondary rounded-l-md cursor-pointer hover:bg-red-100"
               disabled={quantity <= 1}
             >
-              <MinusOutlined style={{ color: "red" }} />
+              <MinusOutlined className="!text-secondary" />
             </button>
             <input
               type="text"
               value={quantity}
               onChange={handleQuantityChange}
               onBlur={handleBlur}
-              className="w-16 h-10 border-t border-b border-red-300 text-center text-red-500 rounded-none focus:outline-none focus:border-red-500"
+              className="w-16 h-10 border-t border-b border-secondary text-center text-secondary rounded-none focus:outline-none focus:border-red-500"
             />
             <button
               onClick={handleIncrement}
-              className="w-10 h-10 flex items-center justify-center border border-red-300 rounded-r-md cursor-pointer hover:bg-red-100"
+              className="w-10 h-10 flex items-center justify-center border border-secondary rounded-r-md cursor-pointer hover:bg-red-100"
             >
-              <PlusOutlined style={{ color: "red" }} />
+              <PlusOutlined className="!text-secondary" />
             </button>
           </div>
           {quantity === 100 && (
-            <p className="text-xs text-red-500 !mt-1">Số lượng tối đa: 100</p>
+            <p className="text-xs text-secondary !mt-1">Số lượng tối đa: 100</p>
           )}
         </div>
 
@@ -311,19 +311,19 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
         {/* Action buttons */}
         <div className="flex flex-col gap-3">
           <button
-            className="w-full bg-red-400 hover:bg-red-600 text-white !py-3 rounded-md font-medium"
+            className="w-full bg-secondary hover:bg-red-600 text-white !py-3 rounded-md font-medium"
             onClick={handleBuyNow}
           >
             Mua ngay
           </button>
           <button
-            className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium"
+            className="w-full border border-red-400 text-secondary hover:bg-red-50 hover:text-red-500 !py-3 rounded-md font-medium"
             onClick={handleAddToCart}
           >
             Thêm vào giỏ
           </button>
           <button
-            className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium"
+            className="w-full border border-red-400 text-secondary hover:bg-red-50 hover:text-red-500 !py-3 rounded-md font-medium"
             onClick={handleBuyNow}
           >
             Mua trả góp - trả sau
