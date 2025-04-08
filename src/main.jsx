@@ -4,9 +4,10 @@ import "./index.css";
 import App from "./App.jsx";
 import "swiper/css";
 import "swiper/css/navigation";
+import { CartProvider } from "./app/components/CardContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <CartProvider>
     <App />
-  </StrictMode>
+  </CartProvider>
 );

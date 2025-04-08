@@ -1,80 +1,80 @@
 footer {
-    margin-top: 16px;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: normal;
-    color: rgb(128, 128, 137);
-    background-color: white;
-    /* width: 1406.67px; */
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: normal;
+  color: rgb(128, 128, 137);
+  background-color: white;
+  /* width: 1406.67px; */
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .information-container {
-    padding: 50px 0px;
+  padding: 50px 0px;
 }
 
 .information {
-    width: 93vw;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    display: flex;
-    justify-content: space-between;
+  width: 93vw;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .address-container {
-    padding: 50px 0px;
-    background-color: rgb(255, 255, 255);
+  padding: 50px 0px;
+  background-color: rgb(255, 255, 255);
 }
 
 .address {
-    width: 93vw;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
+  width: 93vw;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
 
 .categories-container {
-    width: 93vw;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 93vw;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .brand-list {
-    padding: 16px 0px 0px;
+  padding: 16px 0px 0px;
 }
 
 .brands {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .brands a {
-    color: rgb(128, 128, 137);
+  color: rgb(128, 128, 137);
 }
 
 .categories {
-    padding: 16px 0px 0px;
+  padding: 16px 0px 0px;
 }
 
 .block {
-    width: 226px;
+  width: 226px;
 }
 
 .footer-heading {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
-    color: rgb(56, 56, 61);
-    margin-bottom: 12px;
-    margin-top: 0px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgb(56, 56, 61);
+  margin-bottom: 12px;
+  margin-top: 0px;
 }
 
 /* .flex {
@@ -86,65 +86,61 @@ a:hover {
 } */
 
 .security {
-    margin-bottom: 8px;
-    color: rgb(128, 128, 137);
-    font-size: 12px;
-    font-weight: 400;
+  margin-bottom: 8px;
+  color: rgb(128, 128, 137);
+  font-size: 12px;
+  font-weight: 400;
 }
 
-
-
 .icon {
-    display: inline-block;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    vertical-align: middle;
-    width: 32px;
-    height: 32px;
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
 }
 
 .seperator {
-    /* content: " "; */
-    height: 1px;
-    background-color: rgb(235, 235, 240);
-    width: 1240px;
-    margin-right: auto;
-    margin-left: auto;
+  /* content: " "; */
+  height: 1px;
+  background-color: rgb(235, 235, 240);
+  width: 1240px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-
 .columns {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 20px;
 }
 
 .category {
-    margin-bottom: 16px;
-
+  margin-bottom: 16px;
 }
 
 .category p {
-    font-size: 12px;
-    line-height: 16px;
-    color: rgb(128, 128, 137);
-    font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(128, 128, 137);
+  font-weight: normal;
 }
 
 .footer-sub-heading {
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    margin-top: 0px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-top: 0px;
 }
 
 .category a {
-    color: rgb(128, 128, 137);
+  color: rgb(128, 128, 137);
 }
 
 .small-text {
-    display: block;
-    margin-bottom: 8px;
-    color: rgb(128, 128, 137);
+  display: block;
+  margin-bottom: 8px;
+  color: rgb(128, 128, 137);
 }

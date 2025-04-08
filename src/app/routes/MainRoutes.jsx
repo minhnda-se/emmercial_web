@@ -13,6 +13,7 @@ import Search from "../pages/Search/Search";
 import ProductReviews from "../pages/Detail/partials/ProductReviews";
 import Cart from "../pages/Cart";
 import ScrollToTop from "../components/ScrollToTop";
+import Category from "../pages/Category/Category";
 
 const MainRoutes = () => {
   const ScrollToTop = () => {
@@ -43,6 +44,7 @@ const MainRoutes = () => {
           element={<ProductReviews productId="272126105" spid="272126106" />}
         />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/category/:name" element={<Category />} />
       </Routes>
       <Footer />
     </BrowserRouter>
