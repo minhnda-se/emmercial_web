@@ -12,6 +12,7 @@ import InstallmentServices from "./partials/InstallmentServices";
 import WarrantyInfo from "./partials/WarrantyInfo";
 import ShoppingBenefits from "./partials/ShoppingBenefits";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { ProductSlide } from "../Home/partials/ProductSlide";
 
 // Configurable Options component with memoization
 const ConfigurableOptions = React.memo(
@@ -293,8 +294,33 @@ const fetchVariantData = async (productId, spid) => {
   }
 };
 
+// New function to fetch personal recommendations data
+const fetchPersonalRecommendations = async (mpid, spid) => {
+  try {
+    // Generate a consistent trackity_id or use a passed one
+    // In a real app, you might want to store this in localStorage or get from props
+    const trackity_id = "3c2d2eaa-ec0e-527a-3444-2c04e0050144";
+
+    const apiUrl = `https://tiki.vn/api/personalish/v2/pdp?strategy=new_pdp&mpid=${mpid}&spid=${spid}&trackity_id=${trackity_id}`;
+
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch personalized recommendations");
+    }
+    const data = await response.json();
+    return data.widgets.filter((item) => item.code === "similar_products");
+    // Filter out the current product from recommendations
+  } catch (err) {
+    console.error("Error fetching personalized recommendations:", err);
+    return null; // Return null instead of throwing so the UI doesn't crash if this fails
+  }
+};
+
 // Cache for variant data
 const variantCache = new Map();
+// Cache for personalized recommendations
+const recommendationsCache = new Map();
 
 export default function Detail({}) {
   const [searchParams] = useSearchParams(); // Get query parameters
@@ -311,12 +337,16 @@ export default function Detail({}) {
   const [error, setError] = useState(null);
   const [selectedSpid, setSelectedSpid] = useState(spid);
   const [variantsData, setVariantsData] = useState({});
+  // New state for recommendations
+  const [personalRecommendations, setPersonalRecommendations] = useState(null);
 
   // Fetch initial product data - only run once
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
         setIsLoading(true);
+
+        // Fetch product data
         const data = await fetchVariantData(productId, spid);
         setProductData(data);
 
@@ -354,6 +384,9 @@ export default function Detail({}) {
           }
         }
         setSelectedSpid(initialSpid);
+
+        // Now that we have the correct initialSpid, fetch recommendations
+        await fetchRecommendations(productId, initialSpid);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -363,6 +396,41 @@ export default function Detail({}) {
 
     fetchInitialData();
   }, [productId, spid]); // Only depend on initial props
+
+  // Function to fetch recommendations with caching
+  const fetchRecommendations = useCallback(async (mpid, spid) => {
+    const cacheKey = `${mpid}-${spid}`;
+
+    // Check if we have cached data
+    if (recommendationsCache.has(cacheKey)) {
+      setPersonalRecommendations(recommendationsCache.get(cacheKey));
+      return;
+    }
+
+    try {
+      const recommendationsData = await fetchPersonalRecommendations(
+        mpid,
+        spid
+      );
+
+      if (recommendationsData) {
+        // Cache the results
+        recommendationsCache.set(cacheKey, recommendationsData);
+        // Update state
+        setPersonalRecommendations(recommendationsData);
+      }
+    } catch (error) {
+      console.error("Failed to fetch recommendations:", error);
+      // Don't update state on error - keep previous recommendations if any
+    }
+  }, []);
+
+  // Update recommendations when variant changes
+  useEffect(() => {
+    if (productId && selectedSpid) {
+      fetchRecommendations(productId, selectedSpid);
+    }
+  }, [productId, selectedSpid, fetchRecommendations]);
 
   // Pre-fetch all variants data in the background after initial load
   useEffect(() => {
@@ -393,6 +461,18 @@ export default function Detail({}) {
           // Update cache and state
           variantCache.set(variantSpid, data);
           setVariantsData((prev) => ({ ...prev, [variantSpid]: data }));
+
+          // Also prefetch recommendations for this variant
+          const cacheKey = `${productId}-${variantSpid}`;
+          if (!recommendationsCache.has(cacheKey)) {
+            const recData = await fetchPersonalRecommendations(
+              productId,
+              variantSpid
+            );
+            if (recData) {
+              recommendationsCache.set(cacheKey, recData);
+            }
+          }
         } catch (error) {
           console.error(`Failed to prefetch variant ${variantSpid}:`, error);
           // Continue with other variants even if one fails
@@ -403,7 +483,7 @@ export default function Detail({}) {
     if (!isLoading && productData) {
       prefetchVariants();
     }
-  }, [isLoading, productData, productId, selectedSpid]);
+  }, [isLoading, productData, productId, selectedSpid, fetchRecommendations]);
 
   // This is the handler for variant selection - optimized to avoid ANY loading
   const handleVariantSelect = useCallback(
@@ -456,11 +536,19 @@ export default function Detail({}) {
             [optionSpid]: newVariantData,
           }));
         }
+
+        // Update recommendations for the new variant (either from cache or fetch new)
+        const cacheKey = `${productId}-${optionSpid}`;
+        if (recommendationsCache.has(cacheKey)) {
+          setPersonalRecommendations(recommendationsCache.get(cacheKey));
+        } else {
+          fetchRecommendations(productId, optionSpid);
+        }
       } catch (err) {
         setError(err.message);
       }
     },
-    [productId, productData, selectedSpid]
+    [productId, productData, selectedSpid, fetchRecommendations]
   );
 
   // Get the current variant data to display
@@ -476,6 +564,9 @@ export default function Detail({}) {
   }
 
   console.log("current", currentVariantData);
+  // You can also log recommendations data if needed
+  // console.log("recommendations", personalRecommendations);
+
   return (
     <>
       {/* Floating buttons for Message and Support */}
@@ -547,6 +638,7 @@ export default function Detail({}) {
                 <></>
               )}
 
+              {/* Shopping Benefits component */}
               <div className="bg-white rounded-lg shadow-md !px-3 !py-5 flex flex-col justify-around !gap-4">
                 <ShoppingBenefits productData={currentVariantData} />
               </div>
@@ -570,6 +662,16 @@ export default function Detail({}) {
               productData={currentVariantData}
             />
           </div>
+        </div>
+      </div>
+      {/* San pham tuong tu - có thể hiển thị từ personalRecommendations */}
+      {console.log("fssdfsdfsfsdd", personalRecommendations?.[0])}
+      <div className="w-full">
+        <div className="bg-white rounded-lg shadow-md !px-4 !py-5 flex flex-col justify-around !gap-4 !m-auto !mt-8 w-[90vw] ">
+          <h3 className="font-bold text-lg">
+            {personalRecommendations?.[0]?.title}
+          </h3>
+          <ProductSlide data={personalRecommendations?.[0]} />
         </div>
       </div>
     </>
