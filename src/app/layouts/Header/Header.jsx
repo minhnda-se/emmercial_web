@@ -126,7 +126,7 @@ const Header = () => {
         <div className="flex gap-4 font-bold">
           <Link
             to="/"
-            className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3"
+            className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3 font-bold text-[20px]"
           >
             <FontAwesomeIcon
               icon={faHouse}
@@ -140,7 +140,7 @@ const Header = () => {
           {isLoggedIn ? ( // Conditional rendering based on login status
             <Link
               to={"/profile"}
-              className="btn btn-ghost flex items-center hover:!no-underline !pr-3"
+              className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
             >
               <FontAwesomeIcon
                 icon={faUser}
@@ -154,7 +154,7 @@ const Header = () => {
           ) : (
             <Link
               to={"/login"}
-              className="btn btn-ghost flex items-center hover:!no-underline !pr-3"
+              className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
             >
               <FontAwesomeIcon
                 icon={faUser}
@@ -171,7 +171,7 @@ const Header = () => {
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
