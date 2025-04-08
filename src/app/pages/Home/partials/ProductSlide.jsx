@@ -102,7 +102,7 @@ export const ProductSlide = ({ data }) => {
                     )}
                   </div>
                   <hr className="border-base-200 border-1" />
-                  <div className="flex justify-center items-center gap-1">
+                  <div className="flex justify-center items-center gap-1 h-4">
                     <div
                       className="rounded"
                       style={{

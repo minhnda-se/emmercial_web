@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { getIdFromUrl } from "../usecases/GetIdFromUrl";
+import { getUrlKey } from "../usecases/GetUrlKey";
 
 export const SideBar = (props) => {
   const categories = props.categories.menu_block;
   const benifits = props.categories.highlight_block;
   const nav = useNavigate();
   const handleCategoryClick = (text, url) => {
-    nav(`/category/${text}?cid=${getIdFromUrl(url)}`);
+    nav(`/category/${getUrlKey(url)}/${getIdFromUrl(url)}`);
   };
   return (
     <>
