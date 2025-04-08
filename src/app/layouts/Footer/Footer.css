@@ -27,7 +27,7 @@ a:hover {
 }
 
 .address-container {
-  padding: 16px 0px;
+  padding: 50px 0px;
   background-color: rgb(255, 255, 255);
 }
 
@@ -37,6 +37,7 @@ a:hover {
   padding-right: 15px;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
 }
 
 .categories-container {

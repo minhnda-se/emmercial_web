@@ -160,110 +160,110 @@ const Footer = () => {
           <div className="block" style={{ width: "268px" }}>
             <h4 className="footer-heading">Hỗ trợ khách hàng</h4>
             <p style={{ marginBottom: "8px" }}>
-              <span>Hotline: </span>
-              <a
-                href="tel:1900-6035"
-                style={{ color: "rgb(56, 56, 61)", fontWeight: 500 }}
-              >
-                1900-6035
-              </a>
+              <div className="flex items-center gap-0.5">
+                <span>Hotline: </span>
+                <div
+                  className="cursor-pointer hover:underline"
+                  style={{ color: "rgb(56, 56, 61)", fontWeight: 500 }}
+                >
+                  19xx-xxxx
+                </div>
+              </div>
+
               <span className="small-text">
                 (1000 đ/phút, 8-21h kể cả T7, CN)
               </span>
             </p>
-            <a href="#cau-hoi-thuong-gap" className="small-text">
+            <div className="small-text cursor-pointer hover:underline">
               Các câu hỏi thường gặp
-            </a>
-            <a href="#gui-yeu-cau-ho-tro" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Gửi yêu cầu hỗ trợ
-            </a>
-            <a href="#huong-dan-dat-hang" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Hướng dẫn đặt hàng
-            </a>
-            <a href="#phuong-thuc-van-chuyen" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Phương thức vận chuyển
-            </a>
-            <a href="#chinh-sach-kiem-hang" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách kiểm hàng
-            </a>
-            <a href="#chinh-sach-doi-tra" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách đổi trả
-            </a>
-            <a href="#huong-dan-tra-gop" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Hướng dẫn trả góp
-            </a>
-            <a href="#chinh-sach-hang-nhap-khau" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách hàng nhập khẩu
-            </a>
-            <p className="security">
-              Hỗ trợ khách hàng:{" "}
-              <a
-                href="#mailto:hotro@MAVT.vn"
+            </div>
+            <p className="security flex items-center gap-0.5">
+              Hỗ trợ khách hàng:
+              <div
+                className="cursor-pointer hover:underline"
                 style={{ color: "rgb(128, 128, 137)" }}
               >
                 hotro@mavt.vn
-              </a>
+              </div>
             </p>
-            <p className="security" style={{ marginBottom: "0px" }}>
-              Báo lỗi bảo mật:{" "}
-              <a
-                href="#mailto:security@MAVT.vn"
+            <p className="security flex items-center gap-0.5">
+              Báo lỗi bảo mật:
+              <div
+                className="cursor-pointer hover:underline"
                 style={{ color: "rgb(128, 128, 137)" }}
               >
                 security@mavt.vn
-              </a>
+              </div>
             </p>
           </div>
 
           <div className="block">
             <h4 className="footer-heading">Về MAVT</h4>
-            <a href="#gioi-thieu" className="small-text">
+            <div className="small-text cursor-pointer hover:underline">
               Giới thiệu MAVT
-            </a>
-            <a href="#MAVT-blog" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               MAVT Blog
-            </a>
-            <a href="#tuyen-dung" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Tuyển dụng
-            </a>
-            <a href="#chinh-sach-bao-mat-thanh-toan" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách bảo mật thanh toán
-            </a>
-            <a
-              href="#chinh-sach-bao-mat-thong-tin-ca-nhan"
-              className="small-text"
-            >
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách bảo mật thông tin cá nhân
-            </a>
-            <a href="#chinh-sach-giai-quyet-khieu-nai" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Chính sách giải quyết khiếu nại
-            </a>
-            <a href="#dieu-khoan-su-dung" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Điều khoản sử dụng
-            </a>
-            <a href="#gioi-thieu-MAVT-xu" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Giới thiệu MAVT Xu
-            </a>
-            <a href="#tiep-thi-lien-ket-cung-MAVT" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Tiếp thị liên kết cùng MAVT
-            </a>
-            <a href="#ban-hang-doanh-nghiep" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Bán hàng doanh nghiệp
-            </a>
-            <a href="#dieu-kien-van-chuyen" className="small-text">
+            </div>
+            <div className="small-text cursor-pointer hover:underline">
               Điều kiện vận chuyển
-            </a>
+            </div>
           </div>
 
           <div className="block">
             <div>
               <h4 className="footer-heading">Hợp tác và liên kết</h4>
-              <a href="#quy-che-hoat-dong-san-gdtmdt" className="small-text">
+              <div className="small-text cursor-pointer hover:underline">
                 Quy chế hoạt động Sàn GDTMĐT
-              </a>
-              <a href="#ban-hang-cung-MAVT" className="small-text">
+              </div>
+              <div className="small-text cursor-pointer hover:underline">
                 Bán hàng cùng MAVT
-              </a>
+              </div>
             </div>
             <h4 style={{ marginTop: "24px" }} class="footer-heading">
               Chứng nhận bởi
@@ -969,9 +969,11 @@ const Footer = () => {
             Giấy chứng nhận đăng ký doanh nghiệp số 0309xxxxxx do Sở Kế Hoạch và
             Đầu Tư Thành phố Hồ Chí Minh cấp lần đầu vào ngày xx/xx/20xx.
           </p>
-          <p className="small-text" style={{ marginBottom: "0px" }}>
+          <p className="flex gap-0.5 justify-center">
             <span>Hotline: </span>
-            <a href="tel:+1900-6035">1900 6035</a>
+            <div className="small-text cursor-pointer hover:underline">
+              19xx xxxx
+            </div>
           </p>
         </div>
       </div>
@@ -982,36 +984,125 @@ const Footer = () => {
           <div className="footer-heading">Thương Hiệu Nổi Bật</div>
           <div className="brands">
             <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
-              <a href="#vascara">vascara</a>&nbsp;/&nbsp;
-              <a href="#dior">dior</a>&nbsp;/&nbsp;
-              <a href="#esteelauder">estée lauder</a>&nbsp;/&nbsp;
-              <a href="#thtruemilk">th truemilk</a>&nbsp;/&nbsp;
-              <a href="#barbie">barbie</a>&nbsp;/&nbsp;
-              <a href="#owen">owen</a>&nbsp;/&nbsp;
-              <a href="#ensure">ensure</a>&nbsp;/&nbsp;
-              <a href="#durex">durex</a>&nbsp;/&nbsp;
-              <a href="#bioderma">bioderma</a>&nbsp;/&nbsp;
-              <a href="#elly">elly</a>&nbsp;/&nbsp;
-              <a href="#milo">milo</a>&nbsp;/&nbsp;
-              <a href="#skechers">skechers</a>&nbsp;/&nbsp;
-              <a href="#aldo">aldo</a>&nbsp;/&nbsp;
-              <a href="#triumph">triumph</a>&nbsp;/&nbsp;
-              <a href="#nutifood">nutifood</a>&nbsp;/&nbsp;
-              <a href="#kindle">kindle</a>&nbsp;/&nbsp;
-              <a href="#nerman">nerman</a>&nbsp;/&nbsp;
-              <a href="#wacom">wacom</a>&nbsp;/&nbsp;
-              <a href="#anessa">anessa</a>&nbsp;/&nbsp;
-              <a href="#yoosee">yoosee</a>&nbsp;/&nbsp;
-              <a href="#olay">olay</a>&nbsp;/&nbsp;
-              <a href="#similac">similac</a>&nbsp;/&nbsp;
-              <a href="#comfort">comfort</a>&nbsp;/&nbsp;
-              <a href="#bitas">bitas</a>&nbsp;/&nbsp;
-              <a href="#shiseido">shiseido</a>&nbsp;/&nbsp;
-              <a href="#langfarm">langfarm</a>&nbsp;/&nbsp;
-              <a href="#hukan">hukan</a>&nbsp;/&nbsp;
-              <a href="#vichy">vichy</a>&nbsp;/&nbsp;
-              <a href="#fila">fila</a>&nbsp;/&nbsp;
-              <a href="#tsubaki">tsubaki</a>
+              <div className="small-text cursor-pointer hover:underline">
+                vascara
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                dior
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                estée lauder
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                th truemilk
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                barbie
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                owen
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                ensure
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                durex
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                bioderma
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                elly
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                milo
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                skechers
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                aldo
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                triumph
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                nutifood
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                kindle
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                nerman
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                wacom
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                anessa
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                yoosee
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                olay
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                similac
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                comfort
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                bitas
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                shiseido
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                langfarm
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                hukan
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                vichy
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                fila
+              </div>
+              &nbsp;/&nbsp;
+              <div className="small-text cursor-pointer hover:underline">
+                tsubaki
+              </div>
             </p>
           </div>
         </div>
@@ -1024,316 +1115,644 @@ const Footer = () => {
             <div className="column">
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#do-choi-me-be">Đồ Chơi - Mẹ & Bé</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ Chơi - Mẹ & Bé
+                  </div>
                 </div>
-                <p>
-                  <a href="#thoi-trang-me-be">Thời Trang Cho Mẹ Và Bé</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thời Trang Cho Mẹ Và Bé
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-choi">Đồ chơi</a>&nbsp;/&nbsp;
-                  <a href="#do-dung-be">Đồ dùng cho bé</a>&nbsp;/&nbsp;
-                  <a href="#cham-soc-nha-cua">Chăm sóc nhà cửa</a>&nbsp;/&nbsp;
-                  <a href="#cham-soc-me-mang-thai">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ chơi
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ dùng cho bé
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc nhà cửa
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Chăm sóc mẹ mang thai, sau sinh
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dinh-duong-be">Dinh dưỡng cho bé</a>&nbsp;/&nbsp;
-                  <a href="#ta-bim">Tã, Bỉm</a>&nbsp;/&nbsp;
-                  <a href="#dinh-duong-nguoi-lon">Dinh dưỡng cho người lớn</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dinh dưỡng cho bé
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dinh-duong-me">Dinh dưỡng cho mẹ</a>&nbsp;/&nbsp;
-                  <a href="#thuc-pham-an-dam">Thực phẩm ăn dặm</a>&nbsp;/&nbsp;
-                  <a href="#chuan-bi-mang-thai">Chuẩn bị mang thai</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Tã, Bỉm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dinh dưỡng cho người lớn
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dinh dưỡng cho mẹ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thực phẩm ăn dặm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chuẩn bị mang thai
+                  </div>
                 </p>
               </div>
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#thuc-pham-tuoi-song">Thực Phẩm Tươi Sống</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thực Phẩm Tươi Sống
+                  </div>
                 </div>
-                <p>
-                  <a href="#trai-cay">Trái Cây</a>&nbsp;/&nbsp;
-                  <a href="#thit-trung">Thịt, Trứng</a>&nbsp;/&nbsp;
-                  <a href="#ca-thuy-hai-san">Cá, thuỷ hải sản</a>&nbsp;/&nbsp;
-                  <a href="#rau-cu-qua">Rau củ quả</a>&nbsp;/&nbsp;
-                  <a href="#thuc-pham-viet">Thực phẩm Việt</a>&nbsp;/&nbsp;
-                  <a href="#sua-bo-pho-mai">Sữa, bơ, phô mai</a>&nbsp;/&nbsp;
-                  <a href="#dong-lanh-mat">Đông lạnh, mát</a>&nbsp;/&nbsp;
-                  <a href="#dau-an-gia-vi">Dầu ăn, gia vị</a>&nbsp;/&nbsp;
-                  <a href="#gao-mi-nong-san">Gạo, mì, nông sản</a>&nbsp;/&nbsp;
-                  <a href="#do-hop-dong-goi">Đồ hộp, đóng gói</a>&nbsp;/&nbsp;
-                  <a href="#bia-do-uong">Bia, đồ uống</a>&nbsp;/&nbsp;
-                  <a href="#thuc-pham-chay">Thực phẩm chay</a>&nbsp;/&nbsp;
-                  <a href="#danh-cho-tre-em">Dành cho trẻ em</a>&nbsp;/&nbsp;
-                  <a href="#banh-keo-gio-qua">Bánh kẹo, giỏ quà</a>&nbsp;/&nbsp;
-                  <a href="#thuc-an-do-thu-cung">Thức ăn, đồ thú cưng</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trái Cây
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cham-soc-ca-nhan">Chăm sóc cá nhân</a>&nbsp;/&nbsp;
-                  <a href="#cham-soc-nha-cua">Chăm sóc nhà cửa</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thịt, Trứng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Cá, thuỷ hải sản
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Rau củ quả
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thực phẩm Việt
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Sữa, bơ, phô mai
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đông lạnh, mát
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dầu ăn, gia vị
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Gạo, mì, nông sản
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ hộp, đóng gói
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Bia, đồ uống
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thực phẩm chay
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dành cho trẻ em
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Bánh kẹo, giỏ quà
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thức ăn, đồ thú cưng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc cá nhân
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc nhà cửa
+                  </div>
                 </p>
               </div>
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#dien-thoai-may-tinh-bang">
+                  <div className="small-text cursor-pointer hover:underline">
                     Điện Thoại - Máy Tính Bảng
-                  </a>
+                  </div>
                 </div>
-                <p>
-                  <a href="#dien-thoai-smartphone">Điện thoại Smartphone</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện thoại Smartphone
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dien-thoai-ban">Điện thoại bàn</a>&nbsp;/&nbsp;
-                  <a href="#dien-thoai-pho-thong">Điện thoại phổ thông</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện thoại bàn
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-doc-sach">Máy đọc sách</a>&nbsp;/&nbsp;
-                  <a href="#may-tinh-bang">Máy tính bảng</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện thoại phổ thông
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy đọc sách
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy tính bảng
+                  </div>
                 </p>
               </div>
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#lam-dep-suc-khoe">Làm Đẹp - Sức Khỏe</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Làm Đẹp - Sức Khỏe
+                  </div>
                 </div>
-                <p>
-                  <a href="#cham-soc-da-mat">Chăm sóc da mặt</a>&nbsp;/&nbsp;
-                  <a href="#dung-cu-lam-dep">Dụng cụ làm đẹp</a>&nbsp;/&nbsp;
-                  <a href="#thuc-pham-chuc-nang">Thực phẩm chức năng</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc da mặt
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#trang-diem">Trang điểm</a>&nbsp;/&nbsp;
-                  <a href="#cham-soc-co-the">Chăm sóc cơ thể</a>&nbsp;/&nbsp;
-                  <a href="#may-massage-thiet-bi-cham-soc-suc-khoe">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dụng cụ làm đẹp
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thực phẩm chức năng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang điểm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc cơ thể
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Máy Massage & Thiết bị chăm sóc sức khỏe
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#san-pham-thien-nhien-khac">
+                  <div className="small-text cursor-pointer hover:underline">
                     Sản phẩm thiên nhiên & Khác
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cham-soc-toc-da-dau">Chăm sóc tóc và da đầu</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc tóc và da đầu
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cham-soc-ca-nhan">Chăm sóc cá nhân</a>&nbsp;/&nbsp;
-                  <a href="#nuoc-hoa">Nước hoa</a>&nbsp;/&nbsp;
-                  <a href="#ho-tro-tinh-duc">Hỗ trợ tình dục</a>&nbsp;/&nbsp;
-                  <a href="#bo-san-pham-lam-dep">Bộ sản phẩm làm đẹp</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc cá nhân
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#duoc-my-pham">Dược mỹ phẩm</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nước hoa
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Hỗ trợ tình dục
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Bộ sản phẩm làm đẹp
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dược mỹ phẩm
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#dien-gia-dung">Điện Gia Dụng</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện Gia Dụng
+                  </div>
                 </div>
-                <p>
-                  <a href="#do-dung-nha-bep">Đồ dùng nhà bếp</a>&nbsp;/&nbsp;
-                  <a href="#thiet-bi-gia-dinh">Thiết bị gia đình</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ dùng nhà bếp
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thiết bị gia đình
+                  </div>
                 </p>
               </div>
             </div>
             <div className="column">
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#thoi-trang-nu">Thời trang nữ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thời trang nữ
+                  </div>
                 </div>
-                <p>
-                  <a href="#ao-nu">Áo nữ</a>&nbsp;/&nbsp;
-                  <a href="#dam-nu">Đầm nữ</a>&nbsp;/&nbsp;
-                  <a href="#quan-nu">Quần nữ</a>&nbsp;/&nbsp;
-                  <a href="#ao-lien-quan-bo-trang-phuc">
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đầm nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Quần nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Áo liền quần - Bộ trang phục
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ao-khoac-nu">Áo khoác nữ</a>&nbsp;/&nbsp;
-                  <a href="#do-ngu-do-mac-nha-nu">Đồ ngủ - Đồ mặc nhà nữ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo khoác nữ
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#chan-vay">Chân váy</a>&nbsp;/&nbsp;
-                  <a href="#trang-phuc-boi-nu">Trang phục bơi nữ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ ngủ - Đồ mặc nhà nữ
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thoi-trang-bau-sau-sinh">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chân váy
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang phục bơi nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Thời trang bầu và sau sinh
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thoi-trang-trung-nien">Thời trang trung niên</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thời trang trung niên
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#thoi-trang-nam">Thời trang nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thời trang nam
+                  </div>
                 </div>
-                <p>
-                  <a href="#ao-thun-nam">Áo thun nam</a>&nbsp;/&nbsp;
-                  <a href="#quan-nam">Quần nam</a>&nbsp;/&nbsp;
-                  <a href="#ao-vest-ao-khoac-nam">Áo vest - Áo khoác nam</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo thun nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ao-so-mi-nam">Áo sơ mi nam</a>&nbsp;/&nbsp;
-                  <a href="#do-lot-nam">Đồ lót nam</a>&nbsp;/&nbsp;
-                  <a href="#ao-hoodie-nam">Áo hoodie nam</a>&nbsp;/&nbsp;
-                  <a href="#do-ngu-do-mac-nha-nam">Đồ ngủ, đồ mặc nhà nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Quần nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-doi-do-gia-dinh-nam">Đồ đôi - Đồ gia đình nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo vest - Áo khoác nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ao-ni-ao-len-nam">Áo nỉ - Áo len nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo sơ mi nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-boi-do-di-bien-nam">Đồ bơi - Đồ đi biển nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ lót nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#quan-ao-nam-trung-nien">Quần áo nam trung niên</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo hoodie nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#quan-ao-nam-kich-co-lon">Quần áo nam kích cỡ lớn</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ ngủ, đồ mặc nhà nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ đôi - Đồ gia đình nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Áo nỉ - Áo len nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ bơi - Đồ đi biển nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Quần áo nam trung niên
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Quần áo nam kích cỡ lớn
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#giay-dep-nu">Giày - Dép nữ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày - Dép nữ
+                  </div>
                 </div>
-                <p>
-                  <a href="#giay-cao-got">Giày cao gót</a>&nbsp;/&nbsp;
-                  <a href="#dep-guoc-nu">Dép - Guốc nữ</a>&nbsp;/&nbsp;
-                  <a href="#giay-the-thao-nu">Giày thể thao nữ</a>&nbsp;/&nbsp;
-                  <a href="#giay-sandals-nu">Giày sandals nữ</a>&nbsp;/&nbsp;
-                  <a href="#giay-bup-be">Giày búp bê</a>&nbsp;/&nbsp;
-                  <a href="#giay-boots-nu">Giày boots nữ</a>&nbsp;/&nbsp;
-                  <a href="#giay-luoi-nu">Giày lười nữ</a>&nbsp;/&nbsp;
-                  <a href="#phu-kien-giay">Phụ kiện giày</a>&nbsp;/&nbsp;
-                  <a href="#giay-de-xuong-nu">Giày Đế xuồng nữ</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày cao gót
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dép - Guốc nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày thể thao nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày sandals nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày búp bê
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày boots nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày lười nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện giày
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày Đế xuồng nữ
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#giay-dep-nam">Giày - Dép nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày - Dép nam
+                  </div>
                 </div>
-                <p>
-                  <a href="#giay-luoi-nam">Giày lười nam</a>&nbsp;/&nbsp;
-                  <a href="#giay-tay-nam">Giày tây nam</a>&nbsp;/&nbsp;
-                  <a href="#giay-the-thao-nam">Giày thể thao nam</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày lười nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dep-nam">Dép nam</a>&nbsp;/&nbsp;
-                  <a href="#giay-sandals-nam">Giày sandals nam</a>&nbsp;/&nbsp;
-                  <a href="#phu-kien-giay-nam">Phụ kiện giày nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày tây nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#giay-boots-nam">Giày boots nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày thể thao nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dép nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày sandals nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện giày nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày boots nam
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#tui-thoi-trang-nu">Túi thời trang nữ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi thời trang nữ
+                  </div>
                 </div>
-                <p>
-                  <a href="#tui-deo-cheo-deo-vai-nu">
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
                     Túi đeo chéo, túi đeo vai nữ
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#vi-nu">Ví nữ</a>&nbsp;/&nbsp;
-                  <a href="#tui">Túi xách tay nữ</a>&nbsp;/&nbsp;
-                  <a>Túi tote nữ</a>&nbsp;/&nbsp;
-                  <a>Phụ kiện túi</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ví nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi xách tay nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi tote nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện túi
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#tui-thoi-trang-nam">Túi thời trang nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi thời trang nam
+                  </div>
                 </div>
-                <p>
-                  <a href="#vi-nam">Ví nam</a>&nbsp;/&nbsp;
-                  <a href="#tui-deo-cheo-nam">Túi đeo chéo nam</a>&nbsp;/&nbsp;
-                  <a href="#tui-xach-cong-so-nam">Túi xách công sở nam</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ví nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#tui-bao-tu-tui-deo-bung">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi đeo chéo nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi xách công sở nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Túi bao tử, túi đeo bụng
-                  </a>
+                  </div>
                 </p>
               </div>
             </div>
             <div className="column">
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#balo-va-vali">Balo và Vali</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Balo và Vali
+                  </div>
                 </div>
-                <p>
-                  <a href="#balo">Balo</a>&nbsp;/&nbsp;
-                  <a href="#tui-du-lich-phu-kien">Túi du lịch và phụ kiện</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Balo
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#balo-cap-tui-chong-soc-laptop">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Túi du lịch và phụ kiện
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Balo, cặp, túi chống sốc laptop
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#vali-phu-kien-vali">Vali, phụ kiện vali</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Vali, phụ kiện vali
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#phu-kien-thoi-trang">Phụ kiện thời trang</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện thời trang
+                  </div>
                 </div>
-                <p>
-                  <a href="#phu-kien-thoi-trang-nu">Phụ kiện thời trang nữ</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện thời trang nữ
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#mat-kinh">Mắt kính</a>&nbsp;/&nbsp;
-                  <a href="#phu-kien-thoi-trang-nam">Phụ kiện thời trang nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Mắt kính
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện thời trang nam
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#dong-ho-trang-suc">Đồng hồ và Trang sức</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồng hồ và Trang sức
+                  </div>
                 </div>
-                <p>
-                  <a href="#trang-suc">Trang sức</a>&nbsp;/&nbsp;
-                  <a href="#dong-ho-nu">Đồng hồ nữ</a>&nbsp;/&nbsp;
-                  <a href="#dong-ho-nam">Đồng hồ nam</a>&nbsp;/&nbsp;
-                  <a href="#phu-kien-dong-ho">Phụ kiện đồng hồ</a>&nbsp;/&nbsp;
-                  <a href="#dong-ho-tre-em">Đồng hồ trẻ em</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang sức
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồng hồ nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồng hồ nam
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện đồng hồ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồng hồ trẻ em
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#laptop-may-vi-tinh-linh-kien">
+                  <div className="small-text cursor-pointer hover:underline">
                     Laptop - Máy Vi Tính - Linh kiện
-                  </a>
+                  </div>
                 </div>
-                <p>
-                  <a href="#linh-kien-may-tinh-phu-kien-may-tinh">
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
                     Linh Kiện Máy Tính - Phụ Kiện Máy Tính
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-van-phong-thiet-bi-ngoai-vi">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Văn Phòng - Thiết Bị Ngoại Vi
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-mang">Thiết Bị Mạng</a>&nbsp;/&nbsp;
-                  <a href="#thiet-bi-luu-tru">Thiết Bị Lưu Trữ</a>&nbsp;/&nbsp;
-                  <a href="#pc-may-tinh-bo">PC - Máy Tính Bộ</a>&nbsp;/&nbsp;
-                  <a href="#laptop">Laptop</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thiết Bị Mạng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thiết Bị Lưu Trữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    PC - Máy Tính Bộ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Laptop
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#nha-cua-doi-song">Nhà Cửa - Đời Sống</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nhà Cửa - Đời Sống
+                  </div>
                 </div>
-                <p>
-                  <a href="#trang-tri-nha-cua">Trang trí nhà cửa</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang trí nhà cửa
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dung-cu-nha-bep">Dụng cụ nhà bếp</a>&nbsp;/&nbsp;
-                  <a href="#sua-chua-nha-cua">Sửa chữa nhà cửa</a>&nbsp;/&nbsp;
-                  <a href="#ngoai-troi-san-vuon">Ngoài trời & sân vườn</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dụng cụ nhà bếp
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#noi-that">Nội thất</a>&nbsp;/&nbsp;
-                  <a href="#den-thiet-bi-chieu-sang">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Sửa chữa nhà cửa
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ngoài trời & sân vườn
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nội thất
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Đèn & thiết bị chiếu sáng
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-dung-thiet-bi-nha-tam">
+                  <div className="small-text cursor-pointer hover:underline">
                     Đồ dùng và thiết bị nhà tắm
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-dung-phong-an">Đồ dùng phòng ăn</a>&nbsp;/&nbsp;
-                  <a href="#do-dung-phong-ngu">Đồ dùng phòng ngủ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ dùng phòng ăn
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-tho-cung">Đồ thờ cúng</a>&nbsp;/&nbsp;
-                  <a href="#nhac-cu">Nhạc cụ</a>&nbsp;/&nbsp;
-                  <a href="#hoa-tuoi-cay-canh">Hoa tươi và cây cảnh</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ dùng phòng ngủ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ thờ cúng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nhạc cụ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Hoa tươi và cây cảnh
+                  </div>
                 </p>
               </div>
 
@@ -1341,289 +1760,495 @@ const Footer = () => {
                 <div className="footer-sub-heading">
                   <a href="#bach-hoa-online">Bách Hóa Online</a>
                 </div>
-                <p>
-                  <a href="#cham-soc-thu-cung">Chăm sóc thú cưng</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Chăm sóc thú cưng
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-uong-pha-che-dang-bot">
+                  <div className="small-text cursor-pointer hover:underline">
                     Đồ uống - Pha chế dạng bột
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thuc-pham-dong-hop-kho">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thực phẩm Đóng hộp và Khô
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#gia-vi-che-bien">Gia Vị và Chế Biến</a>&nbsp;/&nbsp;
-                  <a href="#dau-hat-cac-loai">Đậu & Hạt Các Loại</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Gia Vị và Chế Biến
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-an-vat">Đồ Ăn Vặt</a>&nbsp;/&nbsp;
-                  <a href="#sua-sua-sua">Sữa và các Sản phẩm từ sữa</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đậu & Hạt Các Loại
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-uong-khong-con">Đồ Uống Không Cồn</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ Ăn Vặt
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-uong-co-con">Đồ uống có cồn</a>&nbsp;/&nbsp;
-                  <a href="#bo-qua-tang">Bộ quà tặng</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Sữa và các Sản phẩm từ sữa
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ Uống Không Cồn
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ uống có cồn
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Bộ quà tặng
+                  </div>
                 </p>
               </div>
             </div>
             <div className="column">
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#hang-quoc-te">Hàng Quốc Tế</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Hàng Quốc Tế
+                  </div>
                 </div>
-                <p>
-                  <a href="#nha-cua-doi-song">Nhà Cửa - Đời Sống</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nhà Cửa - Đời Sống
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thoi-trang">Thời Trang</a>&nbsp;/&nbsp;
-                  <a href="#o-to-xe-may-xe-dap">Ô tô, xe máy, xe đạp</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thời Trang
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-so-phu-kien-so">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ô tô, xe máy, xe đạp
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Số - Phụ Kiện Số
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#the-thao-da-ngoai">Thể thao - Dã ngoại</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thể thao - Dã ngoại
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#lam-dep-suc-khoe">Làm Đẹp - Sức Khỏe</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Làm Đẹp - Sức Khỏe
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#sach-van-phong-pham-qua-luu-niem">
+                  <div className="small-text cursor-pointer hover:underline">
                     Sách, Văn phòng phẩm & Quà lưu niệm
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#me-be">Mẹ & Bé</a>&nbsp;/&nbsp;
-                  <a href="#dien-gia-dung">Điện gia dụng</a>&nbsp;/&nbsp;
-                  <a href="#bach-hoa-online">Bách hóa online</a>&nbsp;/&nbsp;
-                  <a href="#may-anh-may-quay-phim">Máy Ảnh - Máy Quay Phim</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Mẹ & Bé
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#laptop-may-vi-tinh">Laptop & Máy Vi Tính</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện gia dụng
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#san-pham-thiet-bi-cong-nghiep">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Bách hóa online
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy Ảnh - Máy Quay Phim
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Laptop & Máy Vi Tính
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Sản phẩm - thiết bị công nghiệp
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#tivi-thiet-bi-nghe-nhin">
+                  <div className="small-text cursor-pointer hover:underline">
                     Tivi & Thiết Bị Nghe Nhìn
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dien-thoai-may-tinh-bang">
+                  <div className="small-text cursor-pointer hover:underline">
                     Điện Thoại - Máy Tính Bảng
-                  </a>
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#thiet-bi-so-phu-kien-so">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Số - Phụ Kiện Số
-                  </a>
+                  </div>
                 </div>
-                <p>
-                  <a href="#phu-kien-dien-thoai-may-tinh-bang">
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
                     Phụ Kiện Điện Thoại và Máy Tính Bảng
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#phu-kien-may-tinh-laptop">
+                  <div className="small-text cursor-pointer hover:underline">
                     Phụ kiện máy tính và Laptop
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-am-thanh-phu-kien">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Âm Thanh và Phụ Kiện
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-thong-minh-linh-kien-dien-tu">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Thông Minh và Linh Kiện Điện Tử
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-deo-thong-minh-phu-kien">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Đeo Thông Minh và Phụ Kiện
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#thiet-bi-choi-game-phu-kien">
+                  <div className="small-text cursor-pointer hover:underline">
                     Thiết Bị Chơi Game và Phụ Kiện
-                  </a>
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#voucher-dich-vu">Voucher - Dịch vụ</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Voucher - Dịch vụ
+                  </div>
                 </div>
-                <p>
-                  <a href="#thanh-toan-hoa-don">Thanh toán hóa đơn</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thanh toán hóa đơn
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#khoa-hoc">Khóa học</a>&nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Khóa học
+                  </div>
+                  &nbsp;/&nbsp;
                   <a href="#du-lich-khach-san">Du lịch - Khách sạn</a>
                   &nbsp;/&nbsp;
-                  <a href="#spa-lam-dep">Spa & Làm đẹp</a>&nbsp;/&nbsp;
-                  <a href="#dich-vu-khac">Dịch vụ khác</a>&nbsp;/&nbsp;
-                  <a href="#nha-hang-an-uong">Nhà hàng - Ăn uống</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Spa & Làm đẹp
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#suc-khoe-giai-tri">Sự kiện - Giải trí</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dịch vụ khác
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#nha-khoa-suc-khoe">Nha khoa - Sức khỏe</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nhà hàng - Ăn uống
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#phieu-qua-tang">Phiếu quà tặng</a>&nbsp;/&nbsp;
-                  <a href="#sim-so-the-cao-the-game">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Sự kiện - Giải trí
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nha khoa - Sức khỏe
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phiếu quà tặng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Sim số - Thẻ cào - Thẻ game
-                  </a>
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#o-to-xe-may-xe-dap">Ô Tô - Xe Máy - Xe Đạp</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ô Tô - Xe Máy - Xe Đạp
+                  </div>
                 </div>
-                <p>
-                  <a href="#phu-kien-cham-soc-xe">Phụ kiện - Chăm sóc xe</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện - Chăm sóc xe
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#xe-dien">Xe điện</a>&nbsp;/&nbsp;
-                  <a href="#xe-dap">Xe đạp</a>&nbsp;/&nbsp;
-                  <a href="#xe-may">Xe máy</a>&nbsp;/&nbsp;
-                  <a href="#o-to">Ô tô</a>&nbsp;/&nbsp;
-                  <a href="#xe-scooter">Xe Scooter</a>&nbsp;/&nbsp;
-                  <a href="#dich-vu-lap-dat">Dịch vụ, lắp đặt</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Xe điện
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Xe đạp
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Xe máy
+                  </div>
+                  &nbsp;/&nbsp;
+                  <adiv className="small-text cursor-pointer hover:underline">
+                    Ô tô
+                  </adiv>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Xe Scooter
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dịch vụ, lắp đặt
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#nha-sach-MAVT">Nhà Sách MAVT</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Nhà Sách MAVT
+                  </div>
                 </div>
-                <p>
-                  <a href="#sach-tieng-viet">Sách tiếng Việt</a>&nbsp;/&nbsp;
-                  <a href="#van-phong-pham">Văn phòng phẩm</a>&nbsp;/&nbsp;
-                  <a href="#qua-luu-niem">Quà lưu niệm</a>&nbsp;/&nbsp;
-                  <a href="#english-books">English Books</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Sách tiếng Việt
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Văn phòng phẩm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Quà lưu niệm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    English Books
+                  </div>
                 </p>
               </div>
             </div>
             <div className="column">
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#dien-tu-dien-lanh">Điện Tử - Điện Lạnh</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Điện Tử - Điện Lạnh
+                  </div>
                 </div>
-                <p>
-                  <a href="#am-thanh-phu-kien-tivi">Âm thanh & Phụ kiện Tivi</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Âm thanh & Phụ kiện Tivi
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#phu-kien-dien-lanh">Phụ kiện điện lạnh</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện điện lạnh
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#tu-lanh">Tủ lạnh</a>&nbsp;/&nbsp;
-                  <a href="#may-lanh-dieu-hoa">Máy lạnh - Máy điều hòa</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Tủ lạnh
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-giat">Máy giặt</a>&nbsp;/&nbsp;
-                  <a href="#tu-dong-tu-mat">Tủ đông - Tủ mát</a>&nbsp;/&nbsp;
-                  <a href="#tivi">Tivi</a>&nbsp;/&nbsp;
-                  <a href="#may-nuoc-nong">Máy nước nóng</a>&nbsp;/&nbsp;
-                  <a href="#may-rua-chen">Máy rửa chén</a>&nbsp;/&nbsp;
-                  <a href="#may-say-quan-ao">Máy sấy quần áo</a>&nbsp;/&nbsp;
-                  <a href="#tu-uop-ruou">Tủ ướp rượu</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy lạnh - Máy điều hòa
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy giặt
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Tủ đông - Tủ mát
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Tivi
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy nước nóng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy rửa chén
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy sấy quần áo
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    Tủ ướp rượu
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#the-thao-da-ngoai">Thể Thao - Dã Ngoại</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thể Thao - Dã Ngoại
+                  </div>
                 </div>
-                <p>
-                  <a href="#trang-phuc-the-thao-nu">Trang phục thể thao nữ</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang phục thể thao nữ
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#trang-phuc-the-thao-nam">Trang phục thể thao nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Trang phục thể thao nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#do-dung-da-ngoai">Đồ dùng dã ngoại</a>&nbsp;/&nbsp;
-                  <a href="#giay-the-thao-nam">Giày thể thao nam</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Đồ dùng dã ngoại
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#phu-kien-the-thao">Phụ kiện thể thao</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày thể thao nam
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dung-cu-thiet-bi-tap-the-thao">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Phụ kiện thể thao
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Dụng cụ - thiết bị tập thể thao
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cac-mon-the-thao-khac">Các môn thể thao khác</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Các môn thể thao khác
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dung-cu-cau-ca">Dụng cụ câu cá</a>&nbsp;/&nbsp;
-                  <a href="#the-thao-duoi-nuoc">Thể thao dưới nước</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dụng cụ câu cá
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cac-mon-the-thao-dong-doi">
+                  <div className="small-text cursor-pointer hover:underline">
+                    hể thao dưới nước
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Các môn thể thao đồng đội
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cac-mon-the-thao-choi-vot">
+                  <div className="small-text cursor-pointer hover:underline">
                     Các môn thể thao chơi vợt
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cac-mon-the-thao-doi-khang">
+                  <div className="small-text cursor-pointer hover:underline">
                     Các môn thể thao đối kháng
-                  </a>{" "}
+                  </div>{" "}
                   &nbsp;/&nbsp;
-                  <a href="#giay-the-thao-nu">Giày thể thao nữ</a>&nbsp;/&nbsp;
-                  <a href="#thuc-pham-bo-sung-nang-luong">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Giày thể thao nữ
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Thực phẩm bổ sung năng lượng
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#dung-cu-leo-nui">Dụng cụ leo núi</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Dụng cụ leo núi
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#may-anh-may-quay-phim">Máy Ảnh - Máy Quay Phim</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy Ảnh - Máy Quay Phim
+                  </div>
                 </div>
-                <p>
-                  <a href="#phu-kien-may-anh-may-quay">
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
                     Phụ Kiện Máy Ảnh, Máy Quay
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#camera-giam-sat">Camera Giám Sát</a>&nbsp;/&nbsp;
-                  <a href="#thiet-bi-anh-sang">Thiết Bị Ánh Sáng</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Camera Giám Sát
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#camera-hanh-trinh-action-camera">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thiết Bị Ánh Sáng
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Camera Hành Trình - Action Camera và Phụ Kiện
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#balo-tui-dung-bao-da">Balo - Túi Đựng - Bao Da</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Balo - Túi Đựng - Bao Da
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ong-kinh-ong-ngam">Ống Kính - Ống Ngắm</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ống Kính - Ống Ngắm
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ong-kinh-lens">Ống Kính (Lens)</a>&nbsp;/&nbsp;
-                  <a href="#thiet-bi-quay-phim">Thiết Bị Quay Phim</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Ống Kính (Lens)
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-bay-camera-phu-kien">
+                  <div className="small-text cursor-pointer hover:underline">
+                    Thiết Bị Quay Phim
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     Máy Bay Camera và Phụ Kiện
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-anh">Máy Ảnh</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Máy Ảnh
+                  </div>
                 </p>
               </div>
 
               <div className="category">
                 <div className="footer-sub-heading">
-                  <a href="#tu-khoa-duoc-quan-tam">Từ Khóa Được Quan Tâm</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    Từ Khóa Được Quan Tâm
+                  </div>
                 </div>
-                <p>
-                  <a href="#may-suoi">máy sưởi</a>&nbsp;/&nbsp;
-                  <a href="#den-suoi">đèn sưởi</a>&nbsp;/&nbsp;
-                  <a href="#quat-tich-dien-sunhouse">quạt tích điện sunhouse</a>
+                <p style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                  <div className="small-text cursor-pointer hover:underline">
+                    máy sưởi
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-say-toc-philips">máy sấy tóc philips</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    đèn sưởi
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ban-ui-hoi-nuoc-dung">bàn ủi hơi nước đứng</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    quạt tích điện sunhouse
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#ban-la-hoi-nuoc-philip">bàn là hơi nước philip</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    máy sấy tóc philips
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-suoi-xiaomi">máy sưởi xiaomi</a>&nbsp;/&nbsp;
-                  <a href="#binh-nuoc-nong-ariston">bình nước nóng ariston</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    bàn ủi hơi nước đứng
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#may-suoi-xiaomi">máy sưởi xiaomi</a>&nbsp;/&nbsp;
-                  <a href="#may-hut-bui-giuong-nem">máy hút bụi giường nệm</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    bàn là hơi nước philip
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#cay-nuoc-nong-lanh-toshiba">
+                  <div className="small-text cursor-pointer hover:underline">
+                    máy sưởi xiaomi
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    bình nước nóng ariston
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    máy sưởi xiaomi
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    máy hút bụi giường nệm
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
                     cây nước nóng lạnh toshiba
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#robot-hut-bui-lau-nha-cua-nhat">
+                  <div className="small-text cursor-pointer hover:underline">
                     robot hút bụi lau nhà của nhật
-                  </a>
+                  </div>
                   &nbsp;/&nbsp;
-                  <a href="#den-suoi-am-tran">đèn sưởi âm trần</a>&nbsp;/&nbsp;
-                  <a href="#noi-com-dien-tefal">nồi cơm điện tefal</a>
+                  <div className="small-text cursor-pointer hover:underline">
+                    đèn sưởi âm trần
+                  </div>
+                  &nbsp;/&nbsp;
+                  <div className="small-text cursor-pointer hover:underline">
+                    nồi cơm điện tefal
+                  </div>
                 </p>
               </div>
             </div>

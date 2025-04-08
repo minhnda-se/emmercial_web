@@ -224,7 +224,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
                 .split(
                   "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
                 )
-                .join("src/app/assets/favicon.png")}
+                .join("/src/app/assets/favicon.png")}
               alt="MAVT"
               className="h-8 !mr-2"
             /> */}
@@ -322,7 +322,10 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
           >
             Thêm vào giỏ
           </button>
-          <button className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium">
+          <button
+            className="w-full border border-red-400 text-red-500 hover:bg-red-50 !py-3 rounded-md font-medium"
+            onClick={handleBuyNow}
+          >
             Mua trả góp - trả sau
           </button>
         </div>
