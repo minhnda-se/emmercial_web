@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { PlusOutlined, MinusOutlined, SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useCart } from "../../../components/CardContext"; // Import useCart hook
 
 const PaymentComponent = ({ mpid, spid, productData }) => {
   const [quantity, setQuantity] = useState(1);
   const [sellerData, setSellerData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const { addToCart } = useCart();
   const navigate = useNavigate();
 
   // Fetch seller information
@@ -177,8 +178,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       navigate("/checkout");
     } else {
       toast.success("Đã thêm vào giõ hàng!");
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      console.log("Added to cart:", productInfo);
+      addToCart(productInfo);
       // Bạn có thể thêm code hiển thị thông báo "Đã thêm vào giỏ hàng" ở đây
     }
   };
@@ -219,7 +219,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
         <div className="flex items-center justify-between !mb-6 !pb-2 border-b border-gray-200">
           <div className="flex items-center">
             {console.log(sellerData?.icon)}
-            <img
+            {/* <img
               src={sellerData?.icon
                 .split(
                   "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
@@ -227,7 +227,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
                 .join("/src/app/assets/favicon.png")}
               alt="MAVT"
               className="h-8 !mr-2"
-            />
+            /> */}
             <div className="flex flex-col">
               <span className="font-bold text-lg">MAVT Trading</span>
               <div className="flex items-center">

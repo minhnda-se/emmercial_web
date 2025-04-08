@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../components/CardContext"; // Import the useCart hook
 import "./Cart.scss";
+import {
+  faDeleteLeft,
+  faTrash,
+  faTrashAlt,
+  faTrashCan,
+  faTrashCanArrowUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Cart() {
   const navigate = useNavigate();
+  const { cartItems, removeItem } = useCart(); // Access cartItems and removeItem from context
 
-  const [booked, setBooked] = useState([]);
   const [prices, setPrices] = useState({});
   const [quantities, setQuantities] = useState({});
   const [total, setTotal] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
 
-  // Load cart from localStorage on mount
+  // Load cart items and prices from localStorage
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setBooked(storedItems);
-
     const priceMap = {};
     const quantityMap = {};
-    storedItems.forEach((item) => {
+
+    cartItems.forEach((item) => {
       priceMap[item.id] = item.price;
       quantityMap[item.id] = item.quantity;
     });
@@ -26,10 +33,20 @@ export default function Cart() {
     setPrices(priceMap);
     setQuantities(quantityMap);
 
-    // Set all items to checked by default when the page first loads
-    const initialCheckedItems = storedItems.map((item) => item.id);
+    // Set all items to checked by default
+    const initialCheckedItems = cartItems.map((item) => item.id);
     setCheckedItems(initialCheckedItems);
-  }, []);
+  }, [cartItems]);
+
+  useEffect(() => {
+    const totalPrice = cartItems
+      .filter((item) => checkedItems.includes(item.id))
+      .reduce((sum, item) => {
+        return sum + prices[item.id] * quantities[item.id];
+      }, 0);
+
+    setTotal(totalPrice);
+  }, [checkedItems, prices, quantities, cartItems]);
 
   const handleCheck = (itemId) => {
     setCheckedItems((prev) =>
@@ -38,16 +55,6 @@ export default function Cart() {
         : [...prev, itemId]
     );
   };
-
-  useEffect(() => {
-    const totalPrice = booked
-      .filter((item) => checkedItems.includes(item.id))
-      .reduce((sum, item) => {
-        return sum + prices[item.id] * quantities[item.id];
-      }, 0);
-
-    setTotal(totalPrice);
-  }, [checkedItems, prices, quantities, booked]);
 
   const handleUp = (itemId) => {
     setQuantities((prev) => ({
@@ -64,11 +71,8 @@ export default function Cart() {
   };
 
   const handleRemove = (itemId) => {
-    const updatedBooked = booked.filter((item) => item.id !== itemId);
-    setBooked(updatedBooked);
-
-    // Update localStorage
-    localStorage.setItem("cartItems", JSON.stringify(updatedBooked));
+    // Remove the item from cart using removeItem from context
+    removeItem(itemId);
   };
 
   const handleCheckout = () => {
@@ -77,8 +81,7 @@ export default function Cart() {
       return;
     }
 
-    // Create selected items with correct quantity
-    const selectedItems = booked
+    const selectedItems = cartItems
       .filter((item) => checkedItems.includes(item.id))
       .map((item) => ({
         ...item,
@@ -86,43 +89,62 @@ export default function Cart() {
         totalPrice: quantities[item.id] * prices[item.id],
       }));
 
-    // Save to localStorage
-
     localStorage.setItem("checkoutItem", JSON.stringify(selectedItems));
-
-    // Navigate to checkout
     navigate("/checkout");
   };
 
   const formatNumber = (num) =>
     num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
+  // Add handleCheckAll function to select all items
+  const handleCheckAll = (event) => {
+    if (event.target.checked) {
+      setCheckedItems(cartItems.map((item) => item.id));
+    } else {
+      setCheckedItems([]);
+    }
+  };
+
+  const isAllChecked =
+    cartItems.length > 0 && checkedItems.length === cartItems.length;
+
   return (
     <div className="cart-wrapper">
       <h1 className="cart-title text-2xl font-bold">Giỏ Hàng</h1>
-      <div className="text-xs opacity-75 font-semibold">
-        {booked.length} sản phẩm.
-      </div>
+
       <div className="userCart-container">
         <div className="userCart-content">
           <ul className="list bg-white rounded-sm shadow-md userCart-item">
-            {booked.map((item) => (
+            {/* Check All checkbox */}
+            <div className="flex items-center justify-between !p-2">
+              <div className="text-xs opacity-75 font-semibold">
+                {cartItems.length} sản phẩm.
+              </div>
+              <div className="flex items-center gap-2">
+                <label className="text-sm font-semibold">Chọn tất cả</label>
+                <input
+                  type="checkbox"
+                  checked={isAllChecked}
+                  onChange={handleCheckAll}
+                  className="checkbox checkbox-success !p-1"
+                />
+              </div>
+            </div>
+            <hr />
+            {cartItems.map((item) => (
               <li key={item.id} className="list-row userCart-list">
-                <div className="item-details">
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={checkedItems.includes(item.id)}
-                      onChange={() => handleCheck(item.id)}
-                    />
-                  </div>
-                  <div className="item-image">
-                    <img
-                      className="size-10 rounded-box"
-                      src={item.thumbnail || item.image}
-                      alt={item.name}
-                    />
-                  </div>
+                <div className="item-details flex justify-start items-center gap-5">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.includes(item.id)}
+                    onChange={() => handleCheck(item.id)}
+                    className="checkbox  !p-1"
+                  />
+                  <img
+                    className="size-20"
+                    src={item.thumbnail || item.image}
+                    alt={item.name}
+                  />
                   <div className="item-name">
                     <div>{item.name}</div>
                     <div className="text-xs font-semibold opacity-60">
@@ -154,31 +176,39 @@ export default function Cart() {
                     </button>
                   </div>
                 </div>
-                <button
-                  className="btn button-remove bg-white border-none"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  X
-                </button>
+                <div className="flex items-center">
+                  <button
+                    className="btn button-remove bg-transparent border-none shadow-none"
+                    onClick={() => handleRemove(item.id)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      size="lg"
+                      fixedWidth
+                      className="!p-2 rounded-full "
+                    />
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         </div>
-        <div className="order-details bg-white shadow-md rounded-sm">
-          <div>
-            <h1 className="font-bold">Đơn hàng</h1>
-            {checkedItems.length > 0 && (
-              <div className="text-xs opacity-75 font-semibold">
-                {checkedItems.length} sản phẩm.
-              </div>
-            )}
-          </div>
-          <div className="order-content">
+        <div className="order-details sticky top-5 w-[30vw] max-h-[calc(100vh-100px)] p-6 bg-white rounded-lg shadow-md">
+          <h1 className="font-bold text-lg">Đơn hàng</h1>
+          {checkedItems.length > 0 && (
+            <div className="text-xs opacity-75 font-semibold">
+              {checkedItems.length} sản phẩm.
+            </div>
+          )}
+          <div className="order-content mt-4">
             <div className="order-info">
-              {booked
+              {cartItems
                 .filter((item) => checkedItems.includes(item.id))
                 .map((item) => (
-                  <div key={item.id} className="order-info-row">
+                  <div
+                    key={item.id}
+                    className="order-info-row flex justify-between mt-2"
+                  >
                     <div className="order-item-info">
                       <div className="text-xs font-semibold opacity-60">
                         {quantities[item.id]}x
@@ -190,14 +220,14 @@ export default function Cart() {
                 ))}
             </div>
 
-            <div className="order-section order-total">
+            <div className="order-section order-total mt-4">
               <div className="text-xs font-bold">Tổng tiền thanh toán</div>
               <div>{formatNumber(total)}đ</div>
             </div>
           </div>
           <button
             onClick={handleCheckout}
-            className="btn w-full btn-info text-white"
+            className="btn w-full btn-info text-white mt-4"
           >
             Chuyển sang thanh toán
           </button>

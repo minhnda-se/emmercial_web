@@ -54,7 +54,7 @@ export const ProductSlide = ({ data }) => {
                     }}
                   />
                   <img
-                    src={item.badges_v3?.[0].image}
+                    src={item.badges_v3?.[0]?.image}
                     alt="Badge"
                     className="absolute top-0 left-0 w-full"
                     style={{

@@ -7,6 +7,7 @@ import {
   LeftOutlined,
   RightOutlined,
   ShareAltOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -14,6 +15,96 @@ import Loading from "../../../components/Loading";
 
 // Initialize dayjs plugins
 dayjs.extend(relativeTime);
+
+// New Image Gallery Component
+const ImageGallery = ({ images, initialIndex, onClose }) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex || 0);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowLeft") {
+        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+      } else if (e.key === "ArrowRight") {
+        setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+      } else if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [images.length, onClose]);
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center">
+      <div className="relative w-full max-w-3xl px-4">
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+        >
+          <CloseOutlined className="text-xl" />
+        </button>
+
+        {/* Main image */}
+        <div className="relative w-full h-[80vh] flex items-center justify-center">
+          <img
+            src={images[currentIndex].full_path}
+            alt="Review image"
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+
+        {/* Navigation arrows */}
+        <button
+          onClick={() =>
+            setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1))
+          }
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full"
+        >
+          <LeftOutlined />
+        </button>
+        <button
+          onClick={() =>
+            setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0))
+          }
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full"
+        >
+          <RightOutlined />
+        </button>
+
+        {/* Image counter */}
+        <div className="absolute bottom-4 left-0 right-0 text-center text-white">
+          {currentIndex + 1} / {images.length}
+        </div>
+
+        {/* Thumbnail navigation */}
+        {images.length > 1 && (
+          <div className="flex justify-center mt-4 overflow-x-auto py-2 space-x-2">
+            {images.map((image, index) => (
+              <div
+                key={image.id}
+                className={`w-16 h-16 flex-shrink-0 cursor-pointer border-2 rounded overflow-hidden ${
+                  index === currentIndex
+                    ? "border-blue-500"
+                    : "border-transparent"
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              >
+                <img
+                  src={image.full_path}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
   const [loading, setLoading] = useState(true);
@@ -25,6 +116,27 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
     lastPage: 1,
   });
   const [ratingStats, setRatingStats] = useState({});
+
+  // State for image gallery
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [galleryInitialIndex, setGalleryInitialIndex] = useState(0);
+
+  // Function to open the image gallery
+  const openGallery = (images, initialIndex = 0) => {
+    setGalleryImages(images);
+    setGalleryInitialIndex(initialIndex);
+    setGalleryOpen(true);
+    // Prevent body scrolling when gallery is open
+    document.body.style.overflow = "hidden";
+  };
+
+  // Function to close the image gallery
+  const closeGallery = () => {
+    setGalleryOpen(false);
+    // Restore body scrolling
+    document.body.style.overflow = "auto";
+  };
 
   // Function to fetch reviews
   const fetchReviews = async (page = 1) => {
@@ -363,9 +475,6 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
 
       {/* Show loading state */}
       {loading ? (
-        // <div className="flex justify-center !py-8">
-        //   <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-        // </div>
         <Loading />
       ) : (
         <>
@@ -407,13 +516,14 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
                         {review.content}
                       </div>
 
-                      {/* Display review images if any */}
+                      {/* Display review images if any - now clickable */}
                       {review.images?.length > 0 && (
                         <div className="flex flex-wrap !gap-2 !my-2">
-                          {review.images.map((image) => (
+                          {review.images.map((image, index) => (
                             <div
                               key={image.id}
-                              className="w-16 h-16 overflow-hidden rounded"
+                              className="w-16 h-16 overflow-hidden rounded cursor-pointer hover:opacity-90 transition-opacity"
+                              onClick={() => openGallery(review.images, index)}
                             >
                               <img
                                 src={image.full_path}
@@ -493,6 +603,15 @@ const ProductReviews = ({ productId, spid, sellerId = 1 }) => {
             </div>
           )}
         </>
+      )}
+
+      {/* Image Gallery Modal - only render when open */}
+      {galleryOpen && galleryImages.length > 0 && (
+        <ImageGallery
+          images={galleryImages}
+          initialIndex={galleryInitialIndex}
+          onClose={closeGallery}
+        />
       )}
     </div>
   );

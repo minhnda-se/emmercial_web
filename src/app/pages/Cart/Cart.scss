@@ -1,8 +1,9 @@
 .cart-wrapper{
-    margin-left: 5vw;
+    width: 93vw;
+    margin: auto;
 }
 .userCart-content{
-    width: 60%;
+   width: 80vw;
 }
 .userCart-container{
     display: flex;
@@ -11,17 +12,15 @@
 }
 .item-details{
     display: flex;
-    gap: 20px;
-    width: 30%;
-    align-items: center;
+    width: 70%;
 }
 .userCart-list{
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .quantity-selector{
-    margin-top: 20px;
     height: 30%;
     display: flex;
     button{
@@ -42,15 +41,11 @@
     }
     
 }
-.button-remove{
-    margin-right: 10px;
-    margin-top: 10px;
-}
+
 .button-remove:hover{
    color: red;
 }
 .order-details{
-    width: 30%;
     padding: 10px;
     height: fit-content;
 }
