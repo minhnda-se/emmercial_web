@@ -177,8 +177,12 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
       // Chuyển hướng đến trang thanh toán
       navigate("/checkout");
     } else {
-      toast.success("Đã thêm vào giõ hàng!");
-      addToCart(productInfo);
+      if (addToCart(productInfo)) {
+        toast.success("Đã thêm vào giõ hàng!");
+      } else {
+        toast.error("Số lượng tối đa là 100 sản phẩm!");
+      }
+
       // Bạn có thể thêm code hiển thị thông báo "Đã thêm vào giỏ hàng" ở đây
     }
   };

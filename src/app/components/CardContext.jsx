@@ -21,14 +21,17 @@ export const CartProvider = ({ children }) => {
     );
 
     if (existingItemIndex !== -1) {
-      // If item already exists, update the quantity
+      // If item already exists, check if adding would exceed limit
+      const currentQuantity = cartItems[existingItemIndex].quantity;
+      const newQuantity = currentQuantity + productInfo.quantity;
+      // If already at max quantity, return false to indicate failure
+      if (newQuantity > 100) {
+        return false;
+      }
+
       const updatedCartItems = [...cartItems];
 
       // Calculate new quantity, but limit to maximum of 100
-      const newQuantity = Math.min(
-        updatedCartItems[existingItemIndex].quantity + productInfo.quantity,
-        100
-      );
 
       // Set the new quantity (capped at 100)
       updatedCartItems[existingItemIndex].quantity = newQuantity;
@@ -36,10 +39,16 @@ export const CartProvider = ({ children }) => {
       // Update the total price based on the new quantity
       updatedCartItems[existingItemIndex].totalPrice =
         updatedCartItems[existingItemIndex].price * newQuantity;
+
       setCartItems(updatedCartItems);
+
+      // Return true if operation was fully successful (didn't hit cap)
+      // Return false if we had to cap the quantity
+      return currentQuantity + productInfo.quantity <= 100;
     } else {
       // If item doesn't exist, add it to the cart
       setCartItems([...cartItems, productInfo]);
+      return true;
     }
   };
 

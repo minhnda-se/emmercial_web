@@ -180,7 +180,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex flex-col w-[50%] justify-center gap-2">
+        <div className="flex flex-col w-[50%] justify-center gap-2 z-100">
           <div
             className="flex items-center gap-2 relative"
             ref={searchContainerRef}
