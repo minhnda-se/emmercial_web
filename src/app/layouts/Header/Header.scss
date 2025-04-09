@@ -1,0 +1,119 @@
+.header{
+  margin-bottom: 10px;
+  position: relative; /* Make sure header has a relative position */
+   /* Give header a high z-index */
+}
+.icon-rounded{
+  position: relative;
+  cursor: pointer;
+}
+.user-icon{
+ position: absolute;
+ top: 20%;
+ left: 5px;
+}
+.favicon{
+  margin-left: 5vw;
+}
+.search-bar{
+  margin-right: 4vw;
+}
+.header-commitment {
+  transform: translateY(-50%);
+  animation: moveLeftToRight 25s linear infinite; /* 25s is the speed of movement */
+}
+
+/* Define the keyframes for moving from left to right */
+@keyframes moveLeftToRight {
+  0% {
+    transform: translateX(-100%); /* Start off-screen on the left */
+  }
+  100% {
+    transform: translateX(100%); /* Move completely off-screen to the right */
+  }
+}
+
+/* Fix overflow issue in header */
+.header.overflow-visible {
+  overflow: visible !important;
+}
+
+/* Updated search suggestions wrapper positioned directly under search container */
+.search-suggestions-wrapper {
+  position: absolute;
+  top: 100%; /* Position right below the search input */
+  left: 0;
+  width: 100%; /* Extend to full width of parent container */
+  z-index: 1000;
+  margin-top: 2px; /* Add a small gap */
+}
+
+/* Search suggestions styling */
+.search-suggestions {
+  width: 100%; /* Set to match the parent width */
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.search-suggestions ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.suggestion-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background-color: #f3f4f6;
+}
+
+.suggestion-item:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Seller suggestion styling */
+.seller-suggestion {
+  display: flex;
+  align-items: center;
+}
+
+.seller-logo {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.seller-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.seller-title {
+  font-weight: 500;
+}
+
+.seller-subtitle {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Keyword suggestion styling */
+.keyword-suggestion {
+  display: flex;
+  align-items: center;
+}
+
+.suggestion-icon {
+  margin-right: 0.5rem;
+  color: #9ca3af;
+}

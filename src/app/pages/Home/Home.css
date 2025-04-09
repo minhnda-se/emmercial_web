@@ -1,0 +1,60 @@
+.home_container {
+  display: flex;
+  margin: auto;
+  width: 93vw;
+  justify-content: space-between;
+}
+.home_sidebar {
+  width: 18%;
+}
+/* Custom scrollbar hidden */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px; /* Hide scrollbar */
+  background: transparent; /* Optional: Make the background transparent */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+}
+
+/* Optional: If you want to make sure scrollbars are hidden for all browsers */
+.home_sidebar {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+.home_body {
+  width: 80%;
+}
+.btn-hotdeals {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-hotdeals:hover {
+  transform: scale(0.95);
+}
+.card {
+  flex-shrink: 0;
+}
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical; /* Specify vertical layout for the box */
+  overflow: hidden; /* Hide overflowed content */
+  text-overflow: ellipsis; /* Add ellipsis when the text overflows */
+}
+.rating-stars {
+  display: flex;
+}
+
+.rating-stars svg {
+  color: gold; /* Set the color of the stars */
+  font-size: 10px; /* Adjust size of the stars */
+}
+.home-card {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.home-card:hover {
+  transform: scale(0.95);
+}
