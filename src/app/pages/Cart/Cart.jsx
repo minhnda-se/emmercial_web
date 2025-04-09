@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../components/CardContext"; // Import the useCart hook
 import "./Cart.scss";
-import {
-  faDeleteLeft,
-  faTrash,
-  faTrashAlt,
-  faTrashCan,
-  faTrashCanArrowUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -20,6 +14,7 @@ export default function Cart() {
   const [quantities, setQuantities] = useState({});
   const [total, setTotal] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [itemToDelete, setItemToDelete] = useState(null); // Store the item to delete
 
   // Load cart items and prices from localStorage
   useEffect(() => {
@@ -60,20 +55,33 @@ export default function Cart() {
   const handleUp = (itemId) => {
     setQuantities((prev) => ({
       ...prev,
-      [itemId]: Math.min(prev[itemId] + 1, 100),
+      [itemId]: Math.min(prev[itemId] + 1, 100), // Max quantity of 100
     }));
   };
 
   const handleDown = (itemId) => {
     setQuantities((prev) => ({
       ...prev,
-      [itemId]: Math.max(prev[itemId] - 1, 1),
+      [itemId]: Math.max(prev[itemId] - 1, 1), // Min quantity of 1
     }));
   };
 
   const handleRemove = (itemId) => {
-    // Remove the item from cart using removeItem from context
-    removeItem(itemId);
+    // Store the item to be deleted and show the modal
+    setItemToDelete(itemId);
+    document.getElementById("my_modal_1").showModal();
+  };
+
+  const confirmRemoveItem = () => {
+    removeItem(itemToDelete); // Remove the item from the cart
+    document.getElementById("my_modal_1").close(); // Close the dialog
+    setItemToDelete(null); // Clear the item to delete
+    toast.success("Đã được xóa thành công!");
+  };
+
+  const cancelRemoveItem = () => {
+    document.getElementById("my_modal_1").close(); // Close the dialog without removing the item
+    setItemToDelete(null); // Clear the item to delete
   };
 
   const handleCheckout = () => {
@@ -113,7 +121,6 @@ export default function Cart() {
     <>
       <ToastContainer />
       <div className="cart-wrapper flex justify-around">
-        {/* <div className="flex flex-col justify-center"> */}
         <div className="userCart-content">
           <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4">
             {/* Check All checkbox */}
@@ -172,7 +179,21 @@ export default function Cart() {
                       -
                     </button>
                   </div>
-                  <div className="item-quantity">{quantities[item.id]}</div>
+                  <input
+                    className="item-quantity"
+                    value={quantities[item.id]} // Controlled input
+                    type="number"
+                    onChange={(e) => {
+                      const newValue = e.target.value;
+                      // Update quantities state, ensuring the value is a valid number
+                      if (newValue >= 1 && !isNaN(newValue)) {
+                        setQuantities((prev) => ({
+                          ...prev,
+                          [item.id]: newValue,
+                        }));
+                      }
+                    }}
+                  />
                   <div className="border-l-1 border-solid border-secondary rounded-r-sm">
                     <button
                       className="quantity-button"
@@ -185,13 +206,13 @@ export default function Cart() {
                 <div className="flex items-center">
                   <button
                     className="btn button-remove bg-transparent border-none shadow-none"
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemove(item.id)} // Trigger remove confirmation
                   >
                     <FontAwesomeIcon
                       icon={faTrashAlt}
                       size="lg"
                       fixedWidth
-                      className="!p-2 rounded-full "
+                      className="!p-2 rounded-full"
                     />
                   </button>
                 </div>
@@ -199,7 +220,27 @@ export default function Cart() {
             ))}
           </ul>
         </div>
-        {/* </div> */}
+
+        {/* Confirmation Dialog */}
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box !py-5 !px-4">
+            <h3 className="font-bold text-lg">Bạn có chắc muốn xóa không?</h3>
+            <div className="modal-action !mt-6">
+              <button
+                className="btn !p-3 min-w-[70px]"
+                onClick={cancelRemoveItem}
+              >
+                Không
+              </button>
+              <button
+                className="btn btn-primary !p-3 min-w-[70px]"
+                onClick={confirmRemoveItem}
+              >
+                Có
+              </button>
+            </div>
+          </div>
+        </dialog>
 
         <div className="userCart-container">
           <div className="order-details !sticky top-4 w-[30vw] !p-4 bg-white rounded-lg shadow-md">
