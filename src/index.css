@@ -16,5 +16,5 @@
   font-size: 14px !important; /* Thu nhỏ icon */
 }
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }

@@ -23,10 +23,19 @@ export const CartProvider = ({ children }) => {
     if (existingItemIndex !== -1) {
       // If item already exists, update the quantity
       const updatedCartItems = [...cartItems];
-      updatedCartItems[existingItemIndex].quantity += productInfo.quantity;
+
+      // Calculate new quantity, but limit to maximum of 100
+      const newQuantity = Math.min(
+        updatedCartItems[existingItemIndex].quantity + productInfo.quantity,
+        100
+      );
+
+      // Set the new quantity (capped at 100)
+      updatedCartItems[existingItemIndex].quantity = newQuantity;
+
+      // Update the total price based on the new quantity
       updatedCartItems[existingItemIndex].totalPrice =
-        updatedCartItems[existingItemIndex].price *
-        updatedCartItems[existingItemIndex].quantity;
+        updatedCartItems[existingItemIndex].price * newQuantity;
       setCartItems(updatedCartItems);
     } else {
       // If item doesn't exist, add it to the cart

@@ -224,33 +224,22 @@ const Header = () => {
                 aria-label="Search input"
                 className="z-10"
               />
-            </label>
-            <button
-              className="btn btn-secondary w-[10%]"
-              onClick={handleSearchClick}
-              aria-label="Search button"
-            >
-              <FontAwesomeIcon
-                icon={faSearch}
-                size="xl"
-                fixedWidth
-                color="white"
-                className="!p-2 rounded-full"
-              />
-            </button>
 
-            {/* Moved search suggestions inside the search container */}
-            {showSuggestions && suggestions.length > 0 && (
-              <div className="search-suggestions-wrapper" ref={suggestionsRef}>
-                <div className="search-suggestions">
-                  <ul>
-                    {suggestions.map((suggestion, index) => (
-                      <li
-                        key={index}
-                        className="suggestion-item"
-                        onClick={() => handleSuggestionClick(suggestion)}
-                      >
-                        {/* {suggestion.type === "seller" ? (
+              {/* Moved search suggestions inside the search container */}
+              {showSuggestions && suggestions.length > 0 && (
+                <div
+                  className="search-suggestions-wrapper"
+                  ref={suggestionsRef}
+                >
+                  <div className="search-suggestions">
+                    <ul>
+                      {suggestions.map((suggestion, index) => (
+                        <li
+                          key={index}
+                          className="suggestion-item"
+                          onClick={() => handleSuggestionClick(suggestion)}
+                        >
+                          {/* {suggestion.type === "seller" ? (
                           <div className="seller-suggestion">
                             {suggestion.logo && (
                               <img
@@ -269,21 +258,35 @@ const Header = () => {
                             </div>
                           </div>
                         ) : ( */}
-                        <div className="keyword-suggestion">
-                          <FontAwesomeIcon
-                            icon={faSearch}
-                            size="sm"
-                            className="suggestion-icon"
-                          />
-                          <span>{suggestion.keyword}</span>
-                        </div>
-                        {/* )} */}
-                      </li>
-                    ))}
-                  </ul>
+                          <div className="keyword-suggestion">
+                            <FontAwesomeIcon
+                              icon={faSearch}
+                              size="sm"
+                              className="suggestion-icon"
+                            />
+                            <span>{suggestion.keyword}</span>
+                          </div>
+                          {/* )} */}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </label>
+            <button
+              className="btn btn-secondary w-[10%]"
+              onClick={handleSearchClick}
+              aria-label="Search button"
+            >
+              <FontAwesomeIcon
+                icon={faSearch}
+                size="xl"
+                fixedWidth
+                color="white"
+                className="!p-2 rounded-full"
+              />
+            </button>
           </div>
 
           <div className="w-full">
@@ -373,7 +376,7 @@ const Header = () => {
                   />
                 </svg>
 
-                <span className="badge text-white rounded-full badge-xs indicator-item !px-1.25 text-accent-content text-[10px] bg-red-500">
+                <span className="badge text-white rounded-full badge-xs indicator-item !px-1.25 text-accent-content text-[10px] bg-red-500 z-0">
                   {cartIndex}
                 </span>
               </div>
