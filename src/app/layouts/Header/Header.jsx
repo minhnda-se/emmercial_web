@@ -15,7 +15,12 @@ const Header = () => {
   const [commitment, setCommitment] = useState({});
   const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const searchValue = useRef();
+  const searchContainerRef = useRef(null);
+  const suggestionsRef = useRef(null);
   const { cartItems } = useCart(); // Access cart items from context
   const navigate = useNavigate();
 
@@ -44,21 +49,110 @@ const Header = () => {
     };
 
     fetchCommitment();
+
+    // Add event listener to close suggestions when clicking outside
+    const handleClickOutside = (event) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target) &&
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  // Fetch search suggestions when query changes
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (searchQuery.trim() === "") {
+        setSuggestions([]);
+        return;
+      }
+
+      try {
+        const trackityId = "3c2d2eaa-ec0e-527a-3444-2c04e0050144"; // This could be dynamically generated
+        const response = await fetch(
+          `https://tiki.vn/api/v2/search/suggestion?trackity_id=${trackityId}&q=${encodeURIComponent(
+            searchQuery
+          )}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch suggestions");
+        }
+        const data = await response.json();
+        setSuggestions(data.data || []);
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+        setSuggestions([]);
+      }
+    };
+
+    // Debounce the API call
+    const timeoutId = setTimeout(() => {
+      if (searchQuery.trim() !== "") {
+        fetchSuggestions();
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
 
   // Calculate the number of items in the cart
   const cartIndex = cartItems.length;
 
   const handleSearchClick = () => {
-    const searchQuery = searchValue.current.value;
     if (searchQuery.trim() !== "") {
       const query = encodeURIComponent(searchQuery);
       navigate(`/search?q=${query}`);
+      setShowSuggestions(false);
     }
   };
 
+  const handleSuggestionClick = (suggestion) => {
+    // Update the search query state to update the input field
+    if (suggestion.type === "keyword") {
+      // Fill the search input with the suggestion keyword
+      setSearchQuery(suggestion.keyword);
+
+      // Optional: You can add a delay before navigating
+      setTimeout(() => {
+        if (suggestion.url) {
+          // Extract the search query from the URL to ensure consistency
+          const urlParams = new URLSearchParams(suggestion.url.split("?")[1]);
+          const queryParam = urlParams.get("q");
+          if (queryParam) {
+            navigate(`/search?q=${queryParam}`);
+          } else {
+            navigate(`/search?q=${encodeURIComponent(suggestion.keyword)}`);
+          }
+        } else {
+          navigate(`/search?q=${encodeURIComponent(suggestion.keyword)}`);
+        }
+      }, 200); // Small delay to see the search input populated first
+    } else if (suggestion.type === "seller") {
+      // For seller type, set search query to store name
+      setSearchQuery(suggestion.title || "");
+
+      setTimeout(() => {
+        if (suggestion.url) {
+          navigate(suggestion.url.replace("https://tiki.vn", ""));
+        }
+      }, 200);
+    }
+
+    // Hide the suggestions after clicking
+    setShowSuggestions(false);
+  };
+
   return (
-    <div className="header !mb-6 bg-white shadow-sm overflow-hidden">
+    <div className="header !mb-6 bg-white shadow-sm overflow-visible">
       <div className="bg-emerald-100">
         <div className="header-commitment flex justify-around !p-2">
           {commitment.data?.map((item, index) => (
@@ -87,7 +181,10 @@ const Header = () => {
         </div>
 
         <div className="flex flex-col w-[50%] justify-center gap-2">
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2 relative"
+            ref={searchContainerRef}
+          >
             <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
               <svg
                 className="h-[1em] opacity-50"
@@ -108,6 +205,16 @@ const Header = () => {
               <input
                 type="search"
                 ref={searchValue}
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => {
+                  if (searchQuery.trim() !== "") {
+                    setShowSuggestions(true);
+                  }
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     handleSearchClick();
@@ -131,10 +238,56 @@ const Header = () => {
                 className="!p-2 rounded-full"
               />
             </button>
+
+            {/* Moved search suggestions inside the search container */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="search-suggestions-wrapper" ref={suggestionsRef}>
+                <div className="search-suggestions">
+                  <ul>
+                    {suggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="suggestion-item"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                      >
+                        {/* {suggestion.type === "seller" ? (
+                          <div className="seller-suggestion">
+                            {suggestion.logo && (
+                              <img
+                                src={suggestion.logo}
+                                alt={suggestion.title}
+                                className="seller-logo"
+                              />
+                            )}
+                            <div className="seller-info">
+                              <div className="seller-title">
+                                {suggestion.title}
+                              </div>
+                              <div className="seller-subtitle">
+                                {suggestion.subtitle}
+                              </div>
+                            </div>
+                          </div>
+                        ) : ( */}
+                        <div className="keyword-suggestion">
+                          <FontAwesomeIcon
+                            icon={faSearch}
+                            size="sm"
+                            className="suggestion-icon"
+                          />
+                          <span>{suggestion.keyword}</span>
+                        </div>
+                        {/* )} */}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="w-full ">
-            <ul className="flex gap-5 text-sm text-gray-400 font-bold ">
+          <div className="w-full">
+            <ul className="flex gap-5 text-sm text-gray-400 font-bold">
               <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Điện da dụng
               </li>
@@ -173,7 +326,7 @@ const Header = () => {
               <p>Trang chủ</p>
             </Link>
 
-            {isLoggedIn ? ( // Conditional rendering based on login status
+            {isLoggedIn ? (
               <Link
                 to={"/profile"}
                 className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
@@ -220,7 +373,7 @@ const Header = () => {
                   />
                 </svg>
 
-                <span className="badge text-white rounded-full badge-xs indicator-item z-0 !px-1.25 text-accent-content text-[10px] bg-red-500">
+                <span className="badge text-white rounded-full badge-xs indicator-item !px-1.25 text-accent-content text-[10px] bg-red-500">
                   {cartIndex}
                 </span>
               </div>
