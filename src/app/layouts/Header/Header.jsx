@@ -85,8 +85,9 @@ const Header = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col w-[50%] justify-center gap-1">
-          <div className="flex items-center  gap-2">
+
+        <div className="flex flex-col w-[50%] justify-center gap-2">
+          <div className="flex items-center gap-2">
             <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
               <svg
                 className="h-[1em] opacity-50"
@@ -131,68 +132,72 @@ const Header = () => {
               />
             </button>
           </div>
+
           <div className="w-full ">
             <ul className="flex gap-5 text-sm text-gray-400 font-bold ">
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Điện da dụng
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Xe cộ
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Mẹ & bé
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Nhà cửa
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Sách
               </li>
-              <li className="cursor-pointer  hover:scale-95 transition-transform duration-200">
+              <li className="cursor-pointer hover:scale-95 transition-transform duration-200">
                 Thể thao
               </li>
             </ul>
           </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <div className="w-full flex gap-4 font-bold justify-end">
-            <Link to="/" className="flex items-center text-secondary">
+
+        <div className="flex font-bold flex-col w-[25%] gap-2">
+          <div className="flex">
+            <Link
+              to="/"
+              className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3 font-bold text-[20px]"
+            >
               <FontAwesomeIcon
                 icon={faHouse}
                 size="l"
                 fixedWidth
                 color="primary"
-                className="!p-2 rounded-full"
+                className="p-2 rounded-full"
               />
               <p>Trang chủ</p>
             </Link>
 
-            {isLoggedIn ? (
+            {isLoggedIn ? ( // Conditional rendering based on login status
               <Link
-                to={"/"}
-                className="flex items-center"
-                onClick={() => {
-                  sessionStorage.removeItem("token");
-                  window.location.reload();
-                }}
+                to={"/profile"}
+                className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
               >
                 <FontAwesomeIcon
                   icon={faUser}
                   size="l"
                   fixedWidth
                   color="black"
-                  className="!p-2 rounded-full"
+                  className="p-2 rounded-full"
                 />
                 <p>Profile</p>
               </Link>
             ) : (
-              <Link to={"/login"} className="flex items-center">
+              <Link
+                to={"/login"}
+                className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
+              >
                 <FontAwesomeIcon
                   icon={faUser}
                   size="l"
                   fixedWidth
                   color="black"
-                  className="!p-2 rounded-full"
+                  className="p-2 rounded-full"
                 />
                 <p>Tài khoản</p>
               </Link>
@@ -202,7 +207,7 @@ const Header = () => {
               <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -215,31 +220,26 @@ const Header = () => {
                   />
                 </svg>
 
-                <span className="badge text-white rounded-full badge-xs indicator-item !px-1.25 text-accent-content text-[10px] bg-red-500">
+                <span className="badge text-white rounded-full badge-xs indicator-item z-0 !px-1.25 text-accent-content text-[10px] bg-red-500">
                   {cartIndex}
                 </span>
               </div>
             </Link>
           </div>
-          <div className="flex items-center text-sm">
-            <div className="flex font-bold">
-              <Link
-                to="/"
-                className="btn btn-ghost flex items-center text-secondary hover:!no-underline !pr-3"
-              >
-                <FontAwesomeIcon
-                  icon={faMapLocation}
-                  size="l"
-                  fixedWidth
-                  color="gray"
-                  className="rounded-full"
-                />
-              </Link>
-              <p className="flex items-center">
-                <span className="font-bold text-gray-400 !mr-1">
-                  Giao đến:{" "}
+          <div className="flex text-sm">
+            <div className="flex font-bold items-center gap-1 cursor-pointer">
+              <FontAwesomeIcon
+                icon={faMapLocation}
+                size="l"
+                fixedWidth
+                color="gray"
+                className="rounded-full"
+              />
+              <p className="flex">
+                <span className="font-bold text-gray-400 !mr-1">Giao đến:</span>
+                <span className="hover:underline">
+                  Thành phố Thủ Đức, Hồ Chí Minh
                 </span>
-                <span className="link">Thành phố Thủ Đức, Hồ Chí Minh</span>
               </p>
             </div>
           </div>

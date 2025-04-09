@@ -594,7 +594,7 @@ export default function Detail({}) {
           <div className="flex gap-4">
             {/* Sidebar with Product Image */}
             <div>
-              <div className="detail_sidebar rounded-lg shadow-md bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+              <div className="detail_sidebar rounded-lg shadow-md bg-white !sticky top-4 h-screen overflow-y-auto custom-scrollbar">
                 <div className="flex flex-col gap-y-2 !p-4">
                   <DetailPng data={currentVariantData} spid={selectedSpid} />
                 </div>
@@ -655,12 +655,17 @@ export default function Detail({}) {
         </div>
         {/* Payment Sidebar */}
         <div>
-          <div className="detail_sidebar rounded-lg bg-white !sticky top-0 h-screen overflow-y-auto custom-scrollbar shadow-md">
-            <PaymentComponent
-              mpid={productId}
-              spid={selectedSpid}
-              productData={currentVariantData}
-            />
+          <div className="detail_sidebar rounded-lg bg-white !sticky top-4 h-screen overflow-y-auto custom-scrollbar shadow-md">
+            <div>
+              <PaymentComponent
+                mpid={productId}
+                spid={selectedSpid}
+                productData={currentVariantData}
+              />
+            </div>
+            {/* <div className="!m-auto !mt-4 bg-white rounded-lg !shadow-md">
+              <img src={"/public/Shop's Logo.png"} alt="Logo" />
+            </div> */}
           </div>
         </div>
       </div>

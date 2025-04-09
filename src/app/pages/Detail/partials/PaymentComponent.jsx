@@ -219,15 +219,11 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
         <div className="flex items-center justify-between !mb-6 !pb-2 border-b border-gray-200">
           <div className="flex items-center">
             {console.log(sellerData?.icon)}
-            {/* <img
-              src={sellerData?.icon
-                .split(
-                  "https://vcdn.tikicdn.com/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg"
-                )
-                .join("/src/app/assets/favicon.png")}
+            <img
+              src={"/src/app/assets/favicon.png"}
               alt="MAVT"
               className="h-8 !mr-2"
-            /> */}
+            />
             <div className="flex flex-col">
               <span className="font-bold text-lg">MAVT Trading</span>
               <div className="flex items-center">
