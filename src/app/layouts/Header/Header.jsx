@@ -8,7 +8,7 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/favicon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../../components/CardContext"; // Import useCart
 
 const Header = () => {
@@ -113,6 +113,11 @@ const Header = () => {
       navigate(`/search?q=${query}`);
       setShowSuggestions(false);
     }
+  };
+  const hadleLogout = () => {
+    sessionStorage.removeItem("token");
+    setIsLoggedIn(false);
+    return <Navigate to={"/"} replace />;
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -331,7 +336,8 @@ const Header = () => {
 
             {isLoggedIn ? (
               <Link
-                to={"/profile"}
+                to={"/login"}
+                onClick={() => hadleLogout()}
                 className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
               >
                 <FontAwesomeIcon
