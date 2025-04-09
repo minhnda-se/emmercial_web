@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 import { ToastContainer, toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const [booked, setBooked] = useState([]);
+  const nav = useNavigate();
 
   useEffect(() => {
     const storedCart = localStorage.getItem("checkoutItem");
@@ -19,13 +21,25 @@ export default function Checkout() {
   const totalPrice = booked.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
+  const handlePayClick = () => {
+    if (sessionStorage.getItem("token") === null) {
+      nav("/login", { state: { from: "/checkout" } });
+
+      return;
+    }
+    toast.success("Thanh toán thành công!");
+    localStorage.setItem("order", JSON.stringify(booked));
+    localStorage.removeItem("checkoutItem");
+    localStorage.removeItem("cartItem");
+    setBooked([]);
+  };
 
   return (
     <>
       <ToastContainer />
       <div className="checkout-wrapper flex justify-around">
         <div className="w-[60vw]">
-          <ul className="list bg-white rounded-lg shadow-md overflow-hidden !p-4">
+          <ul className="list bg-white rounded-lg shadow-md overflow-hidden !p-4  min-h-[65vh]">
             <div className="flex items-center justify-center !pb-3 border-b border-gray-200">
               <div className="flex flex-col items-center">
                 <h1 className="text-2xl font-bold text-center">Thanh toán</h1>
@@ -132,8 +146,8 @@ export default function Checkout() {
           </div>
         </div> */}
         </div>
-        <div className="payment-container bg-white shadow-md rounded-lg w-[30vw] h-fit sticky top-4">
-          <h3 className="font-bold text-2xl border-b border-gray-200 !py-4 text-center">
+        <div className="payment-container bg-white shadow-md rounded-lg w-[30vw] h-fit sticky top-4 min-h-[65vh]">
+          <h3 className="font-bold text-2xl border-b border-gray-200 !py-3 text-center">
             Chọn hình thức thanh toán
           </h3>
           <div className="radio-item">
@@ -225,7 +239,7 @@ export default function Checkout() {
             </div>
             <div className="bill-button btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
               <button
-                onClick={() => toast.success("Thanh toán thành công!")}
+                onClick={() => handlePayClick()}
                 className="btn btn-secondary w-full text-white"
               >
                 Thanh toán

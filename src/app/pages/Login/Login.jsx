@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // For sign up
+  const [name, setName] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Nếu từ trang nào đó redirect sang login thì lưu lại
+  const from = location.state?.from || "/";
 
   const token = sessionStorage.getItem("token");
 
-  // If the user is logged in, redirect to the home page
+  // Nếu đã đăng nhập thì quay lại trang chủ
   if (token) {
-    return <Navigate to="/" replace />;
+    return <Navigate to={from} replace />;
   }
 
   const handleSignUpClick = () => {
@@ -40,6 +44,7 @@ export default function Login() {
 
     if (email === storedEmail && password === storedPassword) {
       sessionStorage.setItem("token", "token1-auth");
+      toast.success("Login successful!");
       window.location.reload();
     } else {
       toast.error("Invalid email or password!");
@@ -84,21 +89,21 @@ export default function Login() {
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                autoComplete="name" // This is suggested to identify the name field
+                autoComplete="name"
               />
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email" // Added autocomplete for email
+                autoComplete="email"
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password" // Suggested for new password fields
+                autoComplete="new-password"
               />
               <button type="submit">Sign Up</button>
             </form>
@@ -122,14 +127,14 @@ export default function Login() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email" // Added autocomplete for email
+                autoComplete="email"
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password" // Added autocomplete for current password
+                autoComplete="current-password"
               />
               <a href="#">Forgot your password?</a>
               <button type="submit">Sign In</button>

@@ -8,7 +8,7 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/favicon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../../components/CardContext"; // Import useCart
 
 const Header = () => {
@@ -114,6 +114,11 @@ const Header = () => {
       setShowSuggestions(false);
     }
   };
+  const hadleLogout = () => {
+    sessionStorage.removeItem("token");
+    setIsLoggedIn(false);
+    return <Navigate to={"/"} replace />;
+  };
 
   const handleSuggestionClick = (suggestion) => {
     // Update the search query state to update the input field
@@ -180,7 +185,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex flex-col w-[50%] justify-center gap-2">
+        <div className="flex flex-col w-[50%] justify-center gap-2 z-100">
           <div
             className="flex items-center gap-2 relative"
             ref={searchContainerRef}
@@ -331,7 +336,8 @@ const Header = () => {
 
             {isLoggedIn ? (
               <Link
-                to={"/profile"}
+                to={"/login"}
+                onClick={() => hadleLogout()}
                 className="btn btn-ghost flex items-center hover:!no-underline !pr-3 font-bold text-[20px]"
               >
                 <FontAwesomeIcon

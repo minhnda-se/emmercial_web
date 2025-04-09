@@ -120,9 +120,9 @@ export default function Cart() {
   return (
     <>
       <ToastContainer />
-      <div className="cart-wrapper flex justify-around">
-        <div className="userCart-content">
-          <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4">
+      <div className="cart-wrapper flex justify-around ">
+        <div className="userCart-content ">
+          <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4 ">
             {/* Check All checkbox */}
             <div className="flex items-center justify-between !pb-3 border-b border-gray-200">
               <div className="flex flex-col">
@@ -167,7 +167,7 @@ export default function Cart() {
                     )}
                   </div>
                 </div>
-                <div className="text-xs font-semibold opacity-90 text-secondary">
+                <div className="text-xs font-semibold opacity-90 text-secondary min-w-1/5 text-right !pr-10 ">
                   {formatNumber(item.price)}đ
                 </div>
                 <div className="quantity-selector border-1 border-solid border-secondary rounded-sm">
@@ -186,7 +186,11 @@ export default function Cart() {
                     onChange={(e) => {
                       const newValue = e.target.value;
                       // Update quantities state, ensuring the value is a valid number
-                      if (newValue >= 1 && !isNaN(newValue)) {
+                      if (
+                        newValue >= 1 &&
+                        newValue <= 100 &&
+                        !isNaN(newValue)
+                      ) {
                         setQuantities((prev) => ({
                           ...prev,
                           [item.id]: newValue,
@@ -275,11 +279,11 @@ export default function Cart() {
                       key={item.id}
                       className="order-info-row flex mt-2 border-b border-gray-200 !pb-3 !mb-3"
                     >
-                      <div className="order-item-info w-4/5">
+                      <div className="order-item-info w-4/5 gap-1">
                         <div className="text-sm text-secondary font-semibold opacity-90 w-1/10">
                           {quantities[item.id]}x
                         </div>
-                        <div className="flex flex-col text-wrap w-9/10">
+                        <div className="flex flex-col text-wrap w-8/10">
                           <div className="text-sm items-start">{item.name}</div>
                           {item.variant && (
                             <div className="text-xs italic text-gray-400">
