@@ -217,7 +217,7 @@ const PaymentComponent = ({ mpid, spid, productData }) => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer style={{ top: "1%" }} />
       <div className="bg-white rounded-lg !p-4 shadow-md max-w-md !mx-auto">
         {/* Header with seller info and search */}
         <div className="flex items-center justify-between !mb-6 !pb-2 border-b border-gray-200">

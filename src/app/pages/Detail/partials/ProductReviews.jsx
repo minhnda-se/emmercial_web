@@ -37,7 +37,7 @@ const ImageGallery = ({ images, initialIndex, onClose }) => {
   }, [images.length, onClose]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center ">
       <div className="relative w-full max-w-3xl px-4">
         {/* Close button */}
         <button

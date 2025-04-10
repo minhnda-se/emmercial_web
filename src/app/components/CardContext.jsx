@@ -1,3 +1,4 @@
+import { Cog, CookingPot } from "lucide-react";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 // Create a context for the cart
@@ -57,9 +58,23 @@ export const CartProvider = ({ children }) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
+  const deleteCart = (itemsToDelete) => {
+    // Create a new updated cart by filtering out the items to be deleted
+    const updatedCartItems = cartItems.filter(
+      (item) => !itemsToDelete.some((deleteItem) => deleteItem.id === item.id)
+    );
+
+    // Update the cart state with the new list
+    setCartItems(updatedCartItems);
+
+    // Update localStorage to reflect the changes
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeItem }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeItem, deleteCart }}
+    >
       {children}
     </CartContext.Provider>
   );

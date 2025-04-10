@@ -119,7 +119,7 @@ export default function Cart() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer style={{ top: "1%" }} />
       <div className="cart-wrapper flex justify-around ">
         <div className="userCart-content ">
           <ul className="list bg-white rounded-lg shadow-md userCart-item overflow-hidden !p-4 ">

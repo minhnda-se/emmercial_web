@@ -157,8 +157,8 @@ const Header = () => {
   };
 
   return (
-    <div className="header !mb-6 bg-white shadow-sm overflow-visible">
-      <div className="bg-emerald-100">
+    <div className="header !mb-6 bg-white shadow-sm">
+      <div className="bg-emerald-100 overflow-x-hidden">
         <div className="header-commitment flex justify-around !p-2">
           {commitment.data?.map((item, index) => (
             <div className="flex items-center gap-2" key={index}>
@@ -185,12 +185,12 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex flex-col w-[50%] justify-center gap-2 z-100">
+        <div className="flex flex-col w-[50%] justify-center gap-2 z-50">
           <div
             className="flex items-center gap-2 relative"
             ref={searchContainerRef}
           >
-            <label className="input w-[90%] !px-5 !mr-2 bg-transparent">
+            <label className="input w-[90%] !px-5 !mr-2 bg-transparent z-0">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"

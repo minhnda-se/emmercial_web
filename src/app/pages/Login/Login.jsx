@@ -36,7 +36,9 @@ export default function Login() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user) {
-      toast.error("No user found, please sign up first!");
+      toast.error(
+        "Không tìm thấy tài khoản đăng nhập. Hãy chắc rằng bạn đã đăng ký!"
+      );
       return;
     }
 
@@ -44,10 +46,10 @@ export default function Login() {
 
     if (email === storedEmail && password === storedPassword) {
       sessionStorage.setItem("token", "token1-auth");
-      toast.success("Login successful!");
+      toast.success("Đăng nhập thành công!");
       window.location.reload();
     } else {
-      toast.error("Invalid email or password!");
+      toast.error("Mật khẩu hoặc tài khoản không đúng");
     }
   };
 
@@ -55,7 +57,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!name || !email || !password) {
-      toast.error("Please fill in all the fields!");
+      toast.error("Trường không được trống!");
       return;
     }
 
@@ -63,7 +65,7 @@ export default function Login() {
     localStorage.setItem("user", JSON.stringify(user));
     setIsSignUp(false);
 
-    toast.success("Account created successfully!");
+    toast.success("Đăng ký thành công!");
   };
 
   return (
@@ -74,7 +76,7 @@ export default function Login() {
           {/* Sign-up Form */}
           <div className="form-container sign-up-container">
             <form onSubmit={handleSignUp}>
-              <h1>Create Account</h1>
+              <h1>Đăng ký</h1>
               <div className="social-container">
                 <a href="#" className="social">
                   <FontAwesomeIcon icon={faFacebook} />
@@ -83,7 +85,7 @@ export default function Login() {
                   <FontAwesomeIcon icon={faGoogle} />
                 </a>
               </div>
-              <span>or use your email for registration</span>
+              <span>hoặc sử dụng email để đăng ký</span>
               <input
                 type="text"
                 placeholder="Name"
@@ -105,14 +107,14 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
               />
-              <button type="submit">Sign Up</button>
+              <button type="submit">Đăng ký</button>
             </form>
           </div>
 
           {/* Sign-in Form */}
           <div className="form-container sign-in-container">
             <form onSubmit={handleSignIn}>
-              <h1>Sign in</h1>
+              <h1>Đăng nhập</h1>
               <div className="social-container">
                 <a href="#" className="social">
                   <FontAwesomeIcon icon={faFacebook} />
@@ -121,7 +123,7 @@ export default function Login() {
                   <FontAwesomeIcon icon={faGoogle} />
                 </a>
               </div>
-              <span>or use your account</span>
+              <span>hoặc sử dụng tài khoản hiện có</span>
               <input
                 type="email"
                 placeholder="Email"
@@ -136,8 +138,8 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
               />
-              <a href="#">Forgot your password?</a>
-              <button type="submit">Sign In</button>
+              <a href="#">Quên mật khẩu?</a>
+              <button type="submit">Đăng nhập</button>
             </form>
           </div>
 
@@ -145,20 +147,17 @@ export default function Login() {
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
-                <h1>Hello, friend!!</h1>
-                <p>
-                  To keep connected with us please login with your personal
-                  info.
-                </p>
+                <h1>Xin chào!!</h1>
+                <p>Hãy đăng nhập để trải nghiệm những giây phút tuyệt vời.</p>
                 <button className="ghost" onClick={handleSignInClick}>
-                  Sign In
+                  Đăng nhập
                 </button>
               </div>
               <div className="overlay-panel overlay-right">
-                <h1>Welcome Back!</h1>
-                <p>Enjoy your shopping experiences with us.</p>
+                <h1>Chào mừng trở lại!</h1>
+                <p>Tận hưởng phút giây mua hàng với chúng tôi.</p>
                 <button className="ghost" onClick={handleSignUpClick}>
-                  Sign Up
+                  Đăng ký
                 </button>
               </div>
             </div>

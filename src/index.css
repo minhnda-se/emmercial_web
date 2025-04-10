@@ -18,3 +18,9 @@
 body {
   overflow-x: hidden;
 }
+.custom-toast-container {
+  top: 10px;
+}
+button {
+  cursor: pointer;
+}

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useCart } from "../../components/CardContext"; // Import useCart
 
 export default function Checkout() {
+  const { deleteCart } = useCart(); // Access cart items from context
   const [booked, setBooked] = useState([]);
   const nav = useNavigate();
 
@@ -23,23 +25,31 @@ export default function Checkout() {
   }, 0);
   const handlePayClick = () => {
     if (sessionStorage.getItem("token") === null) {
+      // Redirect to login if the user is not logged in
       nav("/login", { state: { from: "/checkout" } });
-
       return;
     }
-    toast.success("Thanh toán thành công!");
+
+    // Process the payment success
+    toast.success("Thanh toán thành công!");
+
+    // Clear the cart in context and localStorage
+    deleteCart(booked);
+
+    // Save the order details to localStorage
     localStorage.setItem("order", JSON.stringify(booked));
+
+    // Remove checkout items and reset the booked items
     localStorage.removeItem("checkoutItem");
-    localStorage.removeItem("cartItem");
     setBooked([]);
   };
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer style={{ top: "1%" }} />
       <div className="checkout-wrapper flex justify-around">
         <div className="w-[60vw]">
-          <ul className="list bg-white rounded-lg shadow-md overflow-hidden !p-4  min-h-[65vh]">
+          <ul className="list bg-white rounded-lg shadow-md overflow-hidden !p-4 ">
             <div className="flex items-center justify-center !pb-3 border-b border-gray-200">
               <div className="flex flex-col items-center">
                 <h1 className="text-2xl font-bold text-center">Thanh toán</h1>
@@ -146,7 +156,7 @@ export default function Checkout() {
           </div>
         </div> */}
         </div>
-        <div className="payment-container bg-white shadow-md rounded-lg w-[30vw] h-fit sticky top-4 min-h-[65vh]">
+        <div className="payment-container bg-white shadow-md rounded-lg w-[30vw] h-fit sticky top-4 ">
           <h3 className="font-bold text-2xl border-b border-gray-200 !py-3 text-center">
             Chọn hình thức thanh toán
           </h3>

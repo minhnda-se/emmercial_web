@@ -34,11 +34,12 @@ export const FlashSale = ({ flashSale }) => {
         >
           {flashSale.data.map((item, index) => (
             <SwiperSlide key={index}>
+              {console.log(item)}
               <div
                 className="card shadow-sm  border-1 border-zinc-100 home-card items-center gap-2 !py-2 relative"
                 onClick={() => {
                   // Navigate with name as part of the URL and spid as a query parameter
-                  nav(`/detail/${item.url_path}`, {
+                  nav(`/detail/${item.product?.url_path}`, {
                     state: { productId: item.product.master_id }, // Pass productId here
                   });
                 }}
